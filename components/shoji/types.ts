@@ -5,6 +5,8 @@ export interface CampaignData {
     pushPeriod: string;
     focus: string;
     budget: string;
+    breakdown?: string;
+    metrics?: string;
 }
 
 export interface TimelineItemProps {
