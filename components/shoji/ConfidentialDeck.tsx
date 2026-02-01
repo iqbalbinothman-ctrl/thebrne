@@ -71,7 +71,7 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                 className="min-h-[80vh] flex flex-col justify-center items-center text-center border-b border-gray-900 mb-10 page-break-after-always"
             >
                 <div className="mb-8">
-                    <img src="/logo.png" alt="THE BRNE" className="h-24 w-auto" />
+                    <img src="/logo-dark.svg" alt="THE BRNE" className="h-24 w-auto" />
                 </div>
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6">
                     2026 Integrated Marketing<br />Strategy & Expansion

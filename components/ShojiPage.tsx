@@ -95,7 +95,7 @@ const ShojiPage: React.FC = () => {
                     <div className="mb-6">
                         <div className="mb-4 flex justify-center items-center">
                             {/* Adjusted with ml-1 to visually center the circle icon, compensating for the TM mark */}
-                            <img src="/logo.png" alt="THE BRNE" className="h-16 w-auto ml-2" />
+                            <img src="/logo-dark.svg" alt="THE BRNE" className="h-16 w-auto" />
                         </div>
                         <h2 className="text-xl font-bold uppercase tracking-widest mb-1">Confidential</h2>
                         <p className="text-xs text-gray-400 uppercase tracking-widest">Internal Access Only</p>
@@ -168,7 +168,7 @@ const ShojiPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     <div className="flex items-center gap-8">
                         <img
-                            src="/logo.png"
+                            src="/logo-dark.svg"
                             alt="THE BRNE"
                             className="h-8 md:h-10 w-auto object-contain cursor-pointer"
                             onClick={() => setCurrentView('timeline')}
