@@ -174,7 +174,7 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                             <p className="font-bold mb-1">Strategy</p>
                             <ul className="list-disc pl-4 space-y-1 text-gray-600">
                                 <li>Search Ads: "Best car service Glenmarie", "Japanese mechanic Klang"</li>
-                                <li>PMax ads for local workshop visits (15km radius)</li>
+                                <li>PMax ads for local workshop visits (Targeting Broad Klang Valley)</li>
                             </ul>
                         </div>
                     </div>
