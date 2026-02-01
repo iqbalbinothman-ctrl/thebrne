@@ -29,8 +29,8 @@ const ShojiPage: React.FC = () => {
 
     const handleDownload = async () => {
         setIsGenerating(true);
-        // Wait for a moment to ensure modal button state updates and print layout renders
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Wait for a moment ensure render
+        await new Promise(resolve => setTimeout(resolve, 800));
 
         const container = document.getElementById('pdf-print-container');
         if (!container) {
@@ -39,7 +39,6 @@ const ShojiPage: React.FC = () => {
         }
 
         try {
-            // Select all explicit print pages from both ConfidentialDeck and Timeline
             const pages = container.querySelectorAll('.print-page');
 
             if (pages.length === 0) {
@@ -48,8 +47,7 @@ const ShojiPage: React.FC = () => {
                 return;
             }
 
-            // A4 Dimensions in Pixels (approx 96 DPI) - 1123px x 794px (Landscape)
-            // We use standard A4 in jsPDF (841.89pt x 595.28pt) and let addImage scale it.
+            // Standard A4 Landscape in Points (approx 842 x 595)
             const pdf = new jsPDF({
                 orientation: 'l',
                 unit: 'pt',
@@ -59,27 +57,30 @@ const ShojiPage: React.FC = () => {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = pdf.internal.pageSize.getHeight();
 
+            // Loop through each page element
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i] as HTMLElement;
 
-                // Capture Page
+                // Capture high-res PNG
                 const canvas = await html2canvas(page, {
-                    scale: 2, // High resolution
-                    useCORS: true,
+                    scale: 2,           // High resolution as requested
+                    useCORS: true,      // Handle images/fonts
                     logging: false,
+                    allowTaint: true,
                     backgroundColor: '#ffffff',
-                    width: page.offsetWidth, // Ensure we capture exact dimensions
-                    height: page.offsetHeight
+                    width: 1123,        // Lock input width (A4 px @ 96dpi)
+                    height: 794,        // Lock input height
+                    windowWidth: 1440   // Simulate desktop to prevent mobile breaks
                 });
 
-                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const imgData = canvas.toDataURL('image/png'); // Lossless PNG
 
                 if (i > 0) {
                     pdf.addPage();
                 }
 
-                // Add image to PDF, filling the page
-                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                // Fit to PDF Page: 0, 0, Width, Height
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
             }
 
             pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
