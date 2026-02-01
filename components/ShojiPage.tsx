@@ -93,8 +93,9 @@ const ShojiPage: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center bg-zinc-50 font-sans text-black">
                 <form onSubmit={handleLogin} className="bg-white p-10 border border-gray-200 shadow-xl w-full max-w-sm text-center">
                     <div className="mb-6">
-                        <div className="mb-4 flex justify-center">
-                            <img src="/logo.png" alt="THE BRNE" className="h-16 w-auto" />
+                        <div className="mb-4 flex justify-center items-center">
+                            {/* Adjusted with ml-1 to visually center the circle icon, compensating for the TM mark */}
+                            <img src="/logo.png" alt="THE BRNE" className="h-16 w-auto ml-2" />
                         </div>
                         <h2 className="text-xl font-bold uppercase tracking-widest mb-1">Confidential</h2>
                         <p className="text-xs text-gray-400 uppercase tracking-widest">Internal Access Only</p>
