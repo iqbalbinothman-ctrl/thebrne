@@ -41,21 +41,21 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
     if (isPrintMode) {
         // Create deep copy for chunking to avoid mutating original for other views
         const dataCopy = [...CAMPAIGN_DATA];
-        // Strategy: 3 items per page to ensure space for details
+        // Strategy: 4 items per page in a 2x2 Grid for Landscape
         const chunks = [];
-        for (let i = 0; i < CAMPAIGN_DATA.length; i += 3) {
-            chunks.push(CAMPAIGN_DATA.slice(i, i + 3));
+        for (let i = 0; i < CAMPAIGN_DATA.length; i += 4) {
+            chunks.push(CAMPAIGN_DATA.slice(i, i + 4));
         }
 
         return (
             <div className="w-full bg-white">
-                {/* Page 1: Header + First 3 Items */}
-                <div className="print-page p-12 h-[1123px] flex flex-col relative bg-white border-b-8 border-gray-100">
-                    <div className="mb-12 text-center">
-                        <span className="inline-block py-1 px-3 border border-black text-xs font-bold uppercase mb-4">
+                {/* Page 1: Header + First 4 Items */}
+                <div className="print-page p-12 h-[794px] flex flex-col relative bg-white border-b-8 border-gray-100">
+                    <div className="mb-8 text-center">
+                        <span className="inline-block py-1 px-3 border border-black text-xs font-bold uppercase mb-2">
                             Strategy 2026-2027
                         </span>
-                        <h1 className="text-4xl font-extrabold text-black mb-4">
+                        <h1 className="text-3xl font-extrabold text-black mb-2">
                             Marketing Roadmap
                         </h1>
                         <p className="text-gray-500 max-w-2xl mx-auto text-sm leading-relaxed">
@@ -63,7 +63,7 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
                         </p>
                     </div>
 
-                    <div className="flex-1 space-y-8">
+                    <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
                         {chunks[0].map((item, index) => (
                             <TimelineItem
                                 key={`${item.id}-${index}`}
@@ -74,20 +74,20 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
                             />
                         ))}
                     </div>
-                    <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-4">
+                    <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-2">
                         Page 1 / {chunks.length}
                     </div>
                 </div>
 
                 {/* Subsequent Pages */}
                 {chunks.slice(1).map((chunk, pageIndex) => (
-                    <div key={pageIndex} className="print-page p-12 h-[1123px] flex flex-col relative bg-white border-b-8 border-gray-100">
-                        <div className="mb-8 pt-4 border-b border-gray-100 pb-4 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest">
+                    <div key={pageIndex} className="print-page p-12 h-[794px] flex flex-col relative bg-white border-b-8 border-gray-100">
+                        <div className="mb-6 pt-2 border-b border-gray-100 pb-2 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest">
                             <span>Marketing Roadmap</span>
                             <span>Continuation</span>
                         </div>
 
-                        <div className="flex-1 space-y-8">
+                        <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
                             {chunk.map((item, index) => (
                                 <TimelineItem
                                     key={`${item.id}-${index}`}
@@ -101,7 +101,7 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
 
                         {/* Footer on last page */}
                         {pageIndex === chunks.slice(1).length - 1 && (
-                            <div className="mt-8 flex justify-center py-4">
+                            <div className="mt-4 flex justify-center py-2">
                                 <div className="flex items-center gap-2 text-gray-400 text-sm font-medium uppercase">
                                     <div className="w-12 h-px bg-gray-300"></div>
                                     End of Cycle
@@ -110,7 +110,7 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
                             </div>
                         )}
 
-                        <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-4">
+                        <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-2">
                             Page {pageIndex + 2} / {chunks.length}
                         </div>
                     </div>

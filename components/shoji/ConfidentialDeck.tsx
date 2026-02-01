@@ -23,24 +23,24 @@ const SlideSection: React.FC<SlideSectionProps> = ({ title, subtitle, children, 
         transition: { duration: 0.6, delay: index * 0.1 }
     };
 
-    // Print Mode: A4 Page Style
+    // Print Mode: A4 Landscape Page Style
     if (isPrintMode) {
         return (
-            <div className="print-page h-[1123px] w-full bg-white p-12 relative flex flex-col justify-center border-b-8 border-gray-100">
-                <div className="mb-8 pt-4 border-b border-gray-100 pb-4 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest absolute top-0 left-12 right-12">
+            <div className="print-page h-[794px] w-full bg-white p-12 relative flex flex-col justify-center border-b-8 border-gray-100">
+                <div className="mb-6 pt-2 border-b border-gray-100 pb-2 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest absolute top-0 left-12 right-12 mt-4">
                     <span>Strategy Deck</span>
                     <span>Strictly Confidential</span>
                 </div>
-                <div className="max-w-4xl mx-auto w-full">
-                    <div className="mb-8">
-                        <h2 className="text-4xl font-bold mb-4">{title}</h2>
+                <div className="max-w-6xl mx-auto w-full h-full flex flex-col justify-center pt-8">
+                    <div className="mb-6">
+                        <h2 className="text-4xl font-bold mb-2">{title}</h2>
                         {subtitle && <p className="text-xl text-gray-500 font-light border-l-2 border-black pl-4">{subtitle}</p>}
                     </div>
-                    <div className="text-lg leading-relaxed text-gray-800">
+                    <div className="text-lg leading-relaxed text-gray-800 flex-1 flex flex-col justify-center">
                         {children}
                     </div>
                 </div>
-                <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-4 absolute bottom-0 left-0 right-0">
+                <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-2 absolute bottom-0 left-0 right-0 mb-2">
                     Proprietary Data &copy; 2026
                 </div>
             </div>
@@ -88,13 +88,15 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
 
     const PrintWrapper = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
         isPrintMode ? (
-            <div className={`print-page h-[1123px] w-full bg-white p-12 relative flex flex-col justify-center border-b-8 border-gray-100 ${className}`}>
-                <div className="mb-8 pt-4 border-b border-gray-100 pb-4 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest absolute top-0 left-12 right-12">
+            <div className={`print-page h-[794px] w-full bg-white p-12 relative flex flex-col justify-center border-b-8 border-gray-100 ${className}`}>
+                <div className="mb-6 pt-2 border-b border-gray-100 pb-2 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest absolute top-0 left-12 right-12 mt-4">
                     <span>Strategy Deck</span>
                     <span>Strictly Confidential</span>
                 </div>
-                {children}
-                <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-4 absolute bottom-0 left-0 right-0">
+                <div className="flex-1 flex flex-col justify-center w-full max-w-6xl mx-auto pt-8">
+                    {children}
+                </div>
+                <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-2 absolute bottom-0 left-0 right-0 mb-2">
                     Proprietary Data &copy; 2026
                 </div>
             </div>

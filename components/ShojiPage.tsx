@@ -47,10 +47,10 @@ const ShojiPage: React.FC = () => {
                 return;
             }
 
-            // A4 Dimensions in Pixels (approx 96 DPI) - 794px x 1123px
-            // We use standard A4 in jsPDF (595.28pt x 841.89pt) and let addImage scale it.
+            // A4 Dimensions in Pixels (approx 96 DPI) - 1123px x 794px (Landscape)
+            // We use standard A4 in jsPDF (841.89pt x 595.28pt) and let addImage scale it.
             const pdf = new jsPDF({
-                orientation: 'p',
+                orientation: 'l',
                 unit: 'pt',
                 format: 'a4'
             });
@@ -225,10 +225,10 @@ const ShojiPage: React.FC = () => {
                 isGenerating={isGenerating}
             />
 
-            {/* Hidden Print Container for PDF Generation */}
+            {/* Hidden Print Container for PDF Generation - A4 Landscape Width */}
             <div
                 id="pdf-print-container"
-                className="fixed left-[-9999px] top-0 w-[1200px] bg-white z-[99999] overflow-hidden"
+                className="fixed left-[-9999px] top-0 w-[1123px] bg-white z-[99999] overflow-hidden"
             >
                 {/* Watermark Overlay */}
                 <div className="absolute inset-0 z-[50] pointer-events-none flex flex-wrap content-start items-start opacity-[0.03] overflow-hidden select-none">
