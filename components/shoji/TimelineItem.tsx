@@ -3,13 +3,23 @@ import { motion } from 'framer-motion';
 import { Calendar, Target, Clock, Banknote, ArrowRight } from 'lucide-react';
 import { TimelineItemProps } from './types';
 
-export const TimelineItem: React.FC<TimelineItemProps> = ({ data, index, isLast }) => {
+export const TimelineItem: React.FC<TimelineItemProps> = ({ data, index, isLast, isPrintMode = false }) => {
+    // Determine props for motion div based on print mode
+    const motionProps = isPrintMode ? {
+        initial: { opacity: 1, y: 0 },
+        whileInView: undefined,
+        viewport: undefined,
+        transition: { duration: 0 }
+    } : {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.5, delay: index * 0.05 }
+    };
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
+            {...motionProps}
             className="relative flex group"
         >
             {/* Timeline Line (Desktop) */}
@@ -24,7 +34,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ data, index, isLast 
                 <div className={`absolute left-[-16px] top-8 bottom-[-48px] w-px bg-gray-200 md:hidden ${isLast ? 'hidden' : 'block'}`}></div>
                 <div className="absolute left-[-21px] top-8 w-2.5 h-2.5 bg-black rounded-full ring-4 ring-white border border-black md:hidden"></div>
 
-                <div className="bg-white border border-gray-200 hover:border-black transition-all duration-300 p-6 md:p-8 shadow-sm hover:shadow-xl rounded-none">
+                <div className={`bg-white border hover:border-black transition-all duration-300 p-6 md:p-8 shadow-sm hover:shadow-xl rounded-none ${isPrintMode ? 'border-black' : 'border-gray-200'}`}>
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
 
                         {/* Header Section: Month & Event */}

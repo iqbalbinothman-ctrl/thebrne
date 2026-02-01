@@ -2,36 +2,73 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, TrendingUp, Users, Search, Smartphone, Zap, CheckCircle, Shield, Globe, PenTool } from 'lucide-react';
 
-const SlideSection: React.FC<{ title: string; subtitle?: string; children: React.ReactNode; index: number }> = ({ title, subtitle, children, index }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10%" }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        className="min-h-[80vh] flex flex-col justify-center py-20 border-b border-gray-100 last:border-0"
-    >
-        <div className="max-w-4xl mx-auto w-full">
-            <div className="mb-12">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">{title}</h2>
-                {subtitle && <p className="text-xl text-gray-500 font-light border-l-2 border-black pl-4">{subtitle}</p>}
-            </div>
-            <div className="text-lg leading-relaxed text-gray-800">
-                {children}
-            </div>
-        </div>
-    </motion.div>
-);
+interface SlideSectionProps {
+    title: string;
+    subtitle?: string;
+    children: React.ReactNode;
+    index: number;
+    isPrintMode?: boolean;
+}
 
-export const ConfidentialDeck: React.FC = () => {
+const SlideSection: React.FC<SlideSectionProps> = ({ title, subtitle, children, index, isPrintMode = false }) => {
+    const motionProps = isPrintMode ? {
+        initial: { opacity: 1, y: 0 },
+        whileInView: undefined,
+        viewport: undefined,
+        transition: { duration: 0 }
+    } : {
+        initial: { opacity: 0, y: 40 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-10%" },
+        transition: { duration: 0.6, delay: index * 0.1 }
+    };
+
+    return (
+        <motion.div
+            {...motionProps}
+            className="min-h-[80vh] flex flex-col justify-center py-20 border-b border-gray-100 last:border-0 page-break-inside-avoid"
+        >
+            <div className="max-w-4xl mx-auto w-full">
+                <div className="mb-12">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">{title}</h2>
+                    {subtitle && <p className="text-xl text-gray-500 font-light border-l-2 border-black pl-4">{subtitle}</p>}
+                </div>
+                <div className="text-lg leading-relaxed text-gray-800">
+                    {children}
+                </div>
+            </div>
+        </motion.div>
+    );
+};
+
+interface ConfidentialDeckProps {
+    isPrintMode?: boolean;
+}
+
+export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode = false }) => {
+    const headerMotionProps = isPrintMode ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        transition: { duration: 0 }
+    } : {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        transition: { duration: 1 }
+    };
+
+    const cardMotionProps = isPrintMode ? {
+        whileHover: undefined
+    } : {
+        whileHover: { y: -10 }
+    };
+
     return (
         <div className="max-w-6xl mx-auto px-6 lg:px-8 pb-20">
 
             {/* Slide 1: Title Slide */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                className="min-h-[80vh] flex flex-col justify-center items-center text-center border-b border-gray-900 mb-10"
+                {...headerMotionProps}
+                className="min-h-[80vh] flex flex-col justify-center items-center text-center border-b border-gray-900 mb-10 page-break-after-always"
             >
                 <div className="mb-8">
                     <img src="/logo.png" alt="THE BRNE" className="h-24 w-auto" />
@@ -45,10 +82,16 @@ export const ConfidentialDeck: React.FC = () => {
                 <div className="text-sm font-mono uppercase tracking-widest text-gray-400">
                     Prepared by THEBRNE AGENCY | February 2026
                 </div>
+
+                {isPrintMode && (
+                    <p className="mt-8 text-xs font-bold uppercase text-red-500 border border-red-500 px-2 py-1">
+                        Strictly Confidential - Do Not Distribute
+                    </p>
+                )}
             </motion.div>
 
             {/* Slide 2: Business Ecosystem */}
-            <SlideSection title="Business Ecosystem Overview" subtitle="The One-Stop Concept" index={1}>
+            <SlideSection title="Business Ecosystem Overview" subtitle="The One-Stop Concept" index={1} isPrintMode={isPrintMode}>
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-6">
                         <div className="p-6 bg-gray-50 border border-gray-200 hover:border-black transition-colors">
@@ -78,7 +121,7 @@ export const ConfidentialDeck: React.FC = () => {
             </SlideSection>
 
             {/* Slide 3: Market Opportunity */}
-            <SlideSection title="Market Opportunity" subtitle="The 2026 Gong Xi Raya" index={2}>
+            <SlideSection title="Market Opportunity" subtitle="The 2026 Gong Xi Raya" index={2} isPrintMode={isPrintMode}>
                 <div className="flex flex-col md:flex-row gap-12 items-center">
                     <div className="flex-1">
                         <p className="text-2xl font-bold mb-6">The Rare Cycle</p>
@@ -97,7 +140,7 @@ export const ConfidentialDeck: React.FC = () => {
             </SlideSection>
 
             {/* Slide 4: Marketing Calendar */}
-            <SlideSection title="1-Year Marketing Calendar" subtitle="Phased Execution" index={3}>
+            <SlideSection title="1-Year Marketing Calendar" subtitle="Phased Execution" index={3} isPrintMode={isPrintMode}>
                 <div className="space-y-4">
                     {[
                         { phase: "Phase 1 (Feb-Apr)", focus: "Festive Peak (Safety & Reliability)" },
@@ -114,10 +157,10 @@ export const ConfidentialDeck: React.FC = () => {
             </SlideSection>
 
             {/* Components 1-4 Grid */}
-            <div className="grid md:grid-cols-2 gap-8 mt-20 mb-12">
+            <div className="grid md:grid-cols-2 gap-8 mt-20 mb-12 page-break-inside-avoid">
                 {/* Slide 5: Google Ads */}
                 <motion.div
-                    whileHover={{ y: -10 }}
+                    {...cardMotionProps}
                     className="p-8 border-2 border-black bg-white"
                 >
                     <div className="flex justify-between items-start mb-6">
@@ -139,7 +182,7 @@ export const ConfidentialDeck: React.FC = () => {
 
                 {/* Slide 6: Meta Platforms */}
                 <motion.div
-                    whileHover={{ y: -10 }}
+                    {...cardMotionProps}
                     className="p-8 border border-gray-200 bg-gray-50"
                 >
                     <div className="flex justify-between items-start mb-6">
@@ -162,7 +205,7 @@ export const ConfidentialDeck: React.FC = () => {
 
                 {/* Slide 7: TikTok */}
                 <motion.div
-                    whileHover={{ y: -10 }}
+                    {...cardMotionProps}
                     className="p-8 border border-gray-200 bg-gray-50"
                 >
                     <div className="flex justify-between items-start mb-6">
@@ -185,7 +228,7 @@ export const ConfidentialDeck: React.FC = () => {
 
                 {/* Slide 8: KOL Support */}
                 <motion.div
-                    whileHover={{ y: -10 }}
+                    {...cardMotionProps}
                     className="p-8 border-2 border-black bg-white"
                 >
                     <div className="flex justify-between items-start mb-6">
@@ -209,8 +252,8 @@ export const ConfidentialDeck: React.FC = () => {
 
             {/* Component 5: Creative & Management Retainer */}
             <motion.div
-                whileHover={{ y: -10 }}
-                className="mb-20 p-8 border-2 border-dashed border-gray-300 bg-gray-50 hover:border-black transition-colors"
+                {...cardMotionProps}
+                className="mb-20 p-8 border-2 border-dashed border-gray-300 bg-gray-50 hover:border-black transition-colors page-break-inside-avoid"
             >
                 <div className="flex flex-col md:flex-row justify-between md:items-start gap-6">
                     <div className="flex items-start gap-4">
@@ -259,7 +302,7 @@ export const ConfidentialDeck: React.FC = () => {
             </motion.div>
 
             {/* Slide 9: 1-Month Early Logic */}
-            <SlideSection title="The '1-Month Early' Logic" subtitle="Operational Efficiency & ROI" index={9}>
+            <SlideSection title="The '1-Month Early' Logic" subtitle="Operational Efficiency & ROI" index={9} isPrintMode={isPrintMode}>
                 <div className="bg-black text-white p-8 md:p-12 rounded-none relative overflow-hidden">
                     <Zap className="absolute top-0 right-0 w-64 h-64 text-gray-800 opacity-20 -mr-10 -mt-10" />
                     <div className="relative z-10 grid md:grid-cols-2 gap-12">
@@ -280,7 +323,7 @@ export const ConfidentialDeck: React.FC = () => {
             </SlideSection>
 
             {/* Slide 10: Summary */}
-            <SlideSection title="Budget Summary & Next Steps" subtitle="" index={10}>
+            <SlideSection title="Budget Summary & Next Steps" subtitle="" index={10} isPrintMode={isPrintMode}>
                 <div className="flex flex-col md:flex-row gap-8 items-stretch">
                     <div className="md:w-1/2 bg-gray-50 border p-8 flex flex-col justify-center">
                         <div className="mb-8 pb-8 border-b border-gray-200">

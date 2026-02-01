@@ -11,4 +11,5 @@ export interface TimelineItemProps {
     data: CampaignData;
     index: number;
     isLast: boolean;
+    isPrintMode?: boolean;
 }

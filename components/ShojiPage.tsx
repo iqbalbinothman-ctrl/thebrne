@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Timeline } from './shoji/Timeline';
 import { ConfidentialDeck } from './shoji/ConfidentialDeck';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { NDAModal } from './shoji/NDAModal';
+import { Download } from 'lucide-react';
 
 const ShojiPage: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    // PDF Generation State
+    const [isNDAModalOpen, setIsNDAModalOpen] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,6 +23,50 @@ const ShojiPage: React.FC = () => {
             setError('');
         } else {
             setError('Incorrect password');
+        }
+    };
+
+    const handleDownload = async () => {
+        setIsGenerating(true);
+        // Wait for a moment to ensure modal button state updates
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        const element = document.getElementById('pdf-print-container');
+        if (!element) {
+            setIsGenerating(false);
+            return;
+        }
+
+        try {
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff',
+                windowWidth: 1200
+            });
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.9);
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+
+            // Create PDF with custom dimensions matching the content
+            const pdf = new jsPDF({
+                orientation: 'p',
+                unit: 'px',
+                format: [imgWidth, imgHeight],
+                hotfixes: ['px_scaling']
+            });
+
+            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+            pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
+
+        } catch (err) {
+            console.error("PDF Generation failed", err);
+            alert("Failed to generate PDF. Please try again.");
+        } finally {
+            setIsGenerating(false);
+            setIsNDAModalOpen(false);
         }
     };
 
@@ -70,6 +122,40 @@ const ShojiPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white font-sans">
 
+            <NDAModal
+                isOpen={isNDAModalOpen}
+                onClose={() => !isGenerating && setIsNDAModalOpen(false)}
+                onConfirm={handleDownload}
+                isGenerating={isGenerating}
+            />
+
+            {/* Hidden Print Container for PDF Generation */}
+            <div
+                id="pdf-print-container"
+                className="fixed left-[-9999px] top-0 w-[1200px] bg-white z-[99999] overflow-hidden"
+            >
+                {/* Watermark Overlay */}
+                <div className="absolute inset-0 z-[50] pointer-events-none flex flex-wrap content-start items-start opacity-[0.03] overflow-hidden select-none">
+                    {Array.from({ length: 40 }).map((_, i) => (
+                        <div key={i} className="w-[300px] h-[300px] flex items-center justify-center -rotate-45 transform">
+                            <span className="text-3xl font-black text-black whitespace-nowrap">BRNE AGENCY</span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10 pt-10 pb-20 px-16 bg-white">
+                    <ConfidentialDeck isPrintMode={true} />
+                    <div className="h-px bg-gray-300 w-full my-10"></div>
+                    <Timeline isPrintMode={true} />
+                </div>
+
+                {/* PDF Footer for each virtual page concept if needed, or just bottom */}
+                <div className="text-center py-8 border-t border-gray-200 mt-10">
+                    <p className="text-xs text-gray-400 uppercase tracking-widest">Confidential Document &bull; Generated via Secure Portal &bull; Tiger Shoji x TheBrne Agency</p>
+                </div>
+            </div>
+
             {/* Progress Bar */}
             <motion.div
                 className="fixed top-0 left-0 right-0 h-1 bg-black origin-left z-50"
@@ -104,14 +190,35 @@ const ShojiPage: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="text-xs font-mono text-gray-500 hidden sm:flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                        CONFIDENTIAL // INTERNAL USE ONLY
+                    <div className="flex items-center gap-4">
+                        <div className="text-xs font-mono text-gray-500 hidden sm:flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                            CONFIDENTIAL
+                        </div>
+
+                        <button
+                            onClick={() => setIsNDAModalOpen(true)}
+                            className="flex items-center gap-2 bg-black text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-800 transition-colors"
+                        >
+                            <Download className="w-3 h-3" />
+                            <span className="hidden md:inline">Download PDF</span>
+                        </button>
                     </div>
                 </div>
             </nav>
 
             {/* Mobile Menu (Simplified) */}
+            <div className="md:hidden fixed bottom-16 left-0 right-0 z-40 flex justify-center pointer-events-none">
+                <button
+                    onClick={() => setIsNDAModalOpen(true)}
+                    className="pointer-events-auto bg-black text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 text-xs font-bold uppercase tracking-widest"
+                >
+                    <Download className="w-4 h-4" />
+                    Download PDF
+                </button>
+            </div>
+
+
             <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-50 flex justify-around">
                 <button
                     onClick={() => { setCurrentView('timeline'); window.scrollTo(0, 0); }}
