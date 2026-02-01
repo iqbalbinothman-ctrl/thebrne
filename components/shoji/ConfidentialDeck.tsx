@@ -337,6 +337,14 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                             <p className="text-sm uppercase text-gray-500 mb-1">Annual Investment</p>
                             <p className="text-4xl font-bold">RM 360,000</p>
                         </div>
+
+                        {/* The X-Factor */}
+                        <div className="mt-8 p-4 bg-black text-white text-xs">
+                            <span className="font-bold uppercase text-yellow-500 mb-1 block">The X-Factor</span>
+                            <p className="opacity-80 leading-relaxed">
+                                Campaign performance and platform algorithms may decrease paid advertising costs over time. Monthly investments are dynamic, potentially reducing the total annual spend as optimization improves.
+                            </p>
+                        </div>
                     </div>
                     <div className="md:w-1/2 flex flex-col justify-between">
                         <div>
