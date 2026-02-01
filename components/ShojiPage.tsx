@@ -28,37 +28,59 @@ const ShojiPage: React.FC = () => {
 
     const handleDownload = async () => {
         setIsGenerating(true);
-        // Wait for a moment to ensure modal button state updates
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // Wait for a moment to ensure modal button state updates and print layout renders
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-        const element = document.getElementById('pdf-print-container');
-        if (!element) {
+        const container = document.getElementById('pdf-print-container');
+        if (!container) {
             setIsGenerating(false);
             return;
         }
 
         try {
-            const canvas = await html2canvas(element, {
-                scale: 2,
-                useCORS: true,
-                logging: false,
-                backgroundColor: '#ffffff',
-                windowWidth: 1200
-            });
+            // Select all explicit print pages from both ConfidentialDeck and Timeline
+            const pages = container.querySelectorAll('.print-page');
 
-            const imgData = canvas.toDataURL('image/jpeg', 0.9);
-            const imgWidth = canvas.width;
-            const imgHeight = canvas.height;
+            if (pages.length === 0) {
+                console.error("No print pages found.");
+                setIsGenerating(false);
+                return;
+            }
 
-            // Create PDF with custom dimensions matching the content
+            // A4 Dimensions in Pixels (approx 96 DPI) - 794px x 1123px
+            // We use standard A4 in jsPDF (595.28pt x 841.89pt) and let addImage scale it.
             const pdf = new jsPDF({
                 orientation: 'p',
-                unit: 'px',
-                format: [imgWidth, imgHeight],
-                hotfixes: ['px_scaling']
+                unit: 'pt',
+                format: 'a4'
             });
 
-            pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+
+            for (let i = 0; i < pages.length; i++) {
+                const page = pages[i] as HTMLElement;
+
+                // Capture Page
+                const canvas = await html2canvas(page, {
+                    scale: 2, // High resolution
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    width: page.offsetWidth, // Ensure we capture exact dimensions
+                    height: page.offsetHeight
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+                if (i > 0) {
+                    pdf.addPage();
+                }
+
+                // Add image to PDF, filling the page
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            }
+
             pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
 
         } catch (err) {

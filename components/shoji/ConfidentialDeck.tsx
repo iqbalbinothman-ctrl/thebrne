@@ -23,6 +23,30 @@ const SlideSection: React.FC<SlideSectionProps> = ({ title, subtitle, children, 
         transition: { duration: 0.6, delay: index * 0.1 }
     };
 
+    // Print Mode: A4 Page Style
+    if (isPrintMode) {
+        return (
+            <div className="print-page h-[1123px] w-full bg-white p-12 relative flex flex-col justify-center border-b-8 border-gray-100">
+                <div className="mb-8 pt-4 border-b border-gray-100 pb-4 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest absolute top-0 left-12 right-12">
+                    <span>Strategy Deck</span>
+                    <span>Strictly Confidential</span>
+                </div>
+                <div className="max-w-4xl mx-auto w-full">
+                    <div className="mb-8">
+                        <h2 className="text-4xl font-bold mb-4">{title}</h2>
+                        {subtitle && <p className="text-xl text-gray-500 font-light border-l-2 border-black pl-4">{subtitle}</p>}
+                    </div>
+                    <div className="text-lg leading-relaxed text-gray-800">
+                        {children}
+                    </div>
+                </div>
+                <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-4 absolute bottom-0 left-0 right-0">
+                    Proprietary Data &copy; 2026
+                </div>
+            </div>
+        );
+    }
+
     return (
         <motion.div
             {...motionProps}
@@ -62,33 +86,52 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
         whileHover: { y: -10 }
     };
 
+    const PrintWrapper = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
+        isPrintMode ? (
+            <div className={`print-page h-[1123px] w-full bg-white p-12 relative flex flex-col justify-center border-b-8 border-gray-100 ${className}`}>
+                <div className="mb-8 pt-4 border-b border-gray-100 pb-4 flex justify-between items-center text-xs uppercase text-gray-400 font-bold tracking-widest absolute top-0 left-12 right-12">
+                    <span>Strategy Deck</span>
+                    <span>Strictly Confidential</span>
+                </div>
+                {children}
+                <div className="mt-auto text-center text-[10px] text-gray-400 uppercase tracking-widest py-4 absolute bottom-0 left-0 right-0">
+                    Proprietary Data &copy; 2026
+                </div>
+            </div>
+        ) : (
+            <>{children}</>
+        )
+    );
+
     return (
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 pb-20">
+        <div className={isPrintMode ? "w-full bg-white" : "max-w-6xl mx-auto px-6 lg:px-8 pb-20"}>
 
             {/* Slide 1: Title Slide */}
-            <motion.div
-                {...headerMotionProps}
-                className="min-h-[80vh] flex flex-col justify-center items-center text-center border-b border-gray-900 mb-10 page-break-after-always"
-            >
-                <div className="mb-8">
-                    <img src="/logo-dark.svg" alt="THE BRNE" className="h-24 w-auto" />
-                </div>
-                <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
-                    2026 Integrated Marketing<br />Strategy & Expansion
-                </h1>
-                <p className="text-2xl text-gray-500 font-light mb-12">
-                    Bridging Japanese Quality with Malaysian Mobility
-                </p>
-                <div className="text-sm font-mono uppercase text-gray-400">
-                    Prepared by THEBRNE AGENCY | February 2026
-                </div>
-
-                {isPrintMode && (
-                    <p className="mt-8 text-xs font-bold uppercase text-red-500 border border-red-500 px-2 py-1">
-                        Strictly Confidential - Do Not Distribute
+            <PrintWrapper className="items-center text-center">
+                <motion.div
+                    {...headerMotionProps}
+                    className={isPrintMode ? "w-full" : "min-h-[80vh] flex flex-col justify-center items-center text-center border-b border-gray-900 mb-10 page-break-after-always"}
+                >
+                    <div className="mb-8">
+                        <img src="/logo-dark.svg" alt="THE BRNE" className="h-24 w-auto mx-auto" />
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
+                        2026 Integrated Marketing<br />Strategy & Expansion
+                    </h1>
+                    <p className="text-2xl text-gray-500 font-light mb-12">
+                        Bridging Japanese Quality with Malaysian Mobility
                     </p>
-                )}
-            </motion.div>
+                    <div className="text-sm font-mono uppercase text-gray-400">
+                        Prepared by THEBRNE AGENCY | February 2026
+                    </div>
+
+                    {isPrintMode && (
+                        <p className="mt-8 text-xs font-bold uppercase text-red-500 border border-red-500 px-2 py-1 inline-block">
+                            Strictly Confidential - Do Not Distribute
+                        </p>
+                    )}
+                </motion.div>
+            </PrintWrapper>
 
             {/* Slide 2: Business Ecosystem */}
             <SlideSection title="Business Ecosystem Overview" subtitle="The One-Stop Concept" index={1} isPrintMode={isPrintMode}>
@@ -156,150 +199,155 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                 </div>
             </SlideSection>
 
-            {/* Components 1-4 Grid */}
-            <div className="grid md:grid-cols-2 gap-8 mt-20 mb-12 page-break-inside-avoid">
-                {/* Slide 5: Google Ads */}
-                <motion.div
-                    {...cardMotionProps}
-                    className="p-8 border-2 border-black bg-white"
-                >
-                    <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-2xl font-bold">Google Ads<br /><span className="text-gray-400 text-lg font-normal">The Engine</span></h3>
-                        <Search className="w-8 h-8" />
-                    </div>
-                    <div className="space-y-4 text-sm">
-                        <div className="flex justify-between border-b pb-2"><span>Budget</span><span className="font-bold">RM 10,000 / mo</span></div>
-                        <div className="flex justify-between border-b pb-2"><span>Objective</span><span>Intent-based Lead Gen</span></div>
-                        <div>
-                            <p className="font-bold mb-1">Strategy</p>
-                            <ul className="list-disc pl-4 space-y-1 text-gray-600">
-                                <li>Search Ads: "Best car service Glenmarie", "Japanese mechanic Klang"</li>
-                                <li>PMax ads for local workshop visits (Targeting Broad Klang Valley)</li>
-                            </ul>
+            {/* Components 1-4 Grid - Wrapped for Print */}
+            <PrintWrapper>
+                {isPrintMode && <h3 className="text-3xl font-bold mb-8">Channel Strategy Mix</h3>}
+                <div className={isPrintMode ? "grid grid-cols-2 gap-6" : "grid md:grid-cols-2 gap-8 mt-20 mb-12 page-break-inside-avoid"}>
+                    {/* Slide 5: Google Ads */}
+                    <motion.div
+                        {...cardMotionProps}
+                        className="p-8 border-2 border-black bg-white"
+                    >
+                        <div className="flex justify-between items-start mb-6">
+                            <h3 className="text-2xl font-bold">Google Ads<br /><span className="text-gray-400 text-lg font-normal">The Engine</span></h3>
+                            <Search className="w-8 h-8" />
                         </div>
-                    </div>
-                </motion.div>
-
-                {/* Slide 6: Meta Platforms */}
-                <motion.div
-                    {...cardMotionProps}
-                    className="p-8 border border-gray-200 bg-gray-50"
-                >
-                    <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-2xl font-bold">Meta Platforms<br /><span className="text-gray-400 text-lg font-normal">The Multiplier</span></h3>
-                        <Users className="w-8 h-8" />
-                    </div>
-                    <div className="space-y-4 text-sm">
-                        <div className="flex justify-between border-b border-gray-300 pb-2"><span>Budget</span><span className="font-bold">RM 1,500 / mo</span></div>
-                        <div className="flex justify-between border-b border-gray-300 pb-2"><span>Objective</span><span>Retargeting & Recall</span></div>
-                        <div>
-                            <p className="font-bold mb-1">Strategy</p>
-                            <ul className="list-disc pl-4 space-y-1 text-gray-600">
-                                <li>Pixel Retargeting for website visitors</li>
-                                <li>Showcase Subscription Harimau inventory</li>
-                                <li>Social Proof: Testimonials & Tours</li>
-                            </ul>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Slide 7: TikTok */}
-                <motion.div
-                    {...cardMotionProps}
-                    className="p-8 border border-gray-200 bg-gray-50"
-                >
-                    <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-2xl font-bold">TikTok<br /><span className="text-gray-400 text-lg font-normal">The Personality</span></h3>
-                        <Smartphone className="w-8 h-8" />
-                    </div>
-                    <div className="space-y-4 text-sm">
-                        <div className="flex justify-between border-b border-gray-300 pb-2"><span>Budget</span><span className="font-bold">RM 1,500 / mo</span></div>
-                        <div className="flex justify-between border-b border-gray-300 pb-2"><span>Objective</span><span>Viral Education & Trust</span></div>
-                        <div>
-                            <p className="font-bold mb-1">Content (2x/week)</p>
-                            <ul className="list-disc pl-4 space-y-1 text-gray-600">
-                                <li>Sensei Tips: Car care hacks</li>
-                                <li>Behind the Scenes: Cleanliness & Precision</li>
-                                <li>Spark Ads for Pre-Festive tips</li>
-                            </ul>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Slide 8: KOL Support */}
-                <motion.div
-                    {...cardMotionProps}
-                    className="p-8 border-2 border-black bg-white"
-                >
-                    <div className="flex justify-between items-start mb-6">
-                        <h3 className="text-2xl font-bold">KOL Support<br /><span className="text-gray-400 text-lg font-normal">The Trust</span></h3>
-                        <Target className="w-8 h-8" />
-                    </div>
-                    <div className="space-y-4 text-sm">
-                        <div className="flex justify-between border-b pb-2"><span>Budget</span><span className="font-bold">RM 10,000 / mo</span></div>
-                        <div className="flex justify-between border-b pb-2"><span>Objective</span><span>Organic Reach & Credibility</span></div>
-                        <div>
-                            <p className="font-bold mb-1">KOL Mix</p>
-                            <ul className="list-disc pl-4 space-y-1 text-gray-600">
-                                <li>Auto-Tech: Validate 30-Point Check</li>
-                                <li>Lifestyle/Expat: Subscription ease</li>
-                                <li>Timing: 4-5 weeks before holidays</li>
-                            </ul>
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* Component 5: Creative & Management Retainer */}
-            <motion.div
-                {...cardMotionProps}
-                className="mb-20 p-8 border-2 border-dashed border-gray-300 bg-gray-50 hover:border-black transition-colors page-break-inside-avoid"
-            >
-                <div className="flex flex-col md:flex-row justify-between md:items-start gap-6">
-                    <div className="flex items-start gap-4">
-                        <div className="p-3 bg-black text-white rounded-full hidden md:block">
-                            <PenTool className="w-6 h-6" />
-                        </div>
-                        <div>
-                            <h3 className="text-2xl font-bold mb-2">Creative & Campaign Management<br /><span className="text-gray-400 text-lg font-normal">Operational Support</span></h3>
-                            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                                <span className="px-2 py-1 bg-gray-200 rounded text-xs font-bold uppercase">Agency Retainer</span>
+                        <div className="space-y-4 text-sm">
+                            <div className="flex justify-between border-b pb-2"><span>Budget</span><span className="font-bold">RM 10,000 / mo</span></div>
+                            <div className="flex justify-between border-b pb-2"><span>Objective</span><span>Intent-based Lead Gen</span></div>
+                            <div>
+                                <p className="font-bold mb-1">Strategy</p>
+                                <ul className="list-disc pl-4 space-y-1 text-gray-600">
+                                    <li>Search Ads: "Best car service Glenmarie", "Japanese mechanic Klang"</li>
+                                    <li>PMax ads for local workshop visits (Targeting Broad Klang Valley)</li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    <div className="text-left md:text-right border-t md:border-t-0 border-gray-200 pt-4 md:pt-0">
-                        <span className="block text-sm uppercase text-gray-400">Monthly Allocation</span>
-                        <span className="text-3xl font-bold">RM 7,000</span>
-                    </div>
-                </div>
+                    </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-6 mt-6 md:pl-16">
-                    <div>
-                        <h4 className="font-bold mb-2 text-sm uppercase border-b border-gray-300 pb-1 inline-block">Content Production</h4>
-                        <ul className="text-sm text-gray-600 space-y-2 mt-2">
-                            <li className="flex items-start gap-2">• <span>Video Editing & Motion Graphics</span></li>
-                            <li className="flex items-start gap-2">• <span>Graphic Design for Ads</span></li>
-                            <li className="flex items-start gap-2">• <span>Material Sourcing</span></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-bold mb-2 text-sm uppercase border-b border-gray-300 pb-1 inline-block">Talent & Management</h4>
-                        <ul className="text-sm text-gray-600 space-y-2 mt-2">
-                            <li className="flex items-start gap-2">• <span>Key Person / Talent Management</span></li>
-                            <li className="flex items-start gap-2">• <span>Campaign Manager Supervision</span></li>
-                            <li className="flex items-start gap-2">• <span>3rd Party Vendor Coordination</span></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-bold mb-2 text-sm uppercase border-b border-gray-300 pb-1 inline-block">Deliverables</h4>
-                        <ul className="text-sm text-gray-600 space-y-2 mt-2">
-                            <li className="flex items-start gap-2">• <span>Weekly Performance Reports</span></li>
-                            <li className="flex items-start gap-2">• <span>Creative Refresh (Bi-weekly)</span></li>
-                            <li className="flex items-start gap-2">• <span>On-site Content Shoots</span></li>
-                        </ul>
-                    </div>
+                    {/* Slide 6: Meta Platforms */}
+                    <motion.div
+                        {...cardMotionProps}
+                        className="p-8 border border-gray-200 bg-gray-50"
+                    >
+                        <div className="flex justify-between items-start mb-6">
+                            <h3 className="text-2xl font-bold">Meta Platforms<br /><span className="text-gray-400 text-lg font-normal">The Multiplier</span></h3>
+                            <Users className="w-8 h-8" />
+                        </div>
+                        <div className="space-y-4 text-sm">
+                            <div className="flex justify-between border-b border-gray-300 pb-2"><span>Budget</span><span className="font-bold">RM 1,500 / mo</span></div>
+                            <div className="flex justify-between border-b border-gray-300 pb-2"><span>Objective</span><span>Retargeting & Recall</span></div>
+                            <div>
+                                <p className="font-bold mb-1">Strategy</p>
+                                <ul className="list-disc pl-4 space-y-1 text-gray-600">
+                                    <li>Pixel Retargeting for website visitors</li>
+                                    <li>Showcase Subscription Harimau inventory</li>
+                                    <li>Social Proof: Testimonials & Tours</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Slide 7: TikTok */}
+                    <motion.div
+                        {...cardMotionProps}
+                        className="p-8 border border-gray-200 bg-gray-50"
+                    >
+                        <div className="flex justify-between items-start mb-6">
+                            <h3 className="text-2xl font-bold">TikTok<br /><span className="text-gray-400 text-lg font-normal">The Personality</span></h3>
+                            <Smartphone className="w-8 h-8" />
+                        </div>
+                        <div className="space-y-4 text-sm">
+                            <div className="flex justify-between border-b border-gray-300 pb-2"><span>Budget</span><span className="font-bold">RM 1,500 / mo</span></div>
+                            <div className="flex justify-between border-b border-gray-300 pb-2"><span>Objective</span><span>Viral Education & Trust</span></div>
+                            <div>
+                                <p className="font-bold mb-1">Content (2x/week)</p>
+                                <ul className="list-disc pl-4 space-y-1 text-gray-600">
+                                    <li>Sensei Tips: Car care hacks</li>
+                                    <li>Behind the Scenes: Cleanliness & Precision</li>
+                                    <li>Spark Ads for Pre-Festive tips</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Slide 8: KOL Support */}
+                    <motion.div
+                        {...cardMotionProps}
+                        className="p-8 border-2 border-black bg-white"
+                    >
+                        <div className="flex justify-between items-start mb-6">
+                            <h3 className="text-2xl font-bold">KOL Support<br /><span className="text-gray-400 text-lg font-normal">The Trust</span></h3>
+                            <Target className="w-8 h-8" />
+                        </div>
+                        <div className="space-y-4 text-sm">
+                            <div className="flex justify-between border-b pb-2"><span>Budget</span><span className="font-bold">RM 10,000 / mo</span></div>
+                            <div className="flex justify-between border-b pb-2"><span>Objective</span><span>Organic Reach & Credibility</span></div>
+                            <div>
+                                <p className="font-bold mb-1">KOL Mix</p>
+                                <ul className="list-disc pl-4 space-y-1 text-gray-600">
+                                    <li>Auto-Tech: Validate 30-Point Check</li>
+                                    <li>Lifestyle/Expat: Subscription ease</li>
+                                    <li>Timing: 4-5 weeks before holidays</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
-            </motion.div>
+            </PrintWrapper>
+
+            {/* Component 5: Creative & Management Retainer */}
+            <PrintWrapper>
+                <motion.div
+                    {...cardMotionProps}
+                    className={isPrintMode ? "w-full p-8 border-2 border-dashed border-gray-300 bg-gray-50" : "mb-20 p-8 border-2 border-dashed border-gray-300 bg-gray-50 hover:border-black transition-colors page-break-inside-avoid"}
+                >
+                    <div className="flex flex-col md:flex-row justify-between md:items-start gap-6">
+                        <div className="flex items-start gap-4">
+                            <div className="p-3 bg-black text-white rounded-full hidden md:block">
+                                <PenTool className="w-6 h-6" />
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-bold mb-2">Creative & Campaign Management<br /><span className="text-gray-400 text-lg font-normal">Operational Support</span></h3>
+                                <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                                    <span className="px-2 py-1 bg-gray-200 rounded text-xs font-bold uppercase">Agency Retainer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="text-left md:text-right border-t md:border-t-0 border-gray-200 pt-4 md:pt-0">
+                            <span className="block text-sm uppercase text-gray-400">Monthly Allocation</span>
+                            <span className="text-3xl font-bold">RM 7,000</span>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-6 mt-6 md:pl-16">
+                        <div>
+                            <h4 className="font-bold mb-2 text-sm uppercase border-b border-gray-300 pb-1 inline-block">Content Production</h4>
+                            <ul className="text-sm text-gray-600 space-y-2 mt-2">
+                                <li className="flex items-start gap-2">• <span>Video Editing & Motion Graphics</span></li>
+                                <li className="flex items-start gap-2">• <span>Graphic Design for Ads</span></li>
+                                <li className="flex items-start gap-2">• <span>Material Sourcing</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="font-bold mb-2 text-sm uppercase border-b border-gray-300 pb-1 inline-block">Talent & Management</h4>
+                            <ul className="text-sm text-gray-600 space-y-2 mt-2">
+                                <li className="flex items-start gap-2">• <span>Key Person / Talent Management</span></li>
+                                <li className="flex items-start gap-2">• <span>Campaign Manager Supervision</span></li>
+                                <li className="flex items-start gap-2">• <span>3rd Party Vendor Coordination</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="font-bold mb-2 text-sm uppercase border-b border-gray-300 pb-1 inline-block">Deliverables</h4>
+                            <ul className="text-sm text-gray-600 space-y-2 mt-2">
+                                <li className="flex items-start gap-2">• <span>Weekly Performance Reports</span></li>
+                                <li className="flex items-start gap-2">• <span>Creative Refresh (Bi-weekly)</span></li>
+                                <li className="flex items-start gap-2">• <span>On-site Content Shoots</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </motion.div>
+            </PrintWrapper>
 
             {/* Slide 9: 1-Month Early Logic */}
             <SlideSection title="The '1-Month Early' Logic" subtitle="Operational Efficiency & ROI" index={9} isPrintMode={isPrintMode}>
