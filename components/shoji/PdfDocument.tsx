@@ -13,13 +13,16 @@ const PageLayout = ({ children, title, subtitle, pageNumber }: { children: React
         style={{ width: PAGE_WIDTH, height: PAGE_HEIGHT, padding: '40px 60px' }}
     >
         {/* Header */}
-        <div className="flex justify-between items-end border-b-2 border-black pb-4 mb-8">
+        <div className="flex justify-between items-end border-b-2 border-black pb-4 mb-6">
             <div>
-                {title && <h1 className="text-3xl font-bold uppercase tracking-tight text-black">{title}</h1>}
-                {subtitle && <p className="text-lg text-gray-500 font-medium">{subtitle}</p>}
+                {title && <h1 className="text-3xl font-bold uppercase tracking-tight text-black leading-none mb-1">{title}</h1>}
+                {subtitle && <p className="text-lg text-gray-500 font-medium leading-none">{subtitle}</p>}
             </div>
             <div className="flex flex-col items-end">
-                <img src="/logo-dark.svg" alt="THEBRNE" className="h-6 w-auto mb-1" />
+                {/* Logo with safe padding to prevent cropping */}
+                <div className="h-8 mb-1 flex items-end">
+                    <img src="/logo-dark.svg" alt="THEBRNE" className="h-full w-auto object-contain" />
+                </div>
                 <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider">Confidential</span>
             </div>
         </div>
@@ -65,7 +68,7 @@ export const PdfDocument: React.FC = () => {
 
             {/* Page 2: Ecosystem & USP */}
             <PageLayout title="Business Ecosystem" subtitle="The One-Stop Mobility Concept" pageNumber={2}>
-                <div className="grid grid-cols-2 gap-12 h-full">
+                <div className="grid grid-cols-2 gap-12 h-full pb-4">
                     <div className="grid grid-cols-1 gap-6 content-center">
                         <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-lg border border-gray-100">
                             <Shield className="w-10 h-10 text-black shrink-0" />
@@ -101,7 +104,7 @@ export const PdfDocument: React.FC = () => {
 
             {/* Page 3: Market Opportunity */}
             <PageLayout title="Strategic Analysis" subtitle="Market Opportunity & 2026 Festive Surge" pageNumber={3}>
-                <div className="flex gap-12 h-full items-center">
+                <div className="flex gap-12 h-full items-center pb-4">
                     <div className="w-1/2 space-y-8">
                         <div>
                             <h3 className="text-2xl font-bold mb-2 text-red-600">The "Rare Cycle" Anomaly</h3>
@@ -217,16 +220,18 @@ export const PdfDocument: React.FC = () => {
 
             {/* Page 5: Operational Support */}
             <PageLayout title="Operational Support" subtitle="Creative & Campaign Management Retainer" pageNumber={5}>
-                <div className="flex gap-12 h-full items-start pt-8">
+                <div className="flex gap-12 h-full items-start pt-8 pb-4">
                     <div className="w-1/3 bg-black text-white p-8 rounded-xl h-full flex flex-col justify-between">
                         <div>
-                            <PenTool className="w-12 h-12 mb-6 text-gray-300" />
+                            <div className="p-3 bg-zinc-800 rounded-full w-fit mb-6">
+                                <PenTool className="w-8 h-8 text-white" />
+                            </div>
                             <h3 className="text-3xl font-bold mb-2">Agency Retainer</h3>
                             <p className="text-gray-400">Dedicated operational and creative team ensuring consistent execution.</p>
                         </div>
-                        <div>
-                            <div className="text-sm uppercase tracking-widest text-gray-500 mb-1">Monthly Investment</div>
-                            <div className="text-5xl font-bold">RM 7,000</div>
+                        <div className="mt-8">
+                            <div className="text-sm uppercase tracking-widest text-gray-500 mb-2">Monthly Investment</div>
+                            <div className="text-5xl font-bold mb-4">RM 7,000</div>
                         </div>
                     </div>
 
@@ -259,15 +264,15 @@ export const PdfDocument: React.FC = () => {
 
             {/* Page 6: Budget Summary */}
             <PageLayout title="Budget Overview" subtitle="Financial Breakdown & Projections" pageNumber={6}>
-                <div className="flex gap-8 h-full items-center">
+                <div className="flex gap-8 h-full items-center pb-4">
                     {/* Main Numbers */}
                     <div className="w-1/2 space-y-6">
                         <div className="bg-white border-2 border-black p-8 shadow-lg">
-                            <p className="text-sm uppercase text-gray-500 font-bold mb-2">Total Monthly Investment</p>
-                            <div className="flex items-baseline gap-4">
-                                <span className="text-6xl font-bold text-black">RM 30,000</span>
+                            <p className="text-sm uppercase text-gray-500 font-bold mb-4">Total Monthly Investment</p>
+                            <div className="flex items-baseline gap-4 mb-6">
+                                <span className="text-6xl font-bold text-black tracking-tight">RM 30,000</span>
                             </div>
-                            <p className="text-sm text-gray-400 mt-2 font-mono">Ads (23k) + Retainer (7k)</p>
+                            <p className="text-sm text-gray-400 font-mono pt-4 border-t border-gray-100">Ads (23k) + Retainer (7k)</p>
                         </div>
 
                         <div className="bg-gray-50 p-8 border border-gray-200">
@@ -285,7 +290,7 @@ export const PdfDocument: React.FC = () => {
                             </div>
                             <h4 className="text-xl font-bold mb-4">Dynamic Cost Efficiency</h4>
                             <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                                Campaign performance and platform algorithms may decrease paid advertising costs over time. Monthly investments are dynamic, potentially reducing the total annual spend as optimization improves/learning phase completes.
+                                Campaign performance and platform algorithms may decrease paid advertising costs over time. Monthly investments are dynamic, potentially reducing the total annual spend as optimization improves.
                             </p>
                         </div>
 
@@ -330,7 +335,7 @@ export const PdfDocument: React.FC = () => {
 
 const TimelinePage = ({ title, data, pageNumber }: { title: string, data: any[], pageNumber: number }) => (
     <PageLayout title={title} pageNumber={pageNumber}>
-        <div className="grid grid-cols-2 gap-8 h-full content-start">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-4 h-full content-start pb-2">
             {data.map((item, idx) => (
                 <div key={idx} className="border border-gray-200 rounded-lg p-5 flex flex-col h-full bg-white shadow-sm">
 
@@ -340,23 +345,23 @@ const TimelinePage = ({ title, data, pageNumber }: { title: string, data: any[],
                             <div className="text-xs font-bold uppercase text-red-600 mb-1">{item.event}</div>
                             <div className="text-xl font-bold text-black">{item.month}</div>
                         </div>
-                        <div className="text-right">
-                            <div className="flex items-center gap-1 justify-end text-sm font-bold bg-black text-white px-2 py-1 rounded">
+                        <div className="text-right flex flex-col items-end">
+                            <div className="flex items-center gap-2 justify-center text-sm font-bold bg-black text-white px-3 py-1 rounded-full leading-none">
                                 <Banknote className="w-3 h-3" />
-                                RM {item.budget}
+                                <span>RM {item.budget}</span>
                             </div>
-                            <div className="text-[10px] text-gray-500 mt-1 uppercase">Allocation</div>
+                            <div className="text-[10px] text-gray-500 mt-1 uppercase tracking-wide">Allocation</div>
                         </div>
                     </div>
 
                     {/* Core Content */}
                     <div className="flex-1 space-y-3">
-                        <div>
-                            <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase font-bold tracking-wider">Push Period</span>
-                            <p className="text-sm font-medium mt-1">{item.pushPeriod}</p>
+                        <div className="flex flex-col items-start">
+                            <span className="inline-flex items-center justify-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded">Push Period</span>
+                            <p className="text-sm font-medium mt-1 leading-snug">{item.pushPeriod}</p>
                         </div>
-                        <div>
-                            <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase font-bold tracking-wider">Key Focus</span>
+                        <div className="flex flex-col items-start">
+                            <span className="inline-flex items-center justify-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded">Key Focus</span>
                             <p className="text-sm text-gray-700 mt-1 leading-snug">{item.focus}</p>
                         </div>
                     </div>
