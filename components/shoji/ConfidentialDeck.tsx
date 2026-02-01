@@ -33,8 +33,8 @@ export const ConfidentialDeck: React.FC = () => {
                 transition={{ duration: 1 }}
                 className="min-h-[80vh] flex flex-col justify-center items-center text-center border-b border-gray-900 mb-10"
             >
-                <div className="w-20 h-20 bg-black text-white flex items-center justify-center rounded-full mb-8">
-                    <span className="font-bold text-2xl tracking-tighter">TS</span>
+                <div className="mb-8">
+                    <img src="/logo.png" alt="THE BRNE" className="h-24 w-auto" />
                 </div>
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6">
                     2026 Integrated Marketing<br />Strategy & Expansion

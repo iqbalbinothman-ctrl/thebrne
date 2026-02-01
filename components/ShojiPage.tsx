@@ -41,8 +41,8 @@ const ShojiPage: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center bg-zinc-50 font-sans text-black">
                 <form onSubmit={handleLogin} className="bg-white p-10 border border-gray-200 shadow-xl w-full max-w-sm text-center">
                     <div className="mb-6">
-                        <div className="w-12 h-12 bg-black text-white mx-auto flex items-center justify-center rounded-full mb-4">
-                            <span className="font-bold text-lg tracking-tighter">TS</span>
+                        <div className="mb-4 flex justify-center">
+                            <img src="/logo.png" alt="THE BRNE" className="h-16 w-auto" />
                         </div>
                         <h2 className="text-xl font-bold uppercase tracking-widest mb-1">Confidential</h2>
                         <p className="text-xs text-gray-400 uppercase tracking-widest">Internal Access Only</p>
@@ -80,12 +80,12 @@ const ShojiPage: React.FC = () => {
             <nav className={`fixed top-0 w-full z-40 transition-all duration-300 border-b ${isScrolled ? 'bg-white/90 backdrop-blur-md border-gray-100 py-4' : 'bg-transparent border-transparent py-6'}`}>
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     <div className="flex items-center gap-8">
-                        <div
-                            className="text-xl font-black tracking-tighter border-2 border-black p-1 leading-none cursor-pointer hover:bg-black hover:text-white transition-colors"
+                        <img
+                            src="/logo.png"
+                            alt="THE BRNE"
+                            className="h-8 md:h-10 w-auto object-contain cursor-pointer"
                             onClick={() => setCurrentView('timeline')}
-                        >
-                            MM<span className="opacity-0">.</span>
-                        </div>
+                        />
 
                         {/* View Switcher */}
                         <div className="hidden md:flex items-center gap-6 text-xs font-bold tracking-widest uppercase">
