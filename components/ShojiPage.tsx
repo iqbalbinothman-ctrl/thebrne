@@ -30,7 +30,7 @@ const ShojiPage: React.FC = () => {
     const handleDownload = async () => {
         setIsGenerating(true);
         // Wait for a moment ensure render
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await new Promise(resolve => setTimeout(resolve, 600));
 
         const container = document.getElementById('pdf-print-container');
         if (!container) {
@@ -61,9 +61,9 @@ const ShojiPage: React.FC = () => {
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i] as HTMLElement;
 
-                // Capture high-res PNG
+                // Capture with balanced quality
                 const canvas = await html2canvas(page, {
-                    scale: 2,           // High resolution as requested
+                    scale: 2,           // Balanced resolution
                     useCORS: true,      // Handle images/fonts
                     logging: false,
                     allowTaint: true,
@@ -73,14 +73,14 @@ const ShojiPage: React.FC = () => {
                     windowWidth: 1440   // Simulate desktop to prevent mobile breaks
                 });
 
-                const imgData = canvas.toDataURL('image/png'); // Lossless PNG
+                const imgData = canvas.toDataURL('image/jpeg', 0.92); // JPEG with good quality
 
                 if (i > 0) {
                     pdf.addPage();
                 }
 
                 // Fit to PDF Page: 0, 0, Width, Height
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
             }
 
             pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');

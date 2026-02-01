@@ -20,7 +20,7 @@ const PageLayout = ({ children, title, subtitle, pageNumber }: { children: React
             </div>
             <div className="flex flex-col items-end">
                 {/* Logo with safe padding to prevent cropping */}
-                <div className="h-8 mb-1 flex items-end">
+                <div className="h-10 mb-1 flex items-center justify-end">
                     <img src="/logo-dark.svg" alt="THEBRNE" className="h-full w-auto object-contain" />
                 </div>
                 <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider">Confidential</span>
@@ -50,7 +50,9 @@ export const PdfDocument: React.FC = () => {
                 style={{ width: PAGE_WIDTH, height: PAGE_HEIGHT }}
             >
                 <div className="border-4 border-white p-20 text-center max-w-4xl">
-                    <img src="/logo-dark.svg" alt="THEBRNE" className="h-24 w-auto mx-auto mb-12 invert filter brightness-0" />
+                    <div className="h-32 flex items-center justify-center mb-12">
+                        <img src="/logo-dark.svg" alt="THEBRNE" className="h-full w-auto object-contain invert brightness-0" />
+                    </div>
                     <h1 className="text-6xl font-extrabold mb-6 tracking-tight leading-tight">
                         2026 Integrated<br />Marketing Strategy
                     </h1>
@@ -346,23 +348,23 @@ const TimelinePage = ({ title, data, pageNumber }: { title: string, data: any[],
                             <div className="text-xl font-bold text-black">{item.month}</div>
                         </div>
                         <div className="text-right flex flex-col items-end">
-                            <div className="flex items-center gap-2 justify-center text-sm font-bold bg-black text-white px-3 py-1 rounded-full leading-none">
-                                <Banknote className="w-3 h-3" />
-                                <span>RM {item.budget}</span>
+                            <div className="inline-flex items-center gap-1.5 text-sm font-bold bg-black text-white px-3 py-1.5 rounded-full">
+                                <Banknote className="w-3.5 h-3.5" />
+                                <span className="leading-none">RM {item.budget}</span>
                             </div>
-                            <div className="text-[10px] text-gray-500 mt-1 uppercase tracking-wide">Allocation</div>
+                            <div className="text-[10px] text-gray-500 mt-1.5 uppercase tracking-wide">Allocation</div>
                         </div>
                     </div>
 
                     {/* Core Content */}
                     <div className="flex-1 space-y-3">
                         <div className="flex flex-col items-start">
-                            <span className="inline-flex items-center justify-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded">Push Period</span>
-                            <p className="text-sm font-medium mt-1 leading-snug">{item.pushPeriod}</p>
+                            <span className="inline-flex items-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded leading-tight">Push Period</span>
+                            <p className="text-sm font-medium mt-2 leading-snug">{item.pushPeriod}</p>
                         </div>
                         <div className="flex flex-col items-start">
-                            <span className="inline-flex items-center justify-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded">Key Focus</span>
-                            <p className="text-sm text-gray-700 mt-1 leading-snug">{item.focus}</p>
+                            <span className="inline-flex items-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded leading-tight">Key Focus</span>
+                            <p className="text-sm text-gray-700 mt-2 leading-snug">{item.focus}</p>
                         </div>
                     </div>
 
