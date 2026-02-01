@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Timeline } from './shoji/Timeline';
 import { ConfidentialDeck } from './shoji/ConfidentialDeck';
+import { PdfDocument } from './shoji/PdfDocument';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -239,11 +240,9 @@ const ShojiPage: React.FC = () => {
                     ))}
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 pt-10 pb-20 px-16 bg-white">
-                    <ConfidentialDeck isPrintMode={true} />
-                    <div className="h-px bg-gray-300 w-full my-10"></div>
-                    <Timeline isPrintMode={true} />
+                {/* Content - Using dedicated PDF Layout */}
+                <div className="relative z-10 bg-white">
+                    <PdfDocument />
                 </div>
 
                 {/* PDF Footer for each virtual page concept if needed, or just bottom */}
