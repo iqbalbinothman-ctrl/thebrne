@@ -39,7 +39,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ data, index, isLast,
 
                         {/* Header Section: Month & Event */}
                         <div className="md:w-1/3 border-b md:border-b-0 md:border-r border-gray-100 md:pr-6 pb-4 md:pb-0">
-                            <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <div className="flex items-center gap-2 text-sm font-bold uppercase text-gray-500 mb-2">
                                 <Calendar className="w-4 h-4" />
                                 {data.month}
                             </div>
@@ -55,7 +55,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ data, index, isLast,
                             <div className="flex items-start gap-3">
                                 <Clock className="w-5 h-5 text-gray-400 mt-0.5 shrink-0 group-hover:text-black transition-colors" />
                                 <div>
-                                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Push Period</p>
+                                    <p className="text-xs font-semibold text-gray-400 uppercase mb-1">Push Period</p>
                                     <p className="text-sm font-medium text-black">{data.pushPeriod}</p>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ data, index, isLast,
                             <div className="flex items-start gap-3">
                                 <Target className="w-5 h-5 text-gray-400 mt-0.5 shrink-0 group-hover:text-black transition-colors" />
                                 <div>
-                                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Focus & Offer</p>
+                                    <p className="text-xs font-semibold text-gray-400 uppercase mb-1">Focus & Offer</p>
                                     <p className="text-lg text-gray-900 leading-relaxed font-light">
                                         {data.focus}
                                     </p>

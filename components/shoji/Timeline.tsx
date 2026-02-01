@@ -37,10 +37,10 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
                 {...motionProps}
                 className="mb-20 text-center relative"
             >
-                <span className="inline-block py-1 px-3 border border-black text-xs font-bold uppercase tracking-[0.2em] mb-4 hover:bg-black hover:text-white transition-colors cursor-default">
+                <span className="inline-block py-1 px-3 border border-black text-xs font-bold uppercase mb-4 hover:bg-black hover:text-white transition-colors cursor-default">
                     Strategy 2026-2027
                 </span>
-                <h1 className="text-4xl md:text-6xl font-extrabold text-black tracking-tighter mb-6">
+                <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-6">
                     Marketing Roadmap
                 </h1>
                 <p className="text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
@@ -49,7 +49,7 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
 
                 {/* Agency Attribution */}
                 <div className="mt-8 flex justify-center">
-                    <p className="text-[10px] md:text-xs font-semibold tracking-[0.15em] text-gray-400 uppercase">
+                    <p className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase">
                         prepared by <span className="text-black font-bold">THEBRNE AGENCY</span> for <span className="text-black font-bold">TIGER SHOJI SDN BHD</span>
                     </p>
                 </div>
@@ -80,7 +80,7 @@ export const Timeline: React.FC<TimelineProps> = ({ isPrintMode = false }) => {
                 {...footerMotionProps}
                 className="flex justify-center mt-12 mb-20"
             >
-                <div className="flex items-center gap-2 text-gray-400 text-sm font-medium uppercase tracking-widest">
+                <div className="flex items-center gap-2 text-gray-400 text-sm font-medium uppercase">
                     <div className="w-12 h-px bg-gray-300"></div>
                     End of Cycle
                     <div className="w-12 h-px bg-gray-300"></div>

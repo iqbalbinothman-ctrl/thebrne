@@ -30,7 +30,7 @@ const SlideSection: React.FC<SlideSectionProps> = ({ title, subtitle, children, 
         >
             <div className="max-w-4xl mx-auto w-full">
                 <div className="mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">{title}</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">{title}</h2>
                     {subtitle && <p className="text-xl text-gray-500 font-light border-l-2 border-black pl-4">{subtitle}</p>}
                 </div>
                 <div className="text-lg leading-relaxed text-gray-800">
@@ -73,13 +73,13 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                 <div className="mb-8">
                     <img src="/logo-dark.svg" alt="THE BRNE" className="h-24 w-auto" />
                 </div>
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6">
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
                     2026 Integrated Marketing<br />Strategy & Expansion
                 </h1>
                 <p className="text-2xl text-gray-500 font-light mb-12">
                     Bridging Japanese Quality with Malaysian Mobility
                 </p>
-                <div className="text-sm font-mono uppercase tracking-widest text-gray-400">
+                <div className="text-sm font-mono uppercase text-gray-400">
                     Prepared by THEBRNE AGENCY | February 2026
                 </div>
 
@@ -115,7 +115,7 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                     </div>
                 </div>
                 <div className="mt-8 p-6 bg-black text-white text-center">
-                    <span className="font-bold uppercase tracking-widest">Unique Selling Point</span>
+                    <span className="font-bold uppercase">Unique Selling Point</span>
                     <p className="text-xl mt-2 italic font-serif">"Omotenashi" (Japanese Hospitality) in the Malaysian automotive sector.</p>
                 </div>
             </SlideSection>
@@ -131,7 +131,7 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                         <p>A 60-day window of maximum road-trip activity.</p>
                     </div>
                     <div className="flex-1 bg-gray-900 text-white p-10">
-                        <h4 className="text-xl font-bold mb-4 uppercase tracking-widest text-gray-400">Strategy</h4>
+                        <h4 className="text-xl font-bold mb-4 uppercase text-gray-400">Strategy</h4>
                         <p className="text-3xl font-light leading-tight">
                             Capture the "Early Bird" market. Most workshops overbook last minute; Tiger Shoji will own the "1-Month Prep" segment.
                         </p>
@@ -263,12 +263,12 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                         <div>
                             <h3 className="text-2xl font-bold mb-2">Creative & Campaign Management<br /><span className="text-gray-400 text-lg font-normal">Operational Support</span></h3>
                             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                                <span className="px-2 py-1 bg-gray-200 rounded text-xs font-bold uppercase tracking-wider">Agency Retainer</span>
+                                <span className="px-2 py-1 bg-gray-200 rounded text-xs font-bold uppercase">Agency Retainer</span>
                             </div>
                         </div>
                     </div>
                     <div className="text-left md:text-right border-t md:border-t-0 border-gray-200 pt-4 md:pt-0">
-                        <span className="block text-sm uppercase tracking-widest text-gray-400">Monthly Allocation</span>
+                        <span className="block text-sm uppercase text-gray-400">Monthly Allocation</span>
                         <span className="text-3xl font-bold">RM 7,000</span>
                     </div>
                 </div>
@@ -327,14 +327,14 @@ export const ConfidentialDeck: React.FC<ConfidentialDeckProps> = ({ isPrintMode 
                 <div className="flex flex-col md:flex-row gap-8 items-stretch">
                     <div className="md:w-1/2 bg-gray-50 border p-8 flex flex-col justify-center">
                         <div className="mb-8 pb-8 border-b border-gray-200">
-                            <p className="text-sm uppercase tracking-widest text-gray-500 mb-1">Total Monthly Investment</p>
+                            <p className="text-sm uppercase text-gray-500 mb-1">Total Monthly Investment</p>
                             <div className="flex items-baseline gap-2">
                                 <p className="text-4xl font-bold">RM 30,000</p>
                                 <p className="text-sm text-gray-400 font-medium">(Ads + Retainer)</p>
                             </div>
                         </div>
                         <div>
-                            <p className="text-sm uppercase tracking-widest text-gray-500 mb-1">Annual Investment</p>
+                            <p className="text-sm uppercase text-gray-500 mb-1">Annual Investment</p>
                             <p className="text-4xl font-bold">RM 360,000</p>
                         </div>
                     </div>

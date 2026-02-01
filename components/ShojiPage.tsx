@@ -70,6 +70,71 @@ const ShojiPage: React.FC = () => {
         }
     };
 
+    // Anti-Screenshot / Privacy Protection
+    useEffect(() => {
+        // 1. Prevent Right Click
+        const handleContextMenu = (e: MouseEvent) => {
+            e.preventDefault();
+        };
+
+        // 2. Prevent Common Screenshot Shortcuts
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // macOS: Cmd + Shift + 3, 4, 5
+            if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
+                e.preventDefault();
+                alert("Screenshots are disabled on this page.");
+            }
+            // Windows: Print Screen (often just 'PrintScreen' or 'F13' etc depending on OS/Browser, hard to block all)
+            if (e.key === 'PrintScreen') {
+                e.preventDefault();
+                alert("Screenshots are disabled on this page.");
+            }
+            // Prevent Ctrl+P / Cmd+P (Printing)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                alert("Printing is disabled on this page.");
+            }
+            // Prevent Save Page
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+            }
+        };
+
+        // 3. Blur/Cover content when window loses focus (e.g. switching apps to take a screenshot)
+        const handleVisibilityChange = () => {
+            const overlay = document.getElementById('privacy-overlay');
+            if (document.hidden) {
+                if (overlay) overlay.style.display = 'flex';
+            } else {
+                if (overlay) overlay.style.display = 'none';
+            }
+        };
+
+        const handleBlur = () => {
+            const overlay = document.getElementById('privacy-overlay');
+            if (overlay) overlay.style.display = 'flex';
+        };
+
+        const handleFocus = () => {
+            const overlay = document.getElementById('privacy-overlay');
+            if (overlay) overlay.style.display = 'none';
+        };
+
+        document.addEventListener('contextmenu', handleContextMenu);
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('blur', handleBlur);
+        window.addEventListener('focus', handleFocus);
+
+        return () => {
+            document.removeEventListener('contextmenu', handleContextMenu);
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('blur', handleBlur);
+            window.removeEventListener('focus', handleFocus);
+        };
+    }, []);
+
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -97,8 +162,8 @@ const ShojiPage: React.FC = () => {
                             {/* Adjusted with ml-1 to visually center the circle icon, compensating for the TM mark */}
                             <img src="/logo-dark.svg" alt="THE BRNE" className="h-16 w-auto" />
                         </div>
-                        <h2 className="text-xl font-bold uppercase tracking-widest mb-1">Confidential</h2>
-                        <p className="text-xs text-gray-400 uppercase tracking-widest">Internal Access Only</p>
+                        <h2 className="text-xl font-bold uppercase mb-1">Confidential</h2>
+                        <p className="text-xs text-gray-400 uppercase">Internal Access Only</p>
                     </div>
 
                     <input
@@ -108,10 +173,10 @@ const ShojiPage: React.FC = () => {
                         className="w-full border-b-2 border-gray-200 p-2 text-center text-lg outline-none focus:border-black transition-colors mb-6 bg-transparent"
                         placeholder="ENTER PASSWORD"
                     />
-                    {error && <p className="text-red-500 mb-6 text-xs font-bold uppercase tracking-wider">{error}</p>}
+                    {error && <p className="text-red-500 mb-6 text-xs font-bold uppercase">{error}</p>}
                     <button
                         type="submit"
-                        className="w-full bg-black text-white py-3 font-bold uppercase tracking-widest hover:bg-zinc-800 transition-all text-xs"
+                        className="w-full bg-black text-white py-3 font-bold uppercase hover:bg-zinc-800 transition-all text-xs"
                     >
                         Unlock Strategy
                     </button>
@@ -122,6 +187,14 @@ const ShojiPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white font-sans">
+
+            {/* Privacy Overlay */}
+            <div id="privacy-overlay" className="fixed inset-0 bg-black z-[100000] hidden items-center justify-center">
+                <div className="text-white text-center">
+                    <h2 className="text-2xl font-bold mb-2">Security Pause</h2>
+                    <p className="text-gray-400">Content hidden while window is inactive.</p>
+                </div>
+            </div>
 
             <NDAModal
                 isOpen={isNDAModalOpen}
@@ -153,7 +226,7 @@ const ShojiPage: React.FC = () => {
 
                 {/* PDF Footer for each virtual page concept if needed, or just bottom */}
                 <div className="text-center py-8 border-t border-gray-200 mt-10">
-                    <p className="text-xs text-gray-400 uppercase tracking-widest">Confidential Document &bull; Generated via Secure Portal &bull; Tiger Shoji x TheBrne Agency</p>
+                    <p className="text-xs text-gray-400 uppercase">Confidential Document &bull; Generated via Secure Portal &bull; Tiger Shoji x TheBrne Agency</p>
                 </div>
             </div>
 
@@ -175,7 +248,7 @@ const ShojiPage: React.FC = () => {
                         />
 
                         {/* View Switcher */}
-                        <div className="hidden md:flex items-center gap-6 text-xs font-bold tracking-widest uppercase">
+                        <div className="hidden md:flex items-center gap-6 text-xs font-bold uppercase">
                             <button
                                 onClick={() => setCurrentView('timeline')}
                                 className={`hover:text-black transition-colors ${currentView === 'timeline' ? 'text-black underline underline-offset-4 decoration-2' : 'text-gray-400'}`}
@@ -199,7 +272,7 @@ const ShojiPage: React.FC = () => {
 
                         <button
                             onClick={() => setIsNDAModalOpen(true)}
-                            className="flex items-center gap-2 bg-black text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-800 transition-colors"
+                            className="flex items-center gap-2 bg-black text-white px-4 py-2 text-[10px] font-bold uppercase hover:bg-zinc-800 transition-colors"
                         >
                             <Download className="w-3 h-3" />
                             <span className="hidden md:inline">Download PDF</span>
@@ -212,7 +285,7 @@ const ShojiPage: React.FC = () => {
             <div className="md:hidden fixed bottom-16 left-0 right-0 z-40 flex justify-center pointer-events-none">
                 <button
                     onClick={() => setIsNDAModalOpen(true)}
-                    className="pointer-events-auto bg-black text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 text-xs font-bold uppercase tracking-widest"
+                    className="pointer-events-auto bg-black text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 text-xs font-bold uppercase"
                 >
                     <Download className="w-4 h-4" />
                     Download PDF
@@ -223,13 +296,13 @@ const ShojiPage: React.FC = () => {
             <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-50 flex justify-around">
                 <button
                     onClick={() => { setCurrentView('timeline'); window.scrollTo(0, 0); }}
-                    className={`text-xs font-bold uppercase tracking-widest ${currentView === 'timeline' ? 'text-black' : 'text-gray-400'}`}
+                    className={`text-xs font-bold uppercase ${currentView === 'timeline' ? 'text-black' : 'text-gray-400'}`}
                 >
                     Roadmap
                 </button>
                 <button
                     onClick={() => { setCurrentView('deck'); window.scrollTo(0, 0); }}
-                    className={`text-xs font-bold uppercase tracking-widest ${currentView === 'deck' ? 'text-black' : 'text-gray-400'}`}
+                    className={`text-xs font-bold uppercase ${currentView === 'deck' ? 'text-black' : 'text-gray-400'}`}
                 >
                     Strategy Deck
                 </button>
