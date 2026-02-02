@@ -31,10 +31,7 @@ const ShojiPage: React.FC = () => {
         setIsGenerating(true);
         await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Temporarily disable privacy overlay
-        const overlay = document.getElementById('privacy-overlay');
-        const originalDisplay = overlay?.style.display || '';
-        if (overlay) overlay.style.display = 'none';
+
 
         try {
             const pdf = new jsPDF({
@@ -97,77 +94,14 @@ const ShojiPage: React.FC = () => {
             console.error("PDF Generation failed", err);
             alert("Failed to generate PDF. Please try again.");
         } finally {
-            // Re-enable privacy overlay
-            if (overlay) overlay.style.display = originalDisplay;
+
             setIsGenerating(false);
             setIsNDAModalOpen(false);
         }
     };
 
     // Anti-Screenshot / Privacy Protection
-    useEffect(() => {
-        // 1. Prevent Right Click
-        const handleContextMenu = (e: MouseEvent) => {
-            e.preventDefault();
-        };
 
-        // 2. Prevent Common Screenshot Shortcuts
-        const handleKeyDown = (e: KeyboardEvent) => {
-            // macOS: Cmd + Shift + 3, 4, 5
-            if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
-                e.preventDefault();
-                alert("Screenshots are disabled on this page.");
-            }
-            // Windows: Print Screen (often just 'PrintScreen' or 'F13' etc depending on OS/Browser, hard to block all)
-            if (e.key === 'PrintScreen') {
-                e.preventDefault();
-                alert("Screenshots are disabled on this page.");
-            }
-            // Prevent Ctrl+P / Cmd+P (Printing)
-            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-                e.preventDefault();
-                alert("Printing is disabled on this page.");
-            }
-            // Prevent Save Page
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-            }
-        };
-
-        // 3. Blur/Cover content when window loses focus (e.g. switching apps to take a screenshot)
-        const handleVisibilityChange = () => {
-            const overlay = document.getElementById('privacy-overlay');
-            if (document.hidden) {
-                if (overlay) overlay.style.display = 'flex';
-            } else {
-                if (overlay) overlay.style.display = 'none';
-            }
-        };
-
-        const handleBlur = () => {
-            const overlay = document.getElementById('privacy-overlay');
-            if (overlay) overlay.style.display = 'flex';
-        };
-
-        const handleFocus = () => {
-            const overlay = document.getElementById('privacy-overlay');
-            if (overlay) overlay.style.display = 'none';
-        };
-
-        document.addEventListener('contextmenu', handleContextMenu);
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-        window.addEventListener('blur', handleBlur);
-        window.addEventListener('focus', handleFocus);
-
-        return () => {
-            document.removeEventListener('contextmenu', handleContextMenu);
-            document.removeEventListener('keydown', handleKeyDown);
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-            window.removeEventListener('blur', handleBlur);
-            window.removeEventListener('focus', handleFocus);
-        };
-    }, []);
 
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
@@ -222,13 +156,7 @@ const ShojiPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white font-sans">
 
-            {/* Privacy Overlay */}
-            <div id="privacy-overlay" className="fixed inset-0 bg-black z-[100000] hidden items-center justify-center">
-                <div className="text-white text-center">
-                    <h2 className="text-2xl font-bold mb-2">Security Pause</h2>
-                    <p className="text-gray-400">Content hidden while window is inactive.</p>
-                </div>
-            </div>
+
 
             <NDAModal
                 isOpen={isNDAModalOpen}
