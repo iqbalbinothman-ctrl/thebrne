@@ -3,7 +3,6 @@ import { Timeline } from './shoji/Timeline';
 import { ConfidentialDeck } from './shoji/ConfidentialDeck';
 import { PdfDocument } from './shoji/PdfDocument';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NDAModal } from './shoji/NDAModal';
 import { Download } from 'lucide-react';
@@ -29,62 +28,13 @@ const ShojiPage: React.FC = () => {
 
     const handleDownload = async () => {
         setIsGenerating(true);
-        // Wait for a moment ensure render
-        await new Promise(resolve => setTimeout(resolve, 600));
-
-        const container = document.getElementById('pdf-print-container');
-        if (!container) {
-            setIsGenerating(false);
-            return;
-        }
+        // Small delay for UI update
+        await new Promise(resolve => setTimeout(resolve, 300));
 
         try {
-            const pages = container.querySelectorAll('.print-page');
-
-            if (pages.length === 0) {
-                console.error("No print pages found.");
-                setIsGenerating(false);
-                return;
-            }
-
-            // Standard A4 Landscape in Points (approx 842 x 595)
-            const pdf = new jsPDF({
-                orientation: 'l',
-                unit: 'pt',
-                format: 'a4'
-            });
-
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-
-            // Loop through each page element
-            for (let i = 0; i < pages.length; i++) {
-                const page = pages[i] as HTMLElement;
-
-                // Capture with balanced quality
-                const canvas = await html2canvas(page, {
-                    scale: 2,           // Balanced resolution
-                    useCORS: true,      // Handle images/fonts
-                    logging: false,
-                    allowTaint: true,
-                    backgroundColor: '#ffffff',
-                    width: 1123,        // Lock input width (A4 px @ 96dpi)
-                    height: 794,        // Lock input height
-                    windowWidth: 1440   // Simulate desktop to prevent mobile breaks
-                });
-
-                const imgData = canvas.toDataURL('image/jpeg', 0.92); // JPEG with good quality
-
-                if (i > 0) {
-                    pdf.addPage();
-                }
-
-                // Fit to PDF Page: 0, 0, Width, Height
-                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-            }
-
-            pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
-
+            // Use vector PDF generation instead of html2canvas
+            const { generateVectorPDF } = await import('../utils/VectorPdfGenerator');
+            generateVectorPDF();
         } catch (err) {
             console.error("PDF Generation failed", err);
             alert("Failed to generate PDF. Please try again.");
