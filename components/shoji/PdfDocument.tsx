@@ -346,23 +346,20 @@ const TimelinePage = ({ title, data, pageNumber }: { title: string, data: any[],
                             <div className="text-xl font-bold text-black">{item.month}</div>
                         </div>
                         <div className="text-right flex flex-col items-end">
-                            <div className="inline-flex items-center gap-1.5 text-sm font-bold bg-black text-white px-3 py-1.5 rounded-full">
-                                <Banknote className="w-3.5 h-3.5" />
-                                <span className="leading-none">RM {item.budget}</span>
-                            </div>
-                            <div className="text-[10px] text-gray-500 mt-1.5 uppercase tracking-wide">Allocation</div>
+                            <div className="text-lg font-bold text-black border-b-2 border-black pb-0.5">RM {item.budget}</div>
+                            <div className="text-[10px] text-gray-500 mt-2 uppercase tracking-wide">Allocation</div>
                         </div>
                     </div>
 
                     {/* Core Content */}
-                    <div className="flex-1 space-y-3">
+                    <div className="flex-1 space-y-4">
                         <div className="flex flex-col items-start">
-                            <span className="inline-flex items-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded leading-tight">Push Period</span>
-                            <p className="text-sm font-medium mt-2 leading-snug">{item.pushPeriod}</p>
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-gray-600 border-b border-gray-400 pb-0.5">Push Period</span>
+                            <p className="text-sm font-medium mt-2.5 leading-snug">{item.pushPeriod}</p>
                         </div>
                         <div className="flex flex-col items-start">
-                            <span className="inline-flex items-center h-5 px-2 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold tracking-wider rounded leading-tight">Key Focus</span>
-                            <p className="text-sm text-gray-700 mt-2 leading-snug">{item.focus}</p>
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-gray-600 border-b border-gray-400 pb-0.5">Key Focus</span>
+                            <p className="text-sm text-gray-700 mt-2.5 leading-snug">{item.focus}</p>
                         </div>
                     </div>
 
