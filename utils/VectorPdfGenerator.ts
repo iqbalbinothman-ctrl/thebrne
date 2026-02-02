@@ -500,6 +500,342 @@ const drawRoadmapPage = (pdf: jsPDF, title: string, data: any[], pageNumber: num
     });
 };
 
+// Page 4: Channel Strategy
+const drawChannelStrategyPage = (pdf: jsPDF) => {
+    const startY = drawPageTemplate(pdf, 'CHANNEL STRATEGY', 'Digital Dominance & Brand Trust', 4);
+
+    const cardWidth = (PAGE_WIDTH - 3 * MARGIN) / 2;
+    const cardHeight = (PAGE_HEIGHT - startY - MARGIN - 5) / 2;
+    const gap = 4;
+
+    const channels = [
+        {
+            title: 'Google Ads',
+            budget: 'RM 10,000 / mo',
+            role: 'Role: The Engine (Intent)',
+            color: COLORS.blue[600],
+            points: [
+                'High-intent Search: "Car service Glenmarie", "Japanese mechanic"',
+                'Performance Max (PMax) targeting Broad Klang Valley radius',
+                'Focus on conversion (Bookings & Calls)'
+            ]
+        },
+        {
+            title: 'Meta Platforms',
+            budget: 'RM 1,500 / mo',
+            role: 'Role: The Multiplier (Retargeting)',
+            color: COLORS.gray[700],
+            points: [
+                'Pixel Retargeting for website visitors & leads',
+                'Visual showcase for Subscription Harimau inventory',
+                'Social Proofing via testimonials'
+            ]
+        },
+        {
+            title: 'TikTok',
+            budget: 'RM 1,500 / mo',
+            role: 'Role: Personality & Trust',
+            color: COLORS.gray[700],
+            points: [
+                '"Sensei Tips" - Educational car care content',
+                'Behind-the-scenes Workshop precision',
+                'Viral reach for brand awareness'
+            ]
+        },
+        {
+            title: 'KOL Support',
+            budget: 'RM 10,000 / mo',
+            role: 'Role: Credibility & Validation',
+            color: COLORS.red,
+            points: [
+                'Auto-Tech Experts: Validating the 30-Point Check',
+                'Lifestyle/Expat Influencers: Promoting Subscription ease',
+                'Deployed 4-5 weeks before major holidays'
+            ]
+        }
+    ];
+
+    channels.forEach((channel, idx) => {
+        const col = idx % 2;
+        const row = Math.floor(idx / 2);
+        const x = MARGIN + col * (cardWidth + gap);
+        const y = startY + row * (cardHeight + gap);
+
+        // Card border
+        drawRect(pdf, x, y, cardWidth, cardHeight, {
+            stroke: COLORS.gray[300],
+            fill: idx === 1 || idx === 2 ? COLORS.gray[50] : COLORS.white
+        });
+
+        // Title and budget
+        drawText(pdf, channel.title, x + 3, y + 6, {
+            fontSize: 12,
+            font: 'bold'
+        });
+
+        // Budget pill
+        const pillWidth = 30;
+        drawRect(pdf, x + cardWidth - pillWidth - 3, y + 3, pillWidth, 5, {
+            fill: idx === 0 ? COLORS.blue[600] + '20' : idx === 3 ? COLORS.red + '20' : COLORS.gray[300]
+        });
+        drawText(pdf, channel.budget, x + cardWidth - pillWidth / 2 - 3, y + 6.5, {
+            fontSize: 6,
+            font: 'bold',
+            color: channel.color,
+            align: 'center'
+        });
+
+        // Role
+        drawText(pdf, channel.role, x + 3, y + 13, {
+            fontSize: 7,
+            color: COLORS.gray[500]
+        });
+
+        // Points
+        let pointY = y + 19;
+        channel.points.forEach(point => {
+            drawText(pdf, '•', x + 4, pointY, {
+                fontSize: 8,
+                color: COLORS.gray[700]
+            });
+            const height = drawText(pdf, point, x + 7, pointY, {
+                fontSize: 7,
+                color: COLORS.gray[700],
+                maxWidth: cardWidth - 10
+            });
+            pointY += height + 3;
+        });
+    });
+};
+
+// Page 5: Operational Support
+const drawOperationalSupportPage = (pdf: jsPDF) => {
+    const startY = drawPageTemplate(pdf, 'OPERATIONAL SUPPORT', 'Creative & Campaign Management Retainer', 5);
+
+    const leftWidth = (PAGE_WIDTH - 3 * MARGIN) / 3;
+    const rightWidth = (PAGE_WIDTH - 3 * MARGIN) * 2 / 3;
+
+    let y = startY + 5;
+
+    // Left panel - Retainer box
+    drawRect(pdf, MARGIN, y, leftWidth, 90, {
+        fill: COLORS.black
+    });
+
+    drawText(pdf, 'Agency Retainer', MARGIN + 5, y + 10, {
+        fontSize: 16,
+        font: 'bold',
+        color: COLORS.white
+    });
+
+    drawText(pdf, 'Dedicated operational and creative team ensuring consistent execution.',
+        MARGIN + 5, y + 18, {
+        fontSize: 8,
+        color: COLORS.gray[300],
+        maxWidth: leftWidth - 10
+    });
+
+    drawText(pdf, 'MONTHLY INVESTMENT', MARGIN + 5, y + 50, {
+        fontSize: 7,
+        color: COLORS.gray[500]
+    });
+
+    drawText(pdf, 'RM 7,000', MARGIN + 5, y + 65, {
+        fontSize: 24,
+        font: 'bold',
+        color: COLORS.white
+    });
+
+    // Right side - Two columns
+    const rightX = MARGIN + leftWidth + MARGIN;
+    const colWidth = (rightWidth - MARGIN) / 2;
+
+    // Content Production
+    drawText(pdf, 'CONTENT PRODUCTION', rightX, y + 5, {
+        fontSize: 10,
+        font: 'bold'
+    });
+    drawLine(pdf, rightX, y + 7, rightX + colWidth - 5, y + 7, {
+        lineWidth: 0.8
+    });
+
+    const contentPoints = [
+        'Video Editing (Reels/TikTok)',
+        'Motion Graphics for Ads',
+        'Static Visuals & Banners',
+        'Copywriting (Ad & Social)'
+    ];
+
+    let contentY = y + 13;
+    contentPoints.forEach(point => {
+        drawText(pdf, '•', rightX + 1, contentY, {
+            fontSize: 8
+        });
+        drawText(pdf, point, rightX + 4, contentY, {
+            fontSize: 8,
+            color: COLORS.gray[700]
+        });
+        contentY += 6;
+    });
+
+    // Management
+    const mgmtX = rightX + colWidth + MARGIN;
+    drawText(pdf, 'MANAGEMENT', mgmtX, y + 5, {
+        fontSize: 10,
+        font: 'bold'
+    });
+    drawLine(pdf, mgmtX, y + 7, mgmtX + colWidth - 5, y + 7, {
+        lineWidth: 0.8
+    });
+
+    const mgmtPoints = [
+        'Media Buying Strategy',
+        'Campaign Optimization',
+        '3rd Party Vendor Coordination',
+        'Key Talent / KOL Liaison'
+    ];
+
+    let mgmtY = y + 13;
+    mgmtPoints.forEach(point => {
+        drawText(pdf, '•', mgmtX + 1, mgmtY, {
+            fontSize: 8
+        });
+        drawText(pdf, point, mgmtX + 4, mgmtY, {
+            fontSize: 8,
+            color: COLORS.gray[700]
+        });
+        mgmtY += 6;
+    });
+
+    // Deliverables box
+    drawRect(pdf, rightX, y + 50, rightWidth - MARGIN, 25, {
+        fill: COLORS.gray[50],
+        stroke: COLORS.gray[100]
+    });
+
+    drawText(pdf, 'DELIVERABLES', rightX + 3, y + 56, {
+        fontSize: 10,
+        font: 'bold'
+    });
+
+    drawText(pdf, 'Weekly Performance Reports • Bi-weekly Creative Refresh • On-site Content Shoots (1x/month)',
+        rightX + 3, y + 63, {
+        fontSize: 8,
+        color: COLORS.gray[700],
+        maxWidth: rightWidth - MARGIN - 6
+    });
+};
+
+// Page 6: Budget Overview
+const drawBudgetPage = (pdf: jsPDF) => {
+    const startY = drawPageTemplate(pdf, 'BUDGET OVERVIEW', 'Financial Breakdown & Projections', 6);
+
+    const colWidth = (PAGE_WIDTH - 3 * MARGIN) / 2;
+    let y = startY + 10;
+
+    // Left side - Main numbers
+    // Total Monthly Investment box
+    drawRect(pdf, MARGIN, y, colWidth, 45, {
+        stroke: COLORS.black,
+        lineWidth: 0.8,
+        fill: COLORS.white
+    });
+
+    drawText(pdf, 'TOTAL MONTHLY INVESTMENT', MARGIN + 5, y + 7, {
+        fontSize: 8,
+        font: 'bold',
+        color: COLORS.gray[500]
+    });
+
+    drawText(pdf, 'RM 30,000', MARGIN + 5, y + 25, {
+        fontSize: 32,
+        font: 'bold'
+    });
+
+    drawLine(pdf, MARGIN + 5, y + 32, colWidth - 5, y + 32, {
+        color: COLORS.gray[100]
+    });
+
+    drawText(pdf, 'Ads (23k) + Retainer (7k)', MARGIN + 5, y + 38, {
+        fontSize: 7,
+        color: COLORS.gray[500]
+    });
+
+    // Annual Investment
+    drawRect(pdf, MARGIN, y + 52, colWidth, 25, {
+        fill: COLORS.gray[50],
+        stroke: COLORS.gray[300]
+    });
+
+    drawText(pdf, 'PROJECTED ANNUAL INVESTMENT', MARGIN + 5, y + 59, {
+        fontSize: 8,
+        font: 'bold',
+        color: COLORS.gray[500]
+    });
+
+    drawText(pdf, 'RM 360,000', MARGIN + 5, y + 70, {
+        fontSize: 22,
+        font: 'bold',
+        color: COLORS.gray[900]
+    });
+
+    // Right side
+    const rightX = MARGIN + colWidth + MARGIN;
+
+    // X-Factor box
+    drawRect(pdf, rightX, y, colWidth, 38, {
+        fill: COLORS.black
+    });
+
+    drawText(pdf, '⚡ THE X-FACTOR', rightX + 5, y + 7, {
+        fontSize: 7,
+        font: 'bold',
+        color: COLORS.yellow[400]
+    });
+
+    drawText(pdf, 'Dynamic Cost Efficiency', rightX + 5, y + 15, {
+        fontSize: 12,
+        font: 'bold',
+        color: COLORS.white
+    });
+
+    drawText(pdf, 'Campaign performance and platform algorithms may decrease paid advertising costs over time. Monthly investments are dynamic, potentially reducing the total annual spend as optimization improves.',
+        rightX + 5, y + 22, {
+        fontSize: 7,
+        color: COLORS.gray[300],
+        maxWidth: colWidth - 10
+    });
+
+    // KPIs
+    drawText(pdf, 'Key Performance Indicators', rightX, y + 46, {
+        fontSize: 11,
+        font: 'bold'
+    });
+
+    const kpis = [
+        { label: 'Search Impression Share', value: '> 70%' },
+        { label: 'Cost Per Lead (CPL)', value: 'Decreasing QoQ' },
+        { label: 'Subscription Enquiries', value: '+15% MoM' }
+    ];
+
+    let kpiY = y + 55;
+    kpis.forEach(kpi => {
+        drawText(pdf, kpi.label, rightX, kpiY, {
+            fontSize: 9,
+            color: COLORS.gray[700]
+        });
+        drawText(pdf, kpi.value, rightX + colWidth - 5, kpiY, {
+            fontSize: 9,
+            font: 'bold',
+            align: 'right'
+        });
+        drawLine(pdf, rightX, kpiY + 2, rightX + colWidth, kpiY + 2, {
+            color: COLORS.gray[100]
+        });
+        kpiY += 10;
+    });
+};
+
 // Main function to generate complete PDF
 export const generateVectorPDF = () => {
     const pdf = new jsPDF({
@@ -519,8 +855,17 @@ export const generateVectorPDF = () => {
     pdf.addPage();
     drawStrategyPage(pdf);
 
-    // Page 4-6: Additional pages would go here (Channel Strategy, Budget, etc.)
-    // For brevity, skipping to roadmap
+    // Page 4: Channel Strategy
+    pdf.addPage();
+    drawChannelStrategyPage(pdf);
+
+    // Page 5: Operational Support
+    pdf.addPage();
+    drawOperationalSupportPage(pdf);
+
+    // Page 6: Budget Overview
+    pdf.addPage();
+    drawBudgetPage(pdf);
 
     // Page 7: Roadmap 1
     pdf.addPage();
