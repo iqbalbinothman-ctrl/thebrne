@@ -19,10 +19,8 @@ const PageLayout = ({ children, title, subtitle, pageNumber }: { children: React
                 {subtitle && <p className="text-lg text-gray-500 font-medium leading-none">{subtitle}</p>}
             </div>
             <div className="flex flex-col items-end">
-                {/* Logo with safe padding to prevent cropping */}
-                <div className="h-10 mb-1 flex items-center justify-end">
-                    <img src="/logo-dark.svg" alt="THEBRNE" className="h-full w-auto object-contain" />
-                </div>
+                {/* Company name instead of logo */}
+                <h2 className="text-xl font-bold uppercase tracking-wider mb-1">THEBRNE</h2>
                 <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider">Confidential</span>
             </div>
         </div>
@@ -50,8 +48,8 @@ export const PdfDocument: React.FC = () => {
                 style={{ width: PAGE_WIDTH, height: PAGE_HEIGHT }}
             >
                 <div className="border-4 border-white p-20 text-center max-w-4xl">
-                    <div className="h-32 flex items-center justify-center mb-12">
-                        <img src="/logo-dark.svg" alt="THEBRNE" className="h-full w-auto object-contain invert brightness-0" />
+                    <div className="mb-12">
+                        <h1 className="text-7xl font-black tracking-widest">THEBRNE</h1>
                     </div>
                     <h1 className="text-6xl font-extrabold mb-6 tracking-tight leading-tight">
                         2026 Integrated<br />Marketing Strategy
