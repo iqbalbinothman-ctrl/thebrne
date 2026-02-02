@@ -155,7 +155,7 @@ export const PdfDocument: React.FC = () => {
                                 <Search className="w-6 h-6 text-blue-600" />
                                 <h3 className="font-bold text-xl">Google Ads</h3>
                             </div>
-                            <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">RM 10,000 / mo</span>
+                            <span className="text-sm font-bold text-black border-b-2 border-black pb-0.5">RM 10,000 / mo</span>
                         </div>
                         <p className="text-sm text-gray-500 mb-4 font-mono uppercase">Role: The Engine (Intent)</p>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
@@ -172,7 +172,7 @@ export const PdfDocument: React.FC = () => {
                                 <Users className="w-6 h-6 text-blue-800" />
                                 <h3 className="font-bold text-xl">Meta Platforms</h3>
                             </div>
-                            <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">RM 1,500 / mo</span>
+                            <span className="text-sm font-bold text-black border-b-2 border-black pb-0.5">RM 1,500 / mo</span>
                         </div>
                         <p className="text-sm text-gray-500 mb-4 font-mono uppercase">Role: The Multiplier (Retargeting)</p>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
@@ -189,7 +189,7 @@ export const PdfDocument: React.FC = () => {
                                 <Smartphone className="w-6 h-6 text-black" />
                                 <h3 className="font-bold text-xl">TikTok</h3>
                             </div>
-                            <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">RM 1,500 / mo</span>
+                            <span className="text-sm font-bold text-black border-b-2 border-black pb-0.5">RM 1,500 / mo</span>
                         </div>
                         <p className="text-sm text-gray-500 mb-4 font-mono uppercase">Role: Personality & Trust</p>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
@@ -206,7 +206,7 @@ export const PdfDocument: React.FC = () => {
                                 <Target className="w-6 h-6 text-red-600" />
                                 <h3 className="font-bold text-xl">KOL Support</h3>
                             </div>
-                            <span className="bg-red-50 text-red-700 px-3 py-1 rounded-full text-xs font-bold">RM 10,000 / mo</span>
+                            <span className="text-sm font-bold text-black border-b-2 border-black pb-0.5">RM 10,000 / mo</span>
                         </div>
                         <p className="text-sm text-gray-500 mb-4 font-mono uppercase">Role: Credibility & Validation</p>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
