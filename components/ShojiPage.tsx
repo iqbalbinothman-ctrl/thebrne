@@ -3,6 +3,8 @@ import { Timeline } from './shoji/Timeline';
 import { ConfidentialDeck } from './shoji/ConfidentialDeck';
 import { PdfDocument } from './shoji/PdfDocument';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { NDAModal } from './shoji/NDAModal';
 import { Download } from 'lucide-react';
 
@@ -27,20 +29,63 @@ const ShojiPage: React.FC = () => {
 
     const handleDownload = async () => {
         setIsGenerating(true);
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 800));
 
         try {
-            // Download the local PDF file
-            const link = document.createElement('a');
-            link.href = '/Roadmap Summary.pdf';
-            link.download = 'THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Get the PDF container with PdfDocument component
+            const container = document.getElementById('pdf-print-container');
+            if (!container) {
+                throw new Error('PDF container not found');
+            }
+
+            // Get all individual pages from PdfDocument
+            const pages = container.querySelectorAll('.print-page');
+            if (pages.length === 0) {
+                throw new Error('No print pages found');
+            }
+
+            // A4 Landscape dimensions (842 x 595 points)
+            const pdf = new jsPDF({
+                orientation: 'l',
+                unit: 'pt',
+                format: 'a4'
+            });
+
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+
+            // Capture each page individually with high quality
+            for (let i = 0; i < pages.length; i++) {
+                const page = pages[i] as HTMLElement;
+
+                // High-resolution capture
+                const canvas = await html2canvas(page, {
+                    scale: 2,              // Higher resolution
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    width: 1123,           // A4 landscape width in pixels
+                    height: 794,           // A4 landscape height in pixels
+                    windowWidth: 1440      // Desktop viewport
+                });
+
+                // Convert to PNG for better quality
+                const imgData = canvas.toDataURL('image/png');
+
+                if (i > 0) {
+                    pdf.addPage();
+                }
+
+                // Add image to PDF, fit to page
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            }
+
+            pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
 
         } catch (err) {
-            console.error("PDF Download failed", err);
-            alert("Failed to download PDF. Please try again.");
+            console.error("PDF Generation failed", err);
+            alert("Failed to generate PDF. Please try again.");
         } finally {
             setIsGenerating(false);
             setIsNDAModalOpen(false);
