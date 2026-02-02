@@ -29,7 +29,9 @@ const ShojiPage: React.FC = () => {
 
     const handleDownload = async () => {
         setIsGenerating(true);
-        await new Promise(resolve => setTimeout(resolve, 800));
+
+        // Longer wait to ensure content is fully rendered
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         try {
             // Get the PDF container with PdfDocument component
@@ -44,48 +46,56 @@ const ShojiPage: React.FC = () => {
                 throw new Error('No print pages found');
             }
 
+            console.log(`Found ${pages.length} pages to capture`);
+
             // A4 Landscape dimensions (842 x 595 points)
             const pdf = new jsPDF({
                 orientation: 'l',
                 unit: 'pt',
-                format: 'a4'
+                format: 'a4',
+                compress: true
             });
 
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = pdf.internal.pageSize.getHeight();
 
-            // Capture each page individually with high quality
+            // Capture each page individually with optimized settings
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i] as HTMLElement;
+                console.log(`Capturing page ${i + 1}/${pages.length}`);
 
-                // High-resolution capture
+                // Optimized capture settings
                 const canvas = await html2canvas(page, {
-                    scale: 2,              // Higher resolution
+                    scale: 1.5,            // Balanced resolution (not too high)
                     useCORS: true,
-                    allowTaint: true,
+                    allowTaint: false,
                     logging: false,
                     backgroundColor: '#ffffff',
                     width: 1123,           // A4 landscape width in pixels
                     height: 794,           // A4 landscape height in pixels
-                    windowWidth: 1440      // Desktop viewport
+                    windowWidth: 1440,     // Desktop viewport
+                    imageTimeout: 0,
+                    removeContainer: false
                 });
 
-                // Convert to PNG for better quality
-                const imgData = canvas.toDataURL('image/png');
+                // Convert to JPEG with high quality for smaller file size
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
 
                 if (i > 0) {
                     pdf.addPage();
                 }
 
                 // Add image to PDF, fit to page
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
             }
 
+            console.log('Saving PDF...');
             pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
+            console.log('PDF saved successfully');
 
         } catch (err) {
-            console.error("PDF Generation failed", err);
-            alert("Failed to generate PDF. Please try again.");
+            console.error("PDF Generation failed:", err);
+            alert(`Failed to generate PDF: ${err instanceof Error ? err.message : 'Unknown error'}`);
         } finally {
             setIsGenerating(false);
             setIsNDAModalOpen(false);
