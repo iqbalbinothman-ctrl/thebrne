@@ -3,6 +3,7 @@ import { Timeline } from './shoji/Timeline';
 import { ConfidentialDeck } from './shoji/ConfidentialDeck';
 import { PdfDocument } from './shoji/PdfDocument';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NDAModal } from './shoji/NDAModal';
 import { Download } from 'lucide-react';
@@ -28,13 +29,64 @@ const ShojiPage: React.FC = () => {
 
     const handleDownload = async () => {
         setIsGenerating(true);
-        // Small delay for UI update
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         try {
-            // Use vector PDF generation instead of html2canvas
-            const { generateVectorPDF } = await import('../utils/VectorPdfGenerator');
-            generateVectorPDF();
+            const pdf = new jsPDF({
+                orientation: 'l',
+                unit: 'px',
+                format: [1920, 1080]
+            });
+
+            // Get the main content container
+            const mainContent = document.querySelector('main');
+            if (!mainContent) {
+                throw new Error('Main content not found');
+            }
+
+            // Screenshot the full page at 1920x1080
+            const canvas = await html2canvas(mainContent as HTMLElement, {
+                scale: 1,
+                width: 1920,
+                height: mainContent.scrollHeight,
+                windowWidth: 1920,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#000000'
+            });
+
+            // Split into pages (1080px height each)
+            const pageHeight = 1080;
+            const totalHeight = canvas.height;
+            const pages = Math.ceil(totalHeight / pageHeight);
+
+            for (let i = 0; i < pages; i++) {
+                if (i > 0) {
+                    pdf.addPage([1920, 1080], 'l');
+                }
+
+                // Create canvas for this page
+                const pageCanvas = document.createElement('canvas');
+                pageCanvas.width = 1920;
+                pageCanvas.height = pageHeight;
+                const ctx = pageCanvas.getContext('2d');
+
+                if (ctx) {
+                    ctx.drawImage(
+                        canvas,
+                        0, i * pageHeight,  // source x, y
+                        1920, pageHeight,   // source width, height
+                        0, 0,               // dest x, y
+                        1920, pageHeight    // dest width, height
+                    );
+
+                    const imgData = pageCanvas.toDataURL('image/jpeg', 0.8);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 1920, 1080);
+                }
+            }
+
+            pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
+
         } catch (err) {
             console.error("PDF Generation failed", err);
             alert("Failed to generate PDF. Please try again.");
