@@ -31,6 +31,11 @@ const ShojiPage: React.FC = () => {
         setIsGenerating(true);
         await new Promise(resolve => setTimeout(resolve, 500));
 
+        // Temporarily disable privacy overlay
+        const overlay = document.getElementById('privacy-overlay');
+        const originalDisplay = overlay?.style.display || '';
+        if (overlay) overlay.style.display = 'none';
+
         try {
             const pdf = new jsPDF({
                 orientation: 'l',
@@ -51,8 +56,9 @@ const ShojiPage: React.FC = () => {
                 height: mainContent.scrollHeight,
                 windowWidth: 1920,
                 useCORS: true,
+                allowTaint: true,
                 logging: false,
-                backgroundColor: '#000000'
+                backgroundColor: '#FFFFFF'  // Changed from black to white
             });
 
             // Split into pages (1080px height each)
@@ -91,6 +97,8 @@ const ShojiPage: React.FC = () => {
             console.error("PDF Generation failed", err);
             alert("Failed to generate PDF. Please try again.");
         } finally {
+            // Re-enable privacy overlay
+            if (overlay) overlay.style.display = originalDisplay;
             setIsGenerating(false);
             setIsNDAModalOpen(false);
         }
