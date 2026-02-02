@@ -3,8 +3,6 @@ import { Timeline } from './shoji/Timeline';
 import { ConfidentialDeck } from './shoji/ConfidentialDeck';
 import { PdfDocument } from './shoji/PdfDocument';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { NDAModal } from './shoji/NDAModal';
 import { Download } from 'lucide-react';
 
@@ -31,70 +29,19 @@ const ShojiPage: React.FC = () => {
         setIsGenerating(true);
         await new Promise(resolve => setTimeout(resolve, 500));
 
-
-
         try {
-            const pdf = new jsPDF({
-                orientation: 'l',
-                unit: 'px',
-                format: [1920, 1080]
-            });
-
-            // Get the main content container
-            const mainContent = document.querySelector('main');
-            if (!mainContent) {
-                throw new Error('Main content not found');
-            }
-
-            // Screenshot the full page at 1920x1080
-            const canvas = await html2canvas(mainContent as HTMLElement, {
-                scale: 1,
-                width: 1920,
-                height: mainContent.scrollHeight,
-                windowWidth: 1920,
-                useCORS: true,
-                allowTaint: true,
-                logging: false,
-                backgroundColor: '#FFFFFF'  // Changed from black to white
-            });
-
-            // Split into pages (1080px height each)
-            const pageHeight = 1080;
-            const totalHeight = canvas.height;
-            const pages = Math.ceil(totalHeight / pageHeight);
-
-            for (let i = 0; i < pages; i++) {
-                if (i > 0) {
-                    pdf.addPage([1920, 1080], 'l');
-                }
-
-                // Create canvas for this page
-                const pageCanvas = document.createElement('canvas');
-                pageCanvas.width = 1920;
-                pageCanvas.height = pageHeight;
-                const ctx = pageCanvas.getContext('2d');
-
-                if (ctx) {
-                    ctx.drawImage(
-                        canvas,
-                        0, i * pageHeight,  // source x, y
-                        1920, pageHeight,   // source width, height
-                        0, 0,               // dest x, y
-                        1920, pageHeight    // dest width, height
-                    );
-
-                    const imgData = pageCanvas.toDataURL('image/jpeg', 0.8);
-                    pdf.addImage(imgData, 'JPEG', 0, 0, 1920, 1080);
-                }
-            }
-
-            pdf.save('THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf');
+            // Download the local PDF file
+            const link = document.createElement('a');
+            link.href = '/Roadmap Summary.pdf';
+            link.download = 'THEBRNE_TigerShoji_Marketing2026_CONFIDENTIAL.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
         } catch (err) {
-            console.error("PDF Generation failed", err);
-            alert("Failed to generate PDF. Please try again.");
+            console.error("PDF Download failed", err);
+            alert("Failed to download PDF. Please try again.");
         } finally {
-
             setIsGenerating(false);
             setIsNDAModalOpen(false);
         }
