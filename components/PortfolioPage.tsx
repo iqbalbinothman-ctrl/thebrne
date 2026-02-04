@@ -45,50 +45,28 @@ const PortfolioPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Projects Grid - Masonry Layout */}
+            {/* Projects Grid - Simple 2-Column Layout */}
             <section className="pb-24 px-6 md:px-12">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-auto">
-                        {PROJECTS.map((project, index) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 md:gap-y-12">
+                        {PROJECTS.map((project) => (
                             <div
                                 key={project.id}
-                                className={`group relative overflow-hidden rounded-2xl bg-gray-100 cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-[#9BE12C]/20 ${index % 5 === 0 ? 'lg:col-span-2 lg:row-span-2' :
-                                    index % 3 === 0 ? 'md:row-span-2' :
-                                        'row-span-1'
-                                    }`}
+                                className="group py-8 border-b border-gray-200 hover:border-[#9BE12C] transition-all duration-300 cursor-pointer"
                             >
-                                {/* Image */}
-                                <div className="relative aspect-[4/5] overflow-hidden">
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                                    />
+                                <div className="flex flex-col">
+                                    {/* Brand Name */}
+                                    <h3 className="font-heading text-3xl md:text-4xl font-bold uppercase tracking-tight mb-2 group-hover:text-[#9BE12C] transition-colors">
+                                        {project.brand}
+                                    </h3>
 
-                                    {/* Overlay on Hover */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    {/* Underscore Separator */}
+                                    <div className="text-gray-400 text-2xl mb-2">_</div>
 
-                                    {/* Project Info - Always Visible */}
-                                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-0 transition-transform duration-500">
-                                        <p className="text-xs uppercase tracking-widest text-gray-300 mb-2">
-                                            {project.category}
-                                        </p>
-                                        <h3 className="font-heading text-2xl md:text-3xl font-bold">
-                                            {project.title}
-                                        </h3>
-                                    </div>
-
-                                    {/* View Project Button - Shows on Hover */}
-                                    <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                                        <div className="bg-[#9BE12C] text-black w-12 h-12 rounded-full flex items-center justify-center font-bold">
-                                            →
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Number Badge */}
-                                <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-black px-4 py-2 rounded-full text-sm font-bold">
-                                    #{String(project.id).padStart(2, '0')}
+                                    {/* Date */}
+                                    <p className="text-gray-500 text-lg font-mono">
+                                        {project.date}
+                                    </p>
                                 </div>
                             </div>
                         ))}
