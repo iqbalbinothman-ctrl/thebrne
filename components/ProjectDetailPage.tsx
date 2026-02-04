@@ -189,13 +189,13 @@ const ProjectDetailPage: React.FC = () => {
 
             {/* CTA Section */}
             <section className="py-24 px-6 md:px-12 bg-[#0A0A0A] text-white text-center">
-                <h2 className="font-heading text-4xl md:text-6xl font-bold mb-6">
+                <h2 className="font-heading text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-none">
                     Have a project<br />in mind?
                 </h2>
-                <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
+                <p className="text-gray-400 text-xl mb-10 max-w-lg mx-auto leading-relaxed">
                     Let's create something extraordinary together.
                 </p>
-                <button className="bg-[#9BE12C] text-black px-8 py-4 rounded-full font-heading text-lg uppercase tracking-wider hover:bg-white transition-all">
+                <button className="bg-[#9BE12C] text-black px-10 py-5 rounded-full font-heading text-xl uppercase tracking-wider hover:bg-white transition-all transform hover:scale-105">
                     Get in Touch
                 </button>
             </section>
