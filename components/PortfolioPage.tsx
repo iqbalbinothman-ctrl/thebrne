@@ -3,62 +3,22 @@ import Header from './Header';
 import Footer from './Footer';
 
 const PROJECTS = [
-    {
-        id: 1,
-        title: 'Brand Identity Design',
-        category: 'Branding',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 2,
-        title: 'Fashion Photography',
-        category: 'Photography',
-        image: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=600&h=600&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 3,
-        title: 'Portrait Series',
-        category: 'Art Direction',
-        image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=700&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 4,
-        title: 'UI/UX Design',
-        category: 'Digital',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 5,
-        title: 'Creative Campaign',
-        category: 'Marketing',
-        image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=700&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 6,
-        title: 'Illustration Project',
-        category: 'Design',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 7,
-        title: 'Fashion Editorial',
-        category: 'Photography',
-        image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&h=800&fit=crop',
-        span: 'row-span-2'
-    },
-    {
-        id: 8,
-        title: 'Visual Identity',
-        category: 'Branding',
-        image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=700&fit=crop',
-        span: 'row-span-2'
-    }
+    { id: 1, brand: 'KROMA', date: '11.25' },
+    { id: 2, brand: 'VELVET STUDIOS', date: '10.25' },
+    { id: 3, brand: 'NEXUS BRANDS', date: '09.25' },
+    { id: 4, brand: 'AURORA CO', date: '08.25' },
+    { id: 5, brand: 'LUMINA DESIGN', date: '07.25' },
+    { id: 6, brand: 'PULSE CREATIVE', date: '06.25' },
+    { id: 7, brand: 'ZENITH GROUP', date: '05.25' },
+    { id: 8, brand: 'VERTEX MEDIA', date: '04.25' },
+    { id: 9, brand: 'ECHO BRANDS', date: '03.25' },
+    { id: 10, brand: 'NOVA STUDIO', date: '02.25' },
+    { id: 11, brand: 'PRISM AGENCY', date: '01.25' },
+    { id: 12, brand: 'CIPHER LABS', date: '12.24' },
+    { id: 13, brand: 'BLOOM COLLECTIVE', date: '11.24' },
+    { id: 14, brand: 'AXIS DESIGN', date: '10.24' },
+    { id: 15, brand: 'FORGE STUDIOS', date: '09.24' },
+    { id: 16, brand: 'MAVEN CREATIVE', date: '08.24' },
 ];
 
 const PortfolioPage: React.FC = () => {
@@ -93,8 +53,8 @@ const PortfolioPage: React.FC = () => {
                             <div
                                 key={project.id}
                                 className={`group relative overflow-hidden rounded-2xl bg-gray-100 cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-[#9BE12C]/20 ${index % 5 === 0 ? 'lg:col-span-2 lg:row-span-2' :
-                                        index % 3 === 0 ? 'md:row-span-2' :
-                                            'row-span-1'
+                                    index % 3 === 0 ? 'md:row-span-2' :
+                                        'row-span-1'
                                     }`}
                             >
                                 {/* Image */}
@@ -157,14 +117,6 @@ const PortfolioPage: React.FC = () => {
 
             {/* Footer */}
             <Footer />
-
-            <style>{`
-                @media (min-width: 1024px) {
-                    .auto-rows-auto {
-                        grid-auto-rows: 300px;
-                    }
-                }
-            `}</style>
         </div>
     );
 };
