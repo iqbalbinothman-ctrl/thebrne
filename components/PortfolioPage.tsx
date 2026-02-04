@@ -89,25 +89,6 @@ const PortfolioPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-24 bg-[#1A1A1A] text-white">
-                <div className="max-w-4xl mx-auto text-center px-6">
-                    <h2 className="font-heading text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                        Ready to create<br />
-                        something <span className="text-[#9BE12C]">unseen</span>?
-                    </h2>
-                    <p className="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">
-                        Let's turn your vision into reality. No fluff, just real results that are impossible to ignore.
-                    </p>
-                    <button className="group inline-flex items-center gap-4 bg-[#9BE12C] text-black px-10 py-5 rounded-full font-heading text-xl uppercase tracking-wider transition-all hover:bg-white hover:shadow-2xl hover:shadow-[#9BE12C]/30">
-                        <span>Start Your Project</span>
-                        <div className="bg-black text-white p-2 rounded-full group-hover:bg-[#9BE12C] transition-colors">
-                            →
-                        </div>
-                    </button>
-                </div>
-            </section >
-
             {/* Footer */}
             < Footer />
         </div >
