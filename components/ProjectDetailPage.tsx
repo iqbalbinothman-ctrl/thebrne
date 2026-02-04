@@ -6,25 +6,23 @@ import Footer from './Footer';
 interface ProjectDetail {
     id: number;
     brand: string;
-    date: string;
     year: string;
-    category: string;
     description: string;
-    challenge: string;
-    solution: string;
+    scope: string;
+    timeline: string;
+    liveUrl?: string; // Optional live link
     images: string[];
 }
 
 const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
     'kroma': {
         id: 1,
-        brand: 'KROMA',
-        date: '11.25',
-        year: '2025',
-        category: 'Brand Identity',
-        description: 'A bold exploration of color theory meets minimalist design. KROMA represents the future of visual communication through innovative brand experiences.',
-        challenge: 'Creating a brand identity that stands out in a saturated market while maintaining timeless appeal and versatility across all touchpoints.',
-        solution: 'We developed a dynamic color system with a modular logo that adapts to different contexts, ensuring consistency while allowing creative flexibility.',
+        brand: 'KROMA®',
+        year: '02.25',
+        description: 'Kroma is a social-first creative agency built around bold ideas, fast culture, and playful storytelling. They came to us for a brand and web refresh that better reflected their upbeat energy, creative range, and knack for turning everyday moments into viral campaigns.',
+        scope: 'Branding, Motion',
+        timeline: '9 weeks',
+        liveUrl: '#',
         images: [
             'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&h=1000&fit=crop',
             'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?w=800&h=600&fit=crop',
@@ -36,12 +34,11 @@ const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
     'velvet-studios': {
         id: 2,
         brand: 'VELVET STUDIOS',
-        date: '10.25',
-        year: '2025',
-        category: 'Photography & Art Direction',
-        description: 'Luxury redefined through elegant visual storytelling. A premium photography studio that captures moments with sophistication.',
-        challenge: 'Establishing a premium brand presence that appeals to high-end clients while maintaining approachability.',
-        solution: 'Created a refined visual language combining classic elegance with contemporary edge, supported by a cohesive brand narrative.',
+        year: '10.25',
+        description: 'Luxury redefined through elegant visual storytelling. A premium photography studio that captures moments with sophistication, blending classic elegance with contemporary edge.',
+        scope: 'Art Direction, Web Design',
+        timeline: '6 weeks',
+        liveUrl: '#',
         images: [
             'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=800&h=1000&fit=crop',
             'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=800&fit=crop',
@@ -49,6 +46,15 @@ const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
             'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&h=1000&fit=crop',
         ]
     },
+    // Add default placeholders for other projects to prevent errors if clicked
+    'nexus-brands': {
+        id: 3, brand: 'NEXUS BRANDS', year: '09.25', description: 'A futuristic tech brand identity focused on connectivity.', scope: 'Identity, UI/UX', timeline: '8 weeks', liveUrl: '#',
+        images: ['https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1200&fit=crop']
+    },
+    'aurora-co': {
+        id: 4, brand: 'AURORA CO', year: '08.25', description: 'Sustainable lifestyle brand packaging and digital presence.', scope: 'Packaging, Web', timeline: '12 weeks', liveUrl: '#',
+        images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=1000&fit=crop']
+    }
 };
 
 const MORE_PROJECTS = [
@@ -84,69 +90,46 @@ const ProjectDetailPage: React.FC = () => {
 
                     {/* Left Column - Fixed Project Details */}
                     <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start">
-                        <div className="space-y-8">
-                            {/* Back Link */}
-                            <Link
-                                to="/portfolio"
-                                className="inline-flex items-center gap-2 text-sm uppercase tracking-wider hover:text-[#9BE12C] transition-colors group"
-                            >
-                                <span className="transform group-hover:-translate-x-1 transition-transform">←</span>
-                                Back to Projects
-                            </Link>
-
+                        <div className="space-y-12">
                             {/* Project Title */}
                             <div>
-                                <h1 className="font-heading text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">
+                                <h1 className="font-heading text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter mb-8 leading-[0.85]">
                                     {project.brand}
                                 </h1>
-                                <div className="flex items-center gap-4 text-sm text-gray-500 uppercase tracking-wider">
-                                    <span>{project.year}</span>
-                                    <span>•</span>
-                                    <span>{project.category}</span>
-                                </div>
+
+                                {/* Description */}
+                                <p className="text-gray-600 text-lg leading-relaxed">
+                                    {project.description}
+                                </p>
                             </div>
 
-                            {/* Description */}
-                            <div className="space-y-6">
-                                <div>
-                                    <h3 className="font-heading text-xs uppercase tracking-widest text-gray-400 mb-3">
-                                        Overview
-                                    </h3>
-                                    <p className="text-gray-700 leading-relaxed">
-                                        {project.description}
-                                    </p>
+                            {/* Minimalist Info Table */}
+                            <div className="pt-8">
+                                {/* Year Row */}
+                                <div className="flex items-center justify-between py-4 border-t border-gray-200">
+                                    <span className="text-gray-500">Year</span>
+                                    <span className="font-medium">{project.year}</span>
                                 </div>
 
-                                <div>
-                                    <h3 className="font-heading text-xs uppercase tracking-widest text-gray-400 mb-3">
-                                        Challenge
-                                    </h3>
-                                    <p className="text-gray-700 leading-relaxed">
-                                        {project.challenge}
-                                    </p>
+                                {/* Scope Row */}
+                                <div className="flex items-center justify-between py-4 border-t border-gray-200">
+                                    <span className="text-gray-500">Scope</span>
+                                    <span className="font-medium text-right max-w-[60%]">{project.scope}</span>
                                 </div>
 
-                                <div>
-                                    <h3 className="font-heading text-xs uppercase tracking-widest text-gray-400 mb-3">
-                                        Solution
-                                    </h3>
-                                    <p className="text-gray-700 leading-relaxed">
-                                        {project.solution}
-                                    </p>
+                                {/* Timeline Row */}
+                                <div className="flex items-center justify-between py-4 border-t border-gray-200">
+                                    <span className="text-gray-500">Timeline</span>
+                                    <span className="font-medium">{project.timeline}</span>
                                 </div>
-                            </div>
 
-                            {/* Project Meta */}
-                            <div className="pt-6 border-t border-gray-200">
-                                <div className="grid grid-cols-2 gap-4 text-sm">
-                                    <div>
-                                        <p className="text-gray-400 uppercase tracking-wider text-xs mb-1">Year</p>
-                                        <p className="font-semibold">{project.year}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-gray-400 uppercase tracking-wider text-xs mb-1">Category</p>
-                                        <p className="font-semibold">{project.category}</p>
-                                    </div>
+                                {/* Live Project Row */}
+                                <div className="flex items-center justify-between py-4 border-t border-b border-gray-200 group cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <span className="text-gray-500">Live project</span>
+                                    <a href={project.liveUrl || '#'} className="flex items-center gap-2 font-medium group-hover:text-[#9BE12C] transition-colors">
+                                        Preview
+                                        <span className="text-xl leading-none">+</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
