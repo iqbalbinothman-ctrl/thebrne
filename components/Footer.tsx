@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-24">
           <div className="max-w-xl">
-            <h2 className="font-heading text-6xl md:text-8xl mb-8 leading-[0.85] uppercase tracking-tighter">
+            <h2 className="font-heading text-6xl md:text-8xl mb-8 leading-[0.85] uppercase tracking-tighter text-white">
               We'd love to <br /> hear from you
             </h2>
             <p className="text-gray-400 text-lg mb-10 leading-relaxed font-body">
