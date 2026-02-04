@@ -61,7 +61,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
                     }
                 }
                 .animate-spin-slow {
-                    animation: spin-slow 1s linear infinite;
+                    animation: spin-slow 2s linear infinite;
                 }
             `}</style>
         </>
