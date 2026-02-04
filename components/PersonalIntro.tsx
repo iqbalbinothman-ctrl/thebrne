@@ -26,23 +26,12 @@ const PersonalIntro: React.FC = () => {
 
         {/* Content */}
         <div className="flex flex-col gap-6">
-          <h2 className="font-heading text-6xl md:text-8xl leading-[0.9] uppercase tracking-tighter">
-            Hey, we're <br /> THE BRNE
+          <h2 className="font-heading text-6xl md:text-8xl leading-[0.9] uppercase tracking-tighter mb-6">
+            We’re <br /> TheBrne®
           </h2>
-          <ul className="space-y-6">
-            <li className="flex gap-4">
-              <div className="mt-2 w-2 h-2 rounded-full bg-black flex-shrink-0" />
-              <p className="text-lg md:text-xl font-medium leading-relaxed font-body">
-                We're a modern agency and media house breaking down the latest in the Creator Economy.
-              </p>
-            </li>
-            <li className="flex gap-4">
-              <div className="mt-2 w-2 h-2 rounded-full bg-black flex-shrink-0" />
-              <p className="text-lg md:text-xl font-medium leading-relaxed font-body">
-                We've spent 10+ years scaling digital brands. We build and grow creator-led businesses that define the next generation of media.
-              </p>
-            </li>
-          </ul>
+          <p className="text-xl md:text-2xl font-medium leading-relaxed font-body">
+            A creative studio crafting bold brands, beautiful websites, strategic campaigns, compelling content, and visual stories that refuse to be ordinary.
+          </p>
 
           <div className="pt-4">
             <button className="group flex items-center gap-4 bg-black text-white px-8 py-3 rounded-full font-heading text-2xl uppercase tracking-wider transition-all shadow-xl btn-bubble-effect btn-bubble-green">
