@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -49,9 +50,11 @@ const PortfolioPage: React.FC = () => {
             <section className="pb-24 px-6 md:px-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     {PROJECTS.map((project) => (
-                        <div
+                        <Link
                             key={project.id}
+                            to={`/portfolio/${project.slug}`}
                             className="group cursor-pointer"
+                            onClick={() => window.scrollTo(0, 0)}
                         >
                             {/* Project Image Container */}
                             <div className="relative overflow-hidden rounded-2xl aspect-square bg-gray-100 mb-4">
@@ -84,7 +87,7 @@ const PortfolioPage: React.FC = () => {
                                     {project.date}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
