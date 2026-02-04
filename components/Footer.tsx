@@ -32,16 +32,7 @@ const Footer: React.FC = () => {
               <a href="#" className="p-3 bg-[#222] rounded-full text-white hover:bg-[#5865F2] transition-colors"><MessageCircle size={24} /></a>
             </div>
 
-            {/* Quick Links */}
-            <div className="space-y-4">
-              <h4 className="font-heading text-[#9BE12C] uppercase text-2xl tracking-wider mb-6">Explore</h4>
-              <ul className="space-y-4 font-body text-lg font-semibold">
-                <li><a href="#" className="hover:text-[#9BE12C] transition-colors">How to be famous in 30 days</a></li>
-                <li><a href="#" className="hover:text-[#9BE12C] transition-colors">Support</a></li>
-                <li><a href="#" className="hover:text-[#9BE12C] transition-colors">VIP Consult</a></li>
-                <li><a href="#" className="hover:text-[#9BE12C] transition-colors">Meet Up</a></li>
-              </ul>
-            </div>
+
           </div>
         </div>
 
