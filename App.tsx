@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Home from './components/Home';
 import ShojiPage from './components/ShojiPage';
 import PortfolioPage from './components/PortfolioPage';
+import ProjectDetailPage from './components/ProjectDetailPage';
 import MaintenanceMode from './components/MaintenanceMode';
 import PageTransition from './components/PageTransition';
 
@@ -19,6 +20,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
             <Route path="/" element={<Home />} />
             <Route path="/shojiMP_2026" element={<ShojiPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/portfolio/:projectSlug" element={<ProjectDetailPage />} />
           </Routes>
         </PageTransition>
       </div>
