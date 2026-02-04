@@ -54,9 +54,10 @@ const Footer: React.FC = () => {
         <img
           src="/logosvgAsset 13logo.svg"
           alt="THE BRNE Logo"
-          className="min-w-full w-screen h-auto translate-y-[10%] scale-105 origin-bottom"
+          className="w-full h-auto translate-y-[15%] scale-110 origin-bottom"
           style={{
-            maxHeight: '50vh',
+            maxHeight: '60vh',
+            minWidth: '100vw'
           }}
         />
       </div>
