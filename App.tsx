@@ -27,7 +27,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
 };
 
 const App: React.FC = () => {
-  const [isMaintenanceMode] = useState(true); // Set to false to disable
+  const [isMaintenanceMode] = useState(false); // Set to false to disable
 
   return (
     <Router>

@@ -1,9 +1,13 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import Header from './Header';
 
 const PortfolioPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#9BE12C] selection:text-black">
+            {/* Header */}
+            <Header />
+
             <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-12 md:py-20">
                 {/* Grid Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
