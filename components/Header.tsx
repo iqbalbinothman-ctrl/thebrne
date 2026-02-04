@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -29,13 +30,14 @@ const Header: React.FC = () => {
           : 'bg-[#9BE12C] text-black'
           }`}
       >
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img src="/logo.png" alt="THE BRNE" className="h-10 md:h-12 w-auto object-contain" />
-        </div>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-10">
           <a href="#" className="font-heading text-xl uppercase tracking-wider hover:opacity-70 transition-opacity">About</a>
           <a href="#" className="font-heading text-xl uppercase tracking-wider hover:opacity-70 transition-opacity">Services</a>
+          <Link to="/portfolio" className="font-heading text-xl uppercase tracking-wider hover:opacity-70 transition-opacity">Portfolio</Link>
           <a href="#" className="font-heading text-xl uppercase tracking-wider hover:opacity-70 transition-opacity">Community</a>
           <button className={`px-8 py-2 rounded-full font-heading text-xl uppercase tracking-wider transition-all duration-300 btn-bubble-effect btn-bubble-white ${isSticky
             ? 'bg-[#9BE12C] text-black hover:text-black'
@@ -88,6 +90,13 @@ const Header: React.FC = () => {
           >
             Services
           </a>
+          <Link
+            to="/portfolio"
+            className="font-heading text-2xl uppercase tracking-wider hover:opacity-70 transition-opacity border-b border-current/20 pb-4"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Portfolio
+          </Link>
           <a
             href="#"
             className="font-heading text-2xl uppercase tracking-wider hover:opacity-70 transition-opacity border-b border-current/20 pb-4"
