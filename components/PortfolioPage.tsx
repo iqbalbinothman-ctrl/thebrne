@@ -42,6 +42,7 @@ const PortfolioPage: React.FC = () => {
                             500+ Projects Delivered
                         </span>
                     </div>
+                </div>
             </section>
 
             {/* Projects Grid - 2-Column Image Cards */}
@@ -53,7 +54,7 @@ const PortfolioPage: React.FC = () => {
                             className="group cursor-pointer"
                         >
                             {/* Project Image Container */}
-                            <div className="relative overflow-hidden rounded-2xl aspect-[4/5] bg-gray-100 mb-4">
+                            <div className="relative overflow-hidden rounded-2xl aspect-square bg-gray-100 mb-4">
                                 {/* Project Image */}
                                 <img
                                     src={project.image}
@@ -61,10 +62,10 @@ const PortfolioPage: React.FC = () => {
                                     className="w-full h-full object-cover transition-all duration-500"
                                 />
 
-                                {/* Hover Overlay with Blur and Logo */}
-                                <div className="absolute inset-0 bg-white/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                                {/* Hover Overlay with Glassmorphic Blur */}
+                                <div className="absolute inset-0 bg-white/20 backdrop-blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                                     <div className="text-center">
-                                        <div className="font-heading text-5xl md:text-6xl font-bold text-black uppercase tracking-tight">
+                                        <div className="font-heading text-5xl md:text-6xl font-bold text-white uppercase tracking-tight drop-shadow-lg">
                                             {project.brand}
                                         </div>
                                     </div>
@@ -86,30 +87,29 @@ const PortfolioPage: React.FC = () => {
                         </div>
                     ))}
                 </div>
-        </div>
-            </section >
+            </section>
 
-    {/* CTA Section */ }
-    < section className = "py-24 bg-[#1A1A1A] text-white" >
-        <div className="max-w-4xl mx-auto text-center px-6">
-            <h2 className="font-heading text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                Ready to create<br />
-                something <span className="text-[#9BE12C]">unseen</span>?
-            </h2>
-            <p className="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">
-                Let's turn your vision into reality. No fluff, just real results that are impossible to ignore.
-            </p>
-            <button className="group inline-flex items-center gap-4 bg-[#9BE12C] text-black px-10 py-5 rounded-full font-heading text-xl uppercase tracking-wider transition-all hover:bg-white hover:shadow-2xl hover:shadow-[#9BE12C]/30">
-                <span>Start Your Project</span>
-                <div className="bg-black text-white p-2 rounded-full group-hover:bg-[#9BE12C] transition-colors">
-                    →
+            {/* CTA Section */}
+            <section className="py-24 bg-[#1A1A1A] text-white">
+                <div className="max-w-4xl mx-auto text-center px-6">
+                    <h2 className="font-heading text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                        Ready to create<br />
+                        something <span className="text-[#9BE12C]">unseen</span>?
+                    </h2>
+                    <p className="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">
+                        Let's turn your vision into reality. No fluff, just real results that are impossible to ignore.
+                    </p>
+                    <button className="group inline-flex items-center gap-4 bg-[#9BE12C] text-black px-10 py-5 rounded-full font-heading text-xl uppercase tracking-wider transition-all hover:bg-white hover:shadow-2xl hover:shadow-[#9BE12C]/30">
+                        <span>Start Your Project</span>
+                        <div className="bg-black text-white p-2 rounded-full group-hover:bg-[#9BE12C] transition-colors">
+                            →
+                        </div>
+                    </button>
                 </div>
-            </button>
-        </div>
             </section >
 
-    {/* Footer */ }
-    < Footer />
+            {/* Footer */}
+            < Footer />
         </div >
     );
 };
