@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import ShojiPage from './components/ShojiPage';
+import PortfolioPage from './components/PortfolioPage';
 import MaintenanceMode from './components/MaintenanceMode';
 
 const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMode }) => {
@@ -15,6 +16,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shojiMP_2026" element={<ShojiPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </div>
 
