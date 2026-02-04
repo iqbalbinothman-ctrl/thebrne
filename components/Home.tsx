@@ -31,7 +31,7 @@ const Home: React.FC = () => {
                 <Projects />
 
                 {/* Section 3.5: Clients (Happy Hoomans style) */}
-                <Clients />
+                {/* <Clients /> */}
 
             </main>
 
