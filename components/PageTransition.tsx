@@ -9,12 +9,13 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
     useEffect(() => {
         if (location.pathname !== displayLocation.pathname) {
             setIsTransitioning(true);
+            window.scrollTo(0, 0); // Ensure scroll to top on route change
 
-            // Show loading for 600ms
+            // Minimum loading time
             const timer = setTimeout(() => {
                 setDisplayLocation(location);
                 setIsTransitioning(false);
-            }, 600);
+            }, 800); // Increased a bit to ensuring smooth transition
 
             return () => clearTimeout(timer);
         }
@@ -24,7 +25,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
         <>
             {/* Loading Overlay with Spinning Logo */}
             <div
-                className={`fixed inset-0 z-[9999] bg-[#1A1A1A] flex items-center justify-center transition-opacity duration-300 pointer-events-none ${isTransitioning ? 'opacity-100 pointer-events-auto' : 'opacity-0'
+                className={`fixed inset-0 z-[9999] bg-[#1A1A1A] flex items-center justify-center transition-opacity duration-500 ${isTransitioning ? 'opacity-100' : 'opacity-0 pointer-events-none'
                     }`}
             >
                 <div className="relative">
@@ -44,7 +45,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
             {/* Page Content with Fade Transition */}
             <div
-                className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'
+                className={`transition-opacity duration-500 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'
                     }`}
             >
                 {children}

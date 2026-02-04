@@ -5,6 +5,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Global Heading Font Adjustment (Bebas Neue) */
+.font-heading {
+  letter-spacing: 0px !important;
+}
+
 /* Bubble/Liquid Hover Effect */
 .btn-bubble-effect {
   position: relative;
