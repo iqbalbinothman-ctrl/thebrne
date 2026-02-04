@@ -4,6 +4,7 @@ import Home from './components/Home';
 import ShojiPage from './components/ShojiPage';
 import PortfolioPage from './components/PortfolioPage';
 import MaintenanceMode from './components/MaintenanceMode';
+import PageTransition from './components/PageTransition';
 
 const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMode }) => {
   const location = useLocation();
@@ -13,11 +14,13 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
     <div className="relative">
       {/* Apply blur only on homepage when maintenance mode is active */}
       <div className={isMaintenanceMode && isHomepage ? 'blur-sm pointer-events-none' : ''}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shojiMP_2026" element={<ShojiPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-        </Routes>
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shojiMP_2026" element={<ShojiPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
+          </Routes>
+        </PageTransition>
       </div>
 
       {/* Maintenance Mode Overlay (only on homepage) */}
