@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
 
       {/* Bottom Giant Branding Statement - Optimized to 25.5vw for "THE BRNE" in Bebas Neue to hit edges perfectly */}
       {/* Bottom Giant Branding Statement - Optimized SVG Logo */}
-      <div className="w-full overflow-hidden flex justify-center items-end bg-[#1A1A1A] select-none pointer-events-none">
+      <div className="relative w-full overflow-hidden flex justify-center items-end bg-[#1A1A1A] select-none pointer-events-none">
         <img
           src="/logosvgAsset 13logo.svg"
           alt="THE BRNE Logo"
@@ -60,6 +60,8 @@ const Footer: React.FC = () => {
             minWidth: '100vw'
           }}
         />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/50 to-transparent z-10" />
       </div>
     </footer>
   );
