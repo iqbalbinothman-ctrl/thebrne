@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Lottie from "lottie-react";
-import animationData from "./social_media.json";
+import animationData from "./socialmedia_new.json";
 
 const SocialMediaManagementPage: React.FC = () => {
     const servicesLeft = [
