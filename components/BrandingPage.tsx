@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import Lottie from "lottie-react";
+import animationData from "./Negative-mask-effect.json";
 
 const BrandingPage: React.FC = () => {
     const servicesLeft = [
@@ -28,13 +30,12 @@ const BrandingPage: React.FC = () => {
 
                     {/* LEFT COLUMN */}
                     <div className="flex flex-col gap-12">
-                        {/* LEFT TOP — Image */}
+                        {/* LEFT TOP — Lottie Animation */}
                         <div className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
-                            {/* Placeholder/Concept Image - Using a clean, minimal abstract workspace or design system image */}
-                            <img
-                                src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop"
-                                alt="Branding System"
-                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            <Lottie
+                                animationData={animationData}
+                                loop={true}
+                                className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
 
