@@ -58,7 +58,7 @@ const BrandingPage: React.FC = () => {
                     <div className="flex flex-col gap-12 lg:justify-between">
                         {/* RIGHT TOP — Big Title */}
                         <div className="mt-4 lg:mt-0">
-                            <h1 className="text-7xl md:text-8xl lg:text-[7rem] xl:text-[8rem] font-bold tracking-tighter leading-[0.85] text-white mb-2">
+                            <h1 className="font-heading text-7xl md:text-8xl lg:text-[7rem] xl:text-[8rem] font-bold tracking-tighter leading-[0.85] text-white mb-2">
                                 BRANDING<br />
                                 <span className="text-transparent outline-text stroke-white/20">& STRATEGY</span>
                             </h1>
