@@ -44,7 +44,7 @@ const DigitalMarketingPage: React.FC = () => {
                             {/* Overlay Text */}
                             <div className="absolute bottom-6 left-6 right-6">
                                 <p className="text-white/90 text-sm md:text-base font-medium tracking-wide backdrop-blur-sm bg-black/30 p-2 rounded-md inline-block">
-                                    Exploding charts, memes in ads, bold CTAs
+                                    Performance, conversion & scale
                                 </p>
                             </div>
                         </div>
