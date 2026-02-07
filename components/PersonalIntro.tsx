@@ -34,7 +34,7 @@ const PersonalIntro: React.FC = () => {
           </p>
 
           <div className="pt-4">
-            <button className="group flex items-center gap-4 bg-black text-white px-8 py-3 rounded-full font-heading text-2xl uppercase tracking-wider transition-all shadow-xl btn-bubble-effect btn-bubble-green">
+            <button className="group flex items-center gap-4 bg-black text-white hover:text-black px-8 py-3 rounded-full font-heading text-2xl uppercase tracking-wider transition-all shadow-xl btn-bubble-effect btn-bubble-green">
               <div className="bg-[#9BE12C] text-black p-2 rounded-full group-hover:scale-110 transition-transform">
                 <Play fill="currentColor" size={20} />
               </div>
