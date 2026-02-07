@@ -3,8 +3,11 @@ import Header from './Header';
 import Footer from './Footer';
 import Lottie from "lottie-react";
 import animationData from "./Scene_UI.json";
+import { useInView } from '../hooks/useInView';
 
 const WebsiteDevelopmentPage: React.FC = () => {
+    const [lottieRef, isInView] = useInView({ threshold: 0.1 });
+
     const servicesLeft = [
         'Website Design',
         'UX/UI Design',
@@ -31,15 +34,17 @@ const WebsiteDevelopmentPage: React.FC = () => {
                     {/* LEFT COLUMN */}
                     <div className="flex flex-col gap-12">
                         {/* LEFT TOP — Lottie Animation */}
-                        <div className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
-                            <Lottie
-                                animationData={animationData}
-                                loop={true}
-                                className="w-full h-full"
-                                rendererSettings={{
-                                    preserveAspectRatio: 'xMidYMid slice'
-                                }}
-                            />
+                        <div ref={lottieRef} className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
+                            {isInView && (
+                                <Lottie
+                                    animationData={animationData}
+                                    loop={true}
+                                    className="w-full h-full"
+                                    rendererSettings={{
+                                        preserveAspectRatio: 'xMidYMid slice'
+                                    }}
+                                />
+                            )}
 
                             {/* Overlay Text */}
                             <div className="absolute bottom-6 left-6 right-6">
