@@ -27,7 +27,7 @@ const ProductShowcase: React.FC = () => {
                   <h2 className="font-heading text-5xl md:text-8xl uppercase tracking-tighter text-white transition-transform duration-500 group-hover:translate-x-4">
                     {service.title}
                   </h2>
-                  <ArrowUpRight className="text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 w-8 h-8 md:w-12 md:h-12" />
+                  <ArrowUpRight className="text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 w-12 h-12 md:w-24 md:h-24" />
                 </div>
 
                 {/* Service Description */}
