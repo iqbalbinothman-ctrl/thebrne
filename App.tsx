@@ -9,6 +9,7 @@ import MaintenanceMode from './components/MaintenanceMode';
 import PageTransition from './components/PageTransition';
 import WebsiteDevelopmentPage from './components/WebsiteDevelopmentPage';
 import SocialMediaManagementPage from './components/SocialMediaManagementPage';
+import VideoContentProductionPage from './components/VideoContentProductionPage';
 
 const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMode }) => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
             <Route path="/branding" element={<BrandingPage />} />
             <Route path="/website-development" element={<WebsiteDevelopmentPage />} />
             <Route path="/social-media-management" element={<SocialMediaManagementPage />} />
+            <Route path="/video-content-production" element={<VideoContentProductionPage />} />
             <Route path="/shojiMP_2026" element={<ShojiPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/portfolio/:projectSlug" element={<ProjectDetailPage />} />
