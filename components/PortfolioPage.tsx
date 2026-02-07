@@ -29,7 +29,7 @@ const PortfolioPage: React.FC = () => {
             <Header />
 
             {/* Hero Section */}
-            <section className="pt-32 pb-16 px-6 md:px-12">
+            <section className="pt-32 pb-16 page-padding">
                 <div className="text-center">
                     <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight">
                         Projects.
@@ -47,7 +47,7 @@ const PortfolioPage: React.FC = () => {
             </section>
 
             {/* Projects Grid - 2-Column Image Cards */}
-            <section className="pb-24 px-6 md:px-12">
+            <section className="pb-24 page-padding">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     {PROJECTS.map((project) => (
                         <Link

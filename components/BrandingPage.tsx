@@ -23,7 +23,7 @@ const BrandingPage: React.FC = () => {
         <div className="min-h-screen bg-[#1A1A1A] text-white selection:bg-[#9BE12C] selection:text-black font-sans">
             <Header />
 
-            <main className="pt-32 pb-20 px-6 md:px-12">
+            <main className="pt-32 pb-20 page-padding">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
                     {/* LEFT COLUMN */}
