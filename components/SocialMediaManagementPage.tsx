@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import Lottie from "lottie-react";
+import animationData from "./social_media.json";
 
 const SocialMediaManagementPage: React.FC = () => {
     const servicesLeft = [
@@ -28,15 +30,16 @@ const SocialMediaManagementPage: React.FC = () => {
 
                     {/* LEFT COLUMN */}
                     <div className="flex flex-col gap-12">
-                        {/* LEFT TOP — Image */}
+                        {/* LEFT TOP — Lottie Animation */}
                         <div className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
-                            {/* Placeholder Image - Meme/Social/Bold Vibe */}
-                            <img
-                                src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop"
-                                alt="Social Media Content"
-                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
+                            <Lottie
+                                animationData={animationData}
+                                loop={true}
+                                className="w-full h-full"
+                                rendererSettings={{
+                                    preserveAspectRatio: 'xMidYMid slice'
+                                }}
                             />
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
 
                             {/* Overlay Text */}
                             <div className="absolute bottom-6 left-6 right-6">
