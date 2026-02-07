@@ -5,7 +5,7 @@ import { Youtube, Instagram, Twitter, MessageCircle, ArrowRight } from 'lucide-r
 const Footer: React.FC = () => {
   return (
     <footer className="bg-[#1A1A1A] pt-24 pb-0 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="max-w-7xl mx-auto page-padding">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-24">
           <div className="max-w-xl">
