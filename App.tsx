@@ -4,6 +4,7 @@ import Home from './components/Home';
 import ShojiPage from './components/ShojiPage';
 import PortfolioPage from './components/PortfolioPage';
 import ProjectDetailPage from './components/ProjectDetailPage';
+import BrandingPage from './components/BrandingPage';
 import MaintenanceMode from './components/MaintenanceMode';
 import PageTransition from './components/PageTransition';
 
@@ -18,6 +19,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
         <PageTransition>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/branding" element={<BrandingPage />} />
             <Route path="/shojiMP_2026" element={<ShojiPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/portfolio/:projectSlug" element={<ProjectDetailPage />} />

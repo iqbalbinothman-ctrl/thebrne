@@ -1,0 +1,112 @@
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+
+const BrandingPage: React.FC = () => {
+    const servicesLeft = [
+        'Brand Strategy',
+        'Brand Identity Design',
+        'Logo Development',
+        'Brand Guidelines',
+        'Rebranding'
+    ];
+
+    const servicesRight = [
+        'Corporate Identity',
+        'Marketing Collateral',
+        'Digital Brand Assets',
+        'Social Media Branding',
+        'Campaign Design'
+    ];
+
+    return (
+        <div className="min-h-screen bg-[#1A1A1A] text-white selection:bg-[#9BE12C] selection:text-black font-sans">
+            <Header />
+
+            <main className="pt-32 pb-20 px-6 md:px-12 lg:px-20 max-w-[1440px] mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+
+                    {/* LEFT COLUMN */}
+                    <div className="flex flex-col gap-12">
+                        {/* LEFT TOP — Image */}
+                        <div className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
+                            {/* Placeholder/Concept Image - Using a clean, minimal abstract workspace or design system image */}
+                            <img
+                                src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop"
+                                alt="Branding System"
+                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
+
+                            {/* Overlay Text */}
+                            <div className="absolute bottom-6 left-6 right-6">
+                                <p className="text-white/90 text-sm md:text-base font-medium tracking-wide backdrop-blur-sm bg-black/30 p-2 rounded-md inline-block">
+                                    Clean brand systems, grids, typography, real clients
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* LEFT BOTTOM — Description */}
+                        <div className="max-w-xl mt-auto">
+                            <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-gray-200">
+                                We build thoughtful brand identities grounded in <span className="text-[#9BE12C]">strategy</span>, <span className="text-[#9BE12C]">clarity</span>, and <span className="text-[#9BE12C]">consistency</span>—designed to communicate value, credibility, and long-term growth across all platforms.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* RIGHT COLUMN */}
+                    <div className="flex flex-col gap-12 lg:justify-between">
+                        {/* RIGHT TOP — Big Title */}
+                        <div className="mt-4 lg:mt-0">
+                            <h1 className="text-7xl md:text-8xl lg:text-[7rem] xl:text-[8rem] font-bold tracking-tighter leading-[0.85] text-white mb-2">
+                                BRANDING<br />
+                                <span className="text-transparent outline-text stroke-white/20">& STRATEGY</span>
+                            </h1>
+                        </div>
+
+                        {/* RIGHT BOTTOM — Services */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 mt-auto pt-8 border-t border-white/10">
+                            {/* Left Service Column */}
+                            <div>
+                                <h3 className="text-sm font-bold tracking-widest text-[#9BE12C] uppercase mb-6">Strategic</h3>
+                                <ul className="space-y-4">
+                                    {servicesLeft.map((item) => (
+                                        <li key={item} className="flex items-center gap-3 text-lg md:text-xl text-gray-400 hover:text-white transition-colors duration-300 group cursor-default">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#9BE12C] opacity-30 group-hover:opacity-100 transition-opacity duration-300" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Right Service Column */}
+                            <div>
+                                <h3 className="text-sm font-bold tracking-widest text-[#9BE12C] uppercase mb-6">Execution</h3>
+                                <ul className="space-y-4">
+                                    {servicesRight.map((item) => (
+                                        <li key={item} className="flex items-center gap-3 text-lg md:text-xl text-gray-400 hover:text-white transition-colors duration-300 group cursor-default">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#9BE12C] opacity-30 group-hover:opacity-100 transition-opacity duration-300" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <Footer />
+
+            <style>{`
+                .outline-text {
+                    -webkit-text-stroke: 1px white; /* Fallback */
+                    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+                    color: transparent;
+                }
+            `}</style>
+        </div>
+    );
+};
+
+export default BrandingPage;
