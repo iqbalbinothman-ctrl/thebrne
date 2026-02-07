@@ -10,6 +10,7 @@ import PageTransition from './components/PageTransition';
 import WebsiteDevelopmentPage from './components/WebsiteDevelopmentPage';
 import SocialMediaManagementPage from './components/SocialMediaManagementPage';
 import VideoContentProductionPage from './components/VideoContentProductionPage';
+import DigitalMarketingPage from './components/DigitalMarketingPage';
 
 const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMode }) => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
             <Route path="/website-development" element={<WebsiteDevelopmentPage />} />
             <Route path="/social-media-management" element={<SocialMediaManagementPage />} />
             <Route path="/video-content-production" element={<VideoContentProductionPage />} />
+            <Route path="/digital-marketing" element={<DigitalMarketingPage />} />
             <Route path="/shojiMP_2026" element={<ShojiPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/portfolio/:projectSlug" element={<ProjectDetailPage />} />
