@@ -35,7 +35,10 @@ const BrandingPage: React.FC = () => {
                             <Lottie
                                 animationData={animationData}
                                 loop={true}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full"
+                                rendererSettings={{
+                                    preserveAspectRatio: 'xMidYMid slice'
+                                }}
                             />
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
 
