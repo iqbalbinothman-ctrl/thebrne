@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Lottie from "lottie-react";
-import animationData from "./Negative-mask-effect.json";
+import animationData from "./branding_scene.json";
 
 const BrandingPage: React.FC = () => {
     const servicesLeft = [
