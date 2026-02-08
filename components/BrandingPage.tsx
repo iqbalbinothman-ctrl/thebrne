@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Lottie from "lottie-react";
-import animationData from "./branding_scene.json";
 import { useInView } from '../hooks/useInView';
 
 const BrandingPage: React.FC = () => {
     const [lottieRef, isInView] = useInView({ threshold: 0.1 });
+    const [animationData, setAnimationData] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Dynamically import the JSON file to avoiding blocking the specific page load
+        import('./branding_scene.json')
+            .then((data) => {
+                setAnimationData(data.default);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error("Failed to load animation data:", error);
+                setIsLoading(false);
+            });
+    }, []);
 
     const servicesLeft = [
         'Brand Strategy',
@@ -40,19 +54,27 @@ const BrandingPage: React.FC = () => {
                             </h1>
                         </div>
 
-                        {/* LEFT TOP — Lottie Animation */}
+                        {/* LEFT TOP — Lottie Animation or Skeleton */}
                         <div ref={lottieRef} className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
-                            {isInView && (
-                                <Lottie
-                                    animationData={animationData}
-                                    loop={true}
-                                    className="w-full h-full"
-                                    rendererSettings={{
-                                        preserveAspectRatio: 'xMidYMid slice'
-                                    }}
-                                />
+                            {isLoading ? (
+                                // Skeleton Loader
+                                <div className="w-full h-full animate-pulse bg-gray-800 flex items-center justify-center">
+                                    <div className="text-gray-600 font-heading text-xl tracking-widest uppercase">Loading Visuals...</div>
+                                </div>
+                            ) : (
+                                isInView && animationData && (
+                                    <Lottie
+                                        animationData={animationData}
+                                        loop={true}
+                                        className="w-full h-full"
+                                        rendererSettings={{
+                                            preserveAspectRatio: 'xMidYMid slice'
+                                        }}
+                                    />
+                                )
                             )}
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
+
+                            {!isLoading && <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />}
 
                             {/* Overlay Text */}
                             <div className="absolute bottom-6 left-6 right-6">
