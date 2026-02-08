@@ -23,7 +23,7 @@ const ProductShowcase: React.FC = () => {
               className="block group relative border-b border-white/20 last:border-b-0 py-12 md:py-16 cursor-pointer transition-colors hover:bg-white/5"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="flex items-center gap-4 w-full md:w-1/2">
+                <div className="flex items-center justify-between md:justify-start gap-4 w-full md:w-1/2">
                   <h2 className="font-heading text-5xl md:text-8xl uppercase tracking-tighter text-white transition-transform duration-500 group-hover:translate-x-4">
                     {service.title}
                   </h2>
