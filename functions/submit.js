@@ -42,10 +42,11 @@ export async function onRequestPost(context) {
         const RESEND_API_KEY = context.env.RESEND_API_KEY;
 
         if (!RESEND_API_KEY) {
-            console.error("Missing RESEND_API_KEY environment variable");
+            console.error("Missing RESEND_API_KEY environment variable. Current env keys:", Object.keys(context.env));
             // We don't fail the request so the user still sees "Success", 
             // but we log it for the developer.
         } else {
+            console.log("RESEND_API_KEY found:", RESEND_API_KEY.substring(0, 5) + "...");
             try {
                 const resendResponse = await fetch("https://api.resend.com/emails", {
                     method: "POST",
@@ -77,8 +78,10 @@ export async function onRequestPost(context) {
                 if (!resendResponse.ok) {
                     const errorText = await resendResponse.text();
                     console.error("Resend API Error:", errorText);
+                    console.error("Resend Status:", resendResponse.status);
                 } else {
-                    console.log("Email sent successfully!");
+                    const successData = await resendResponse.json();
+                    console.log("Email sent successfully!", successData);
                 }
             } catch (emailErr) {
                 console.error("Failed to execute email fetch:", emailErr);
