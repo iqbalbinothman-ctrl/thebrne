@@ -24,10 +24,10 @@ const ProductShowcase: React.FC = () => {
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center justify-between md:justify-start gap-4 w-full md:w-1/2">
-                  <h2 className="font-heading text-5xl md:text-8xl uppercase tracking-tighter text-white transition-transform duration-500 group-hover:translate-x-4">
+                  <h2 className="font-heading text-5xl md:text-8xl uppercase tracking-tighter text-white transition-transform duration-500 group-hover:translate-x-4 md:order-last">
                     {service.title}
                   </h2>
-                  <ArrowUpRight className="text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 w-12 h-12 md:w-24 md:h-24" />
+                  <ArrowUpRight className="text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 w-12 h-12 md:w-24 md:h-24 md:order-first" />
                 </div>
 
                 {/* Service Description */}
