@@ -13,6 +13,7 @@ const WebsiteDevelopmentPage = lazy(() => import('./components/WebsiteDevelopmen
 const SocialMediaManagementPage = lazy(() => import('./components/SocialMediaManagementPage'));
 const VideoContentProductionPage = lazy(() => import('./components/VideoContentProductionPage'));
 const DigitalMarketingPage = lazy(() => import('./components/DigitalMarketingPage'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
 
 const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMode }) => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
               <Route path="/shojiMP_2026" element={<ShojiPage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/portfolio/:projectSlug" element={<ProjectDetailPage />} />
+              <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </Suspense>
         </PageTransition>
