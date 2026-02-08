@@ -73,13 +73,13 @@ const ContactPage: React.FC = () => {
                     <div className="flex flex-col justify-between h-full min-h-[400px]">
                         <div>
                             <h1 className="font-heading text-6xl md:text-8xl lg:text-[6rem] font-bold tracking-tighter leading-[0.9] text-white/90 mb-12">
-                                CONTACT<br />ME
+                                CONTACT<br />US
                             </h1>
 
                             <div className="space-y-8">
                                 <div>
                                     <span className="block text-sm font-medium text-gray-400 mb-1">Location</span>
-                                    <span className="text-xl">Mutiara Damansara, Malaysia</span>
+                                    <span className="text-xl">CO3 Social Office | Puchong Campus<br />3-1, Jalan Merbah 1, Bandar Puchong Jaya, 47170 Puchong, Selangor</span>
                                 </div>
                                 <div>
                                     <span className="block text-sm font-medium text-gray-400 mb-1">Office Hours</span>
@@ -157,8 +157,8 @@ const ContactPage: React.FC = () => {
                                     <option value="branding">Branding</option>
                                     <option value="development">Web Development</option>
                                     <option value="marketing">Digital Marketing</option>
+                                    <option value="social-media">Social Media Management</option>
                                     <option value="video">Video & Content Production</option>
-                                    <option value="shojimp">Shoji MP 2026</option>
                                     <option value="other">Other</option>
                                 </select>
                                 <div className="absolute right-0 bottom-4 pointer-events-none text-gray-400">
@@ -227,8 +227,8 @@ const ContactPage: React.FC = () => {
                             {/* Status Messages */}
                             {status.message && (
                                 <div className={`p-4 rounded-lg mt-4 ${status.type === 'success'
-                                        ? 'bg-green-900/20 text-green-400 border border-green-900/50'
-                                        : 'bg-red-900/20 text-red-400 border border-red-900/50'
+                                    ? 'bg-green-900/20 text-green-400 border border-green-900/50'
+                                    : 'bg-red-900/20 text-red-400 border border-red-900/50'
                                     }`}>
                                     {status.message}
                                 </div>
