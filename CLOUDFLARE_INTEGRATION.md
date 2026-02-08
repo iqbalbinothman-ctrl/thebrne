@@ -28,6 +28,7 @@ To actually receive emails, you need to integrate a 3rd-party email service (lik
     *   Go to Cloudflare Dashboard > Settings > Environment Variables.
     *   Add a variable named `RESEND_API_KEY` with your key.
 3.  **Update `submit.js`**:
-    *   We need to uncomment the email sending logic in `functions/submit.js`.
+    *   I have already updated `functions/submit.js` to send emails to `work.thebrne@gmail.com`.
+    *   Uncomment the email sending logic block in the file to enable it.
 
-**I can update `submit.js` for you right now if you want to use Resend or another provider. Just let me know which one you prefer!**
+**Note:** Emails will be sent *to* `work.thebrne@gmail.com`. The "From" address must be a domain verified in your Resend dashboard (e.g., `onboarding@resend.dev` for testing, or `noreply@thebrne.com`).

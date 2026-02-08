@@ -58,7 +58,7 @@ export async function onRequestPost(context) {
                 },
                 body: JSON.stringify({
                     from: "onboarding@resend.dev", // Configure your verified domain in Resend
-                    to: "hello@thebrne.com", // Your email address
+                    to: "work.thebrne@gmail.com", // Updated to your preferred email
                     subject: `New Inquiry from ${firstName} ${lastName}`,
                     html: `
                         <h2>New Contact Submission</h2>
