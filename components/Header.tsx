@@ -87,7 +87,7 @@ const Header: React.FC = () => {
           </div>
 
           <Link to="/portfolio" className="font-heading text-xl uppercase tracking-wider hover:opacity-70 transition-opacity">Portfolio</Link>
-          <Link to="/shojiMP_2026" className="font-heading text-xl uppercase tracking-wider hover:opacity-70 transition-opacity">Shoji</Link>
+
 
           <Link
             to="/contact"
@@ -157,12 +157,7 @@ const Header: React.FC = () => {
               Portfolio
             </Link>
 
-            <Link
-              to="/shojiMP_2026"
-              className="font-heading text-3xl uppercase tracking-wider border-b border-white/20 pb-4"
-            >
-              Shoji
-            </Link>
+
 
             <Link
               to="/contact"
