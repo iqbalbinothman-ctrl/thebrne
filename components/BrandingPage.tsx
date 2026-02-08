@@ -28,11 +28,18 @@ const BrandingPage: React.FC = () => {
         <div className="min-h-screen bg-[#1A1A1A] text-white selection:bg-[#9BE12C] selection:text-black font-sans">
             <Header />
 
-            <main className="pt-32 pb-20 page-padding">
+            <main className="pt-20 lg:pt-32 pb-20 page-padding">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
                     {/* LEFT COLUMN */}
                     <div className="flex flex-col gap-12">
+                        {/* LEFT TOP — Mobile Title (Visible only on mobile) */}
+                        <div className="block lg:hidden">
+                            <h1 className="font-heading text-6xl md:text-8xl lg:text-[6rem] xl:text-[7rem] font-bold tracking-tighter leading-[0.9] text-white/90 mb-2">
+                                BRANDING STRATEGY
+                            </h1>
+                        </div>
+
                         {/* LEFT TOP — Lottie Animation */}
                         <div ref={lottieRef} className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
                             {isInView && (
@@ -65,8 +72,8 @@ const BrandingPage: React.FC = () => {
 
                     {/* RIGHT COLUMN */}
                     <div className="flex flex-col gap-12 lg:justify-between">
-                        {/* RIGHT TOP — Big Title */}
-                        <div className="mt-4 lg:mt-0">
+                        {/* RIGHT TOP — Big Title (Hidden on mobile) */}
+                        <div className="mt-4 lg:mt-0 hidden lg:block">
                             <h1 className="font-heading text-6xl md:text-8xl lg:text-[6rem] xl:text-[7rem] font-bold tracking-tighter leading-[0.9] text-white/90 mb-2">
                                 BRANDING STRATEGY
                             </h1>
