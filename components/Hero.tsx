@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -49,12 +49,24 @@ const Hero: React.FC = () => {
           <p className="text-gray-300 mb-6 text-sm md:text-base leading-relaxed font-body">
             The best work isn't always visible—until it's impossible to ignore. We’re a crew of creative brains crafting strategic chaos for brands that are tired of playing it safe. No fluff, just real results.
           </p>
-          <button className="group flex items-center gap-3 bg-white text-black pl-6 pr-2 py-2 rounded-full font-heading text-lg uppercase tracking-wider transition-all btn-bubble-effect btn-bubble-green">
+          <button className="group flex items-center gap-3 bg-white text-black pl-6 pr-2 py-2 rounded-full font-heading text-lg uppercase tracking-wider transition-all btn-bubble-effect btn-bubble-green mb-6">
             <span>🔥 Start the Chaos</span>
             <div className="bg-black text-white p-2 rounded-full group-hover:bg-[#9BE12C] group-hover:text-black transition-colors">
               <ArrowRight size={16} />
             </div>
           </button>
+
+          {/* Dummy Review Widget */}
+          <div className="flex items-center gap-2 pt-4 border-t border-white/10">
+            <div className="flex items-center gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={14} className="fill-[#9BE12C] text-[#9BE12C]" />
+              ))}
+            </div>
+            <p className="text-white/60 text-xs font-body">
+              <span className="text-white font-bold">4.9</span>/5 based on <span className="text-white font-bold underline decoration-white/30 underline-offset-2">132 reviews</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>
