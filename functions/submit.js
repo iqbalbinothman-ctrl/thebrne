@@ -39,47 +39,51 @@ export async function onRequestPost(context) {
         }
 
         // 3. Process the Data (e.g., Send Email via Resend)
-        // To enable email sending:
-        // 1. Get API Key from https://resend.com
-        // 2. Add RESEND_API_KEY to Cloudflare Pages environment variables
-        // 3. Uncomment the code below:
-
-        /*
         const RESEND_API_KEY = context.env.RESEND_API_KEY;
-        if (!RESEND_API_KEY) {
-            console.error("Missing RESEND_API_KEY");
-            // Don't fail the request, just log error and maybe return success to user
-        } else {
-            const resendResponse = await fetch("https://api.resend.com/emails", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${RESEND_API_KEY}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    from: "onboarding@resend.dev", // Configure your verified domain in Resend
-                    to: "work.thebrne@gmail.com", // Updated to your preferred email
-                    subject: `New Inquiry from ${firstName} ${lastName}`,
-                    html: `
-                        <h2>New Contact Submission</h2>
-                        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Service:</strong> ${service}</p>
-                        <p><strong>Newsletter:</strong> ${data.newsletter ? "Yes" : "No"}</p>
-                        <p><strong>Description:</strong></p>
-                        <blockquote style="background: #f9f9f9; padding: 10px; border-left: 4px solid #ccc;">
-                            ${projectDescription || "N/A"}
-                        </blockquote>
-                    `
-                })
-            });
 
-            if (!resendResponse.ok) {
-                const errorText = await resendResponse.text();
-                console.error("Resend API Error:", errorText);
+        if (!RESEND_API_KEY) {
+            console.error("Missing RESEND_API_KEY environment variable");
+            // We don't fail the request so the user still sees "Success", 
+            // but we log it for the developer.
+        } else {
+            try {
+                const resendResponse = await fetch("https://api.resend.com/emails", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${RESEND_API_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        from: "onboarding@resend.dev", // Only works if sent TO the registered account email during testing
+                        to: "work.thebrne@gmail.com",
+                        subject: `New Inquiry from ${firstName} ${lastName}`,
+                        html: `
+                            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+                                <h2>New Contact Submission</h2>
+                                <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+                                <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+                                <p><strong>Service:</strong> ${service}</p>
+                                <p><strong>Newsletter:</strong> ${data.newsletter ? "Yes" : "No"}</p>
+                                <hr style="border: 0; border-top: 1px solid #eaeaea; margin: 20px 0;">
+                                <p><strong>Message:</strong></p>
+                                <blockquote style="background: #f9f9f9; padding: 15px; border-left: 4px solid #000; margin: 0;">
+                                    ${projectDescription ? projectDescription.replace(/\n/g, '<br>') : "N/A"}
+                                </blockquote>
+                            </div>
+                        `
+                    })
+                });
+
+                if (!resendResponse.ok) {
+                    const errorText = await resendResponse.text();
+                    console.error("Resend API Error:", errorText);
+                } else {
+                    console.log("Email sent successfully!");
+                }
+            } catch (emailErr) {
+                console.error("Failed to execute email fetch:", emailErr);
             }
         }
-        */
 
         console.log(`New Contact Submission (Log):
             Name: ${firstName} ${lastName}
