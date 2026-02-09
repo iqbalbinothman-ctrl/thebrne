@@ -15,8 +15,21 @@ interface ProjectDetail {
 }
 
 const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
-    'kroma': {
+    'saloma-kuala-lumpur': {
         id: 1,
+        brand: 'SALOMA KUALA LUMPUR®',
+        year: '2025',
+        description: 'Saloma Kuala Lumpur is a premier cultural destination that fuses Malaysia\'s rich heritage with a sophisticated, modern guest experience. They came to us for a complete digital overhaul to better reflect their status as an icon of hospitality. We developed a robust, integrated platform that streamlines their operations—from high-traffic ticketing to seamless dinner reservations—ensuring their digital front door is as welcoming and efficient as their physical one.',
+        scope: 'Website, Booking System, Ticketing System',
+        timeline: '3 months',
+        liveUrl: 'https://salomagroup.com',
+        images: [
+            '/saloma-logo.png',
+            '/saloma-website.png',
+        ]
+    },
+    'kroma': {
+        id: 2,
         brand: 'KROMA®',
         year: '02.25',
         description: 'Kroma is a social-first creative agency built around bold ideas, fast culture, and playful storytelling. They came to us for a brand and web refresh that better reflected their upbeat energy, creative range, and knack for turning everyday moments into viral campaigns.',
@@ -32,7 +45,7 @@ const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
         ]
     },
     'velvet-studios': {
-        id: 2,
+        id: 3,
         brand: 'VELVET STUDIOS',
         year: '10.25',
         description: 'Luxury redefined through elegant visual storytelling. A premium photography studio that captures moments with sophistication, blending classic elegance with contemporary edge.',
@@ -48,11 +61,11 @@ const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
     },
     // Add default placeholders for other projects to prevent errors if clicked
     'nexus-brands': {
-        id: 3, brand: 'NEXUS BRANDS', year: '09.25', description: 'A futuristic tech brand identity focused on connectivity.', scope: 'Identity, UI/UX', timeline: '8 weeks', liveUrl: '#',
+        id: 4, brand: 'NEXUS BRANDS', year: '09.25', description: 'A futuristic tech brand identity focused on connectivity.', scope: 'Identity, UI/UX', timeline: '8 weeks', liveUrl: '#',
         images: ['https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1200&fit=crop']
     },
     'aurora-co': {
-        id: 4, brand: 'AURORA CO', year: '08.25', description: 'Sustainable lifestyle brand packaging and digital presence.', scope: 'Packaging, Web', timeline: '12 weeks', liveUrl: '#',
+        id: 5, brand: 'AURORA CO', year: '08.25', description: 'Sustainable lifestyle brand packaging and digital presence.', scope: 'Packaging, Web', timeline: '12 weeks', liveUrl: '#',
         images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=1000&fit=crop']
     }
 };
