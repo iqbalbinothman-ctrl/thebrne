@@ -24,7 +24,6 @@ const PROJECT_DETAILS: { [key: string]: ProjectDetail } = {
         timeline: '3 months',
         liveUrl: 'https://salomagroup.com',
         images: [
-            '/saloma-logo.png',
             '/saloma-website.png',
         ]
     },

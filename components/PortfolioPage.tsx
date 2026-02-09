@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 
 const PROJECTS = [
-    { id: 1, brand: 'SALOMA KUALA LUMPUR', date: '2025', image: '/saloma-logo.png', slug: 'saloma-kuala-lumpur' },
+    { id: 1, brand: 'SALOMA KUALA LUMPUR', date: '2025', image: '/saloma-website.png', logo: '/saloma-logo.png', slug: 'saloma-kuala-lumpur' },
     { id: 2, brand: 'KROMA', date: '11.25', image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop', slug: 'kroma' },
     { id: 3, brand: 'VELVET STUDIOS', date: '10.25', image: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=600&h=600&fit=crop', slug: 'velvet-studios' },
     { id: 4, brand: 'NEXUS BRANDS', date: '09.25', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=700&fit=crop', slug: 'nexus-brands' },
@@ -50,7 +50,7 @@ const PortfolioPage: React.FC = () => {
             {/* Projects Grid - 2-Column Image Cards */}
             <section className="pb-24 page-padding">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    {PROJECTS.map((project) => (
+                    {PROJECTS.map((project: any) => (
                         <Link
                             key={project.id}
                             to={`/portfolio/${project.slug}`}
@@ -69,9 +69,17 @@ const PortfolioPage: React.FC = () => {
                                 {/* Hover Overlay with Glassmorphic Blur */}
                                 <div className="absolute inset-0 bg-white/20 backdrop-blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                                     <div className="text-center">
-                                        <div className="font-heading text-5xl md:text-6xl font-bold text-white uppercase tracking-tight drop-shadow-lg">
-                                            {project.brand}
-                                        </div>
+                                        {project.logo ? (
+                                            <img
+                                                src={project.logo}
+                                                alt={`${project.brand} Logo`}
+                                                className="w-48 h-auto object-contain drop-shadow-lg"
+                                            />
+                                        ) : (
+                                            <div className="font-heading text-5xl md:text-6xl font-bold text-white uppercase tracking-tight drop-shadow-lg">
+                                                {project.brand}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
