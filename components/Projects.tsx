@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useImageColor } from '../hooks/useImageColor';
 
 const PROJECTS = [
     {
@@ -9,7 +10,6 @@ const PROJECTS = [
         category: 'Website',
         image: '/saloma-frontpage.png',
         date: '2025',
-        brandColor: '#FFFFFF',
         slug: 'saloma-kuala-lumpur',
         imagePosition: 'object-top'
     },
@@ -19,7 +19,6 @@ const PROJECTS = [
         category: 'Branding',
         image: '/project-1.jpg',
         date: '26 Jan 2024',
-        brandColor: '#317EE3',
         slug: 'milk'
     },
     {
@@ -28,7 +27,6 @@ const PROJECTS = [
         category: 'Branding',
         image: '/project-2.jpg',
         date: '22 Mar 2024',
-        brandColor: '#e03c3c',
         slug: 'glossier'
     },
     {
@@ -37,7 +35,6 @@ const PROJECTS = [
         category: 'Branding',
         image: '/project-3.jpg',
         date: '14 Feb 2024',
-        brandColor: '#feb9e0',
         slug: 'curame'
     },
     {
@@ -46,7 +43,6 @@ const PROJECTS = [
         category: 'Branding',
         image: '/project-4.jpg',
         date: '11 Jan 2024',
-        brandColor: '#d21100',
         slug: 'thatsmytype'
     },
     {
@@ -55,15 +51,54 @@ const PROJECTS = [
         category: 'Branding',
         image: '/project-5.jpg',
         date: '05 Dec 2023',
-        brandColor: '#fdec00',
         slug: 'zurich-race'
     }
 ];
 
+const ProjectCard = ({ project }: { project: any }) => {
+    // Use fallback white color initially
+    const titleColor = useImageColor(project.image, '#FFFFFF');
+
+    return (
+        <Link
+            to={`/portfolio/${project.slug}`}
+            className="flex-shrink-0 w-[85vw] md:w-[450px] snap-center group cursor-pointer block"
+        >
+            {/* Image Card */}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] mb-8 bg-[#222]">
+                <img
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ${project.imagePosition || 'object-center'}`}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+
+                {/* Hover Badge */}
+                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                    <div className="bg-[#9BE12C] text-black w-12 h-12 rounded-full flex items-center justify-center">
+                        <ArrowUpRight size={24} />
+                    </div>
+                </div>
+            </div>
+
+            {/* Info */}
+            <div className="space-y-2">
+                <p className="text-gray-500 font-body text-sm uppercase tracking-widest">
+                    {project.date} — {project.category}
+                </p>
+                <h3
+                    className="font-heading text-3xl md:text-4xl uppercase tracking-tight transition-colors duration-500"
+                    style={{ color: titleColor }}
+                >
+                    {project.title}
+                </h3>
+            </div>
+        </Link>
+    );
+};
+
 const Projects: React.FC = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
-
-
 
     return (
         <section className="bg-black text-white py-24 overflow-hidden">
@@ -85,42 +120,8 @@ const Projects: React.FC = () => {
                     className="flex gap-8 md:gap-12 overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {PROJECTS.map((project: any, index) => (
-                        <Link
-                            to={`/portfolio/${project.slug}`}
-                            key={project.id}
-                            className="flex-shrink-0 w-[85vw] md:w-[450px] snap-center group cursor-pointer block"
-                        >
-                            {/* Image Card */}
-                            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] mb-8 bg-[#222]">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className={`w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ${project.imagePosition || 'object-center'}`}
-                                />
-                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
-
-                                {/* Hover Badge */}
-                                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                                    <div className="bg-[#9BE12C] text-black w-12 h-12 rounded-full flex items-center justify-center">
-                                        <ArrowUpRight size={24} />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Info */}
-                            <div className="space-y-2">
-                                <p className="text-gray-500 font-body text-sm uppercase tracking-widest">
-                                    {project.date} — {project.category}
-                                </p>
-                                <h3
-                                    className="font-heading text-3xl md:text-4xl uppercase tracking-tight transition-colors"
-                                    style={{ color: project.brandColor || 'white' }}
-                                >
-                                    {project.title}
-                                </h3>
-                            </div>
-                        </Link>
+                    {PROJECTS.map((project) => (
+                        <ProjectCard key={project.id} project={project} />
                     ))}
 
                     {/* Spacer for padding right */}
