@@ -1,46 +1,62 @@
 import React, { useRef, useEffect } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PROJECTS = [
     {
         id: 1,
+        title: 'SALOMA KUALA LUMPUR',
+        category: 'Website',
+        image: '/saloma-frontpage.png',
+        date: '2025',
+        brandColor: '#FFFFFF',
+        slug: 'saloma-kuala-lumpur',
+        imagePosition: 'object-top'
+    },
+    {
+        id: 2,
         title: 'MILK™',
         category: 'Branding',
         image: '/project-1.jpg',
         date: '26 Jan 2024',
-        brandColor: '#317EE3'
+        brandColor: '#317EE3',
+        slug: 'milk'
     },
     {
-        id: 2,
+        id: 3,
         title: 'Glossier®',
         category: 'Branding',
         image: '/project-2.jpg',
         date: '22 Mar 2024',
-        brandColor: '#e03c3c'
+        brandColor: '#e03c3c',
+        slug: 'glossier'
     },
     {
-        id: 3,
+        id: 4,
         title: 'CURAME',
         category: 'Branding',
         image: '/project-3.jpg',
         date: '14 Feb 2024',
-        brandColor: '#feb9e0'
+        brandColor: '#feb9e0',
+        slug: 'curame'
     },
     {
-        id: 4,
+        id: 5,
         title: 'thatsmytype',
         category: 'Branding',
         image: '/project-4.jpg',
         date: '11 Jan 2024',
-        brandColor: '#d21100'
+        brandColor: '#d21100',
+        slug: 'thatsmytype'
     },
     {
-        id: 5,
+        id: 6,
         title: 'Zurich 2017 Race',
         category: 'Branding',
         image: '/project-5.jpg',
         date: '05 Dec 2023',
-        brandColor: '#fdec00'
+        brandColor: '#fdec00',
+        slug: 'zurich-race'
     }
 ];
 
@@ -57,10 +73,10 @@ const Projects: React.FC = () => {
                     <h2 className="font-heading text-5xl md:text-7xl uppercase tracking-tighter">
                         Projects
                     </h2>
-                    <a href="#" className="hidden md:flex items-center gap-2 group font-body text-gray-400 hover:text-[#9BE12C] transition-colors">
+                    <Link to="/portfolio" className="hidden md:flex items-center gap-2 group font-body text-gray-400 hover:text-[#9BE12C] transition-colors">
                         <span className="text-lg uppercase tracking-wider">More +500</span>
                         <ArrowUpRight className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Horizontal Scroll Container */}
@@ -69,17 +85,18 @@ const Projects: React.FC = () => {
                     className="flex gap-8 md:gap-12 overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {PROJECTS.map((project, index) => (
-                        <div
+                    {PROJECTS.map((project: any, index) => (
+                        <Link
+                            to={`/portfolio/${project.slug}`}
                             key={project.id}
-                            className="flex-shrink-0 w-[85vw] md:w-[450px] snap-center group cursor-pointer"
+                            className="flex-shrink-0 w-[85vw] md:w-[450px] snap-center group cursor-pointer block"
                         >
                             {/* Image Card */}
                             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] mb-8 bg-[#222]">
                                 <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                    className={`w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ${project.imagePosition || 'object-center'}`}
                                 />
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
 
@@ -103,7 +120,7 @@ const Projects: React.FC = () => {
                                     {project.title}
                                 </h3>
                             </div>
-                        </div>
+                        </Link>
                     ))}
 
                     {/* Spacer for padding right */}
