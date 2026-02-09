@@ -4,11 +4,11 @@ import Header from './Header';
 import Footer from './Footer';
 
 const PROJECTS = [
-    { id: 1, brand: 'SALOMA KUALA LUMPUR', date: '2025', image: '/saloma-website.png', logo: '/saloma-logo.png', slug: 'saloma-kuala-lumpur', imagePosition: 'object-top' },
-    { id: 2, brand: 'KROMA', date: '11.25', image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop', slug: 'kroma' },
-    { id: 3, brand: 'VELVET STUDIOS', date: '10.25', image: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=600&h=600&fit=crop', slug: 'velvet-studios' },
-    { id: 4, brand: 'NEXUS BRANDS', date: '09.25', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=700&fit=crop', slug: 'nexus-brands' },
-    { id: 5, brand: 'AURORA CO', date: '08.25', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop', slug: 'aurora-co' },
+    { id: 1, brand: 'SALOMA KUALA LUMPUR', date: '2025', image: '/saloma-website.png', logo: '/saloma-logo.png', slug: 'saloma-kuala-lumpur', imagePosition: 'object-top', scope: 'Website, Booking System, Ticketing System' },
+    { id: 2, brand: 'KROMA', date: '11.25', image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop', slug: 'kroma', scope: 'Branding, Motion' },
+    { id: 3, brand: 'VELVET STUDIOS', date: '10.25', image: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=600&h=600&fit=crop', slug: 'velvet-studios', scope: 'Art Direction, Web Design' },
+    { id: 4, brand: 'NEXUS BRANDS', date: '09.25', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=700&fit=crop', slug: 'nexus-brands', scope: 'Identity, UI/UX' },
+    { id: 5, brand: 'AURORA CO', date: '08.25', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop', slug: 'aurora-co', scope: 'Packaging, Web' },
     { id: 6, brand: 'LUMINA DESIGN', date: '07.25', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=700&fit=crop', slug: 'lumina-design' },
     { id: 7, brand: 'PULSE CREATIVE', date: '06.25', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop', slug: 'pulse-creative' },
     { id: 8, brand: 'ZENITH GROUP', date: '05.25', image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&h=800&fit=crop', slug: 'zenith-group' },
@@ -86,10 +86,17 @@ const PortfolioPage: React.FC = () => {
 
                             {/* Project Info Below Image */}
                             <div className="flex items-center justify-between">
-                                {/* Brand Name - Left */}
-                                <h3 className="font-heading text-xl md:text-2xl font-bold uppercase tracking-tight group-hover:text-[#9BE12C] transition-colors">
-                                    {project.brand}
-                                </h3>
+                                {/* Brand Name & Scope - Left */}
+                                <div className="flex flex-col items-start">
+                                    <h3 className="font-heading text-xl md:text-2xl font-bold uppercase tracking-tight group-hover:text-[#9BE12C] transition-colors text-left">
+                                        {project.brand}
+                                    </h3>
+                                    {project.scope && (
+                                        <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider">
+                                            {project.scope}
+                                        </p>
+                                    )}
+                                </div>
 
                                 {/* Date - Right */}
                                 <p className="text-gray-500 text-sm md:text-base font-mono">
