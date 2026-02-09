@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 
 const PROJECTS = [
-    { id: 1, brand: 'SALOMA KUALA LUMPUR', date: '2025', image: '/saloma-website.png', logo: '/saloma-logo.png', slug: 'saloma-kuala-lumpur' },
+    { id: 1, brand: 'SALOMA KUALA LUMPUR', date: '2025', image: '/saloma-website.png', logo: '/saloma-logo.png', slug: 'saloma-kuala-lumpur', imagePosition: 'object-top' },
     { id: 2, brand: 'KROMA', date: '11.25', image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=800&fit=crop', slug: 'kroma' },
     { id: 3, brand: 'VELVET STUDIOS', date: '10.25', image: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=600&h=600&fit=crop', slug: 'velvet-studios' },
     { id: 4, brand: 'NEXUS BRANDS', date: '09.25', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=700&fit=crop', slug: 'nexus-brands' },
@@ -63,7 +63,7 @@ const PortfolioPage: React.FC = () => {
                                 <img
                                     src={project.image}
                                     alt={project.brand}
-                                    className="w-full h-full object-cover transition-all duration-500"
+                                    className={`w-full h-full object-cover transition-all duration-500 ${project.imagePosition || 'object-center'}`}
                                 />
 
                                 {/* Hover Overlay with Glassmorphic Blur */}
