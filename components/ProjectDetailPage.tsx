@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -73,6 +73,24 @@ const MORE_PROJECTS = [
     { id: 3, brand: 'NEXUS BRANDS', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop', slug: 'nexus-brands' },
     { id: 4, brand: 'AURORA CO', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop', slug: 'aurora-co' },
 ];
+
+const ProjectImage: React.FC<{ src: string; alt: string }> = ({ src, alt }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+        <div className={`overflow-hidden rounded-2xl bg-gray-100 relative ${!isLoaded ? 'min-h-[400px]' : ''}`}>
+            {!isLoaded && (
+                <div className="absolute inset-0 bg-gray-200" />
+            )}
+            <img
+                src={src}
+                alt={alt}
+                className={`w-full h-auto object-cover hover:scale-105 transition-transform duration-700 ${!isLoaded ? 'opacity-0' : 'opacity-100'}`}
+                onLoad={() => setIsLoaded(true)}
+            />
+        </div>
+    );
+};
 
 const ProjectDetailPage: React.FC = () => {
     const { projectSlug } = useParams<{ projectSlug: string }>();
@@ -151,16 +169,11 @@ const ProjectDetailPage: React.FC = () => {
                     <div className="lg:col-span-8">
                         <div className="space-y-8 md:space-y-12">
                             {project.images.map((image, index) => (
-                                <div
+                                <ProjectImage
                                     key={index}
-                                    className="overflow-hidden rounded-2xl bg-gray-100"
-                                >
-                                    <img
-                                        src={image}
-                                        alt={`${project.brand} ${index + 1}`}
-                                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-                                    />
-                                </div>
+                                    src={image}
+                                    alt={`${project.brand} ${index + 1}`}
+                                />
                             ))}
                         </div>
                     </div>
