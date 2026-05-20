@@ -22,3 +22,40 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+thebrne-website.code-workspace
+
+# Root-level scratch / leftover originals (live copies belong under /public)
+/blob-new.svg
+/google.png
+/linkedn.jpg
+/meta.jpg
+/thread.jpg
+/tiktok.jpg
+/whatsapp.jpg
+/video-background-scroll.mp4
+/hero section.mp4
+/video frame.mp4
+
+# Design mockups (kept for reference, not deployed)
+public/cinematic-hero.html
+public/gotham-section.html
+
+# Source PNG/JPG kept on disk for re-encoding; deployed versions are .webp
+public/google.png
+public/meta.jpg
+public/tiktok.jpg
+public/youtube.jpg
+public/linkedn.jpg
+public/thread.jpg
+public/whatsapp.jpg
+
+# Source JPG frame sequence — production uses /frames-webp/ only
+public/frames/
+
+# Obsolete assets superseded by current versions
+public/newblob.svg
+public/blob-new.svg
+public/batguy.png
+public/blobshape-newAsset 12logo.svg
+public/logosvgAsset 13logo.svg
+public/hero-signal.mp4

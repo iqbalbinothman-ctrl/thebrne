@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
       {/* Bottom Giant Branding Statement - Optimized SVG Logo */}
       <div className="relative w-full overflow-hidden flex justify-center items-end bg-[#1A1A1A] select-none pointer-events-none">
         <img
-          src="/logosvgAsset 13logo.svg"
+          src="/logo-baru-brneAsset 21logo.svg"
           alt="THE BRNE Logo"
           className="w-full h-auto translate-y-[15%] scale-110 origin-bottom"
           style={{

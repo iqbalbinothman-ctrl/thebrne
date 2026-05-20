@@ -49,8 +49,12 @@ const Header: React.FC = () => {
           : 'bg-[#9BE12C] text-black'
           }`}
       >
-        <Link to="/" className="flex items-center gap-2 z-50">
-          <img src="/logo.png" alt="THE BRNE" className="h-10 md:h-12 w-auto object-contain" />
+        <Link to="/" className="flex items-center z-50" aria-label="THE BRNE — Home">
+          <img
+            src="/logo.gif"
+            alt="THE BRNE"
+            className="h-[52px] md:h-[62px] w-auto object-contain block"
+          />
         </Link>
 
         {/* Desktop Navigation */}

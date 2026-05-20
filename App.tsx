@@ -1,6 +1,7 @@
-import React, { useState, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Home from './components/Home';
+import NewHome from './components/NewHome';
 import ShojiPage from './components/ShojiPage';
 import PortfolioPage from './components/PortfolioPage';
 import ProjectDetailPage from './components/ProjectDetailPage';
@@ -18,15 +19,44 @@ const ContactPage = lazy(() => import('./components/ContactPage'));
 const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMode }) => {
   const location = useLocation();
   const isHomepage = location.pathname === '/';
+  const [hideLogo, setHideLogo] = useState(false);
+
+  // On the homepage, hide the universal logo once the sticky Header takes over
+  useEffect(() => {
+    if (!isHomepage) {
+      setHideLogo(false);
+      return;
+    }
+    const onScroll = () => setHideLogo(window.scrollY > window.innerHeight * 3.8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHomepage]);
 
   return (
     <div className="relative">
+      {/* Universal fixed logo — visible on every page */}
+      <Link
+        to="/"
+        aria-label="THE BRNE — Home"
+        className={`fixed top-4 left-4 md:top-6 md:left-6 z-[60] transition-opacity duration-300 pointer-events-auto ${hideLogo ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        style={{ animation: 'logoSlideDown 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both' }}
+      >
+        <img
+          src="/logo-light.svg"
+          alt="THE BRNE"
+          width="180"
+          height="64"
+          className="h-[52px] md:h-[62px] w-auto select-none"
+        />
+      </Link>
+
       {/* Apply blur only on homepage when maintenance mode is active */}
       <div className={isMaintenanceMode && isHomepage ? 'blur-sm pointer-events-none' : ''}>
         <PageTransition>
           <Suspense fallback={<div className="min-h-screen bg-[#1A1A1A]" />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/new" element={<NewHome />} />
               <Route path="/branding" element={<BrandingPage />} />
               <Route path="/website-development" element={<WebsiteDevelopmentPage />} />
               <Route path="/social-media-management" element={<SocialMediaManagementPage />} />

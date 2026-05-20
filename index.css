@@ -1,13 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CinematicHero + other GSAP-scrubbed sections rely on raw scroll offsets;
+   smooth scroll would lerp the position and desync the scrub. */
+html { scroll-behavior: auto; }
+
 /* Global Styles */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+  overflow-x: hidden;
 }
 
-/* Global Heading Font Adjustment (Bebas Neue) */
 .font-heading {
+  font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 0px !important;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A1A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9BE12C;
+  border-radius: 10px;
+}
+
+@font-face {
+  font-family: 'Embolism Spark';
+  src: url('/Embolism%20Spark.woff2') format('woff2'),
+       url('/Embolism%20Spark.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Cinematic hero: hide default cursor only inside the hero scroll container */
+.cinematic-hero-root,
+.cinematic-hero-root * {
+  cursor: none;
+}
+
+
+/* Shimmer animation for CTA button */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* CRT scanline flicker */
+@keyframes scanFlicker {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.18; }
+}
+
+/* Transmission badge red-dot blink */
+@keyframes signalBlink {
+  0%, 100% { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
+  50%      { background: transparent; box-shadow: none; }
+}
+
+/* Logo entrance — slides down from above viewport with slight bounce */
+@keyframes logoSlideDown {
+  0%   { transform: translateY(-300%); opacity: 0; }
+  60%  { transform: translateY(18%);   opacity: 1; }
+  80%  { transform: translateY(-6%);   opacity: 1; }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+
+/* Glitch horizontal shift */
+@keyframes glitchShift {
+  0%   { clip-path: inset(40% 0 50% 0); transform: translateX(-6px); }
+  20%  { clip-path: inset(20% 0 60% 0); transform: translateX(6px); }
+  40%  { clip-path: inset(70% 0 10% 0); transform: translateX(-4px); }
+  60%  { clip-path: inset(10% 0 80% 0); transform: translateX(4px); }
+  80%  { clip-path: inset(55% 0 35% 0); transform: translateX(-2px); }
+  100% { clip-path: inset(40% 0 50% 0); transform: translateX(0); }
 }
 
 /* Bubble/Liquid Hover Effect */

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from './Header';
-import Hero from './Hero';
+import CinematicHero from './CinematicHero';
 import PersonalIntro from './PersonalIntro';
 import ProductShowcase from './ProductShowcase';
 import Projects from './Projects';
@@ -8,15 +8,14 @@ import Clients from './Clients';
 import Footer from './Footer';
 
 const Home: React.FC = () => {
-    useEffect(() => {
-        document.documentElement.style.scrollBehavior = 'smooth';
-    }, []);
+    // scroll-behavior is enforced globally via index.css — no useEffect needed.
 
     return (
         <div className="relative min-h-screen bg-[#1A1A1A] selection:bg-[#9BE12C] selection:text-black">
             <main>
-                {/* Section 1: Hero Impact with Parallax */}
-                <Hero />
+                {/* Section 1: Cinematic scroll-scrub hero — text sweeps → blob portal grows
+                    showing video-frame.mp4 → SEEN / WANTED / REMEMBERED scroll up over the same video */}
+                <CinematicHero />
 
                 {/* Sticky Header Bridge */}
                 <Header />
