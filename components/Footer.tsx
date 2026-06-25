@@ -36,15 +36,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Partner Logos */}
-        <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center items-center gap-8 md:gap-16 mb-24 opacity-70 hover:opacity-100 transition-opacity duration-500 overflow-x-auto w-full pb-4">
-          <img src="/assets/logos/google-partner.png" alt="Google Partner" className="h-10 md:h-12 w-auto object-contain brightness-0 invert transition-all shrink-0" />
-          <img src="/assets/logos/meta-partner.png" alt="Meta Business Partner" className="h-10 md:h-12 w-auto object-contain brightness-0 invert transition-all shrink-0" />
-          <img src="/assets/logos/tiktok-partner.png" alt="TikTok Marketing Partner" className="h-10 md:h-12 w-auto object-contain brightness-0 invert transition-all shrink-0" />
-          <img src="/assets/logos/shopee.svg" alt="Shopee" className="h-8 md:h-10 w-auto object-contain brightness-0 invert transition-all shrink-0" />
-          <img src="/assets/logos/google-ads.png" alt="Google Ads" className="h-10 md:h-12 w-auto object-contain brightness-0 invert transition-all shrink-0" />
-        </div>
-
         {/* Middle Divider/Copyright */}
         <div className="pt-12 border-t border-white/5 pb-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold uppercase tracking-widest text-gray-600 font-body">
