@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Youtube, Instagram, Twitter, MessageCircle, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -23,17 +23,6 @@ const Footer: React.FC = () => {
             </button>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-16 md:gap-32 w-full md:w-auto">
-            {/* Social Icons */}
-            <div className="flex md:flex-col gap-6">
-              <a href="#" className="p-3 bg-[#222] rounded-full text-white hover:bg-red-600 transition-colors"><Youtube size={24} /></a>
-              <a href="#" className="p-3 bg-[#222] rounded-full text-white hover:bg-pink-600 transition-colors"><Instagram size={24} /></a>
-              <a href="#" className="p-3 bg-[#222] rounded-full text-white hover:bg-blue-400 transition-colors"><Twitter size={24} /></a>
-              <a href="#" className="p-3 bg-[#222] rounded-full text-white hover:bg-[#5865F2] transition-colors"><MessageCircle size={24} /></a>
-            </div>
-
-
-          </div>
         </div>
 
         {/* Middle Divider/Copyright */}
