@@ -6,62 +6,21 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ACCENT = '#9BE12C';
 
-const LOGOS = [
-  'AAMRA', 'Ilham Ilmu', 'Caliph Academy', 'Suria Cherating',
-  'Bekam Ar Rayyan', 'EJSHOP', 'SugarBomb', 'Love and Laugh',
-  'iHR', 'Nestnec',
-];
+// White silhouette logos generated into /public/assets/logos-trust.
+// 30 logos -> 5 columns = 6 clean rows on desktop.
+const LOGOS = Array.from({ length: 30 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  const row = Math.floor(i / 6) + 1;
+  const col = (i % 6) + 1;
+  return `/assets/logos-trust/logo_${n}_r${row}c${col}.png`;
+});
 
-const COLS = 5; // per row on desktop → 2 rows of 5
+const COLS = 5; // per row on desktop
 
 const TrustSection: React.FC = () => {
   const sectionRef  = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const gridRef     = useRef<HTMLDivElement>(null);
-
-  // Fit each logo text to fill ~72% of its cell. Was: 10 separate
-  // ResizeObservers, each doing read-after-write font sizing, which forced
-  // 10 sync layouts on every resize. Now: 1 ResizeObserver on the grid,
-  // RAF-batched, with all reads done before any writes (no layout thrash).
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    let raf = 0;
-    const refit = () => {
-      raf = 0;
-      const cells = grid.querySelectorAll<HTMLElement>('.logo-cell');
-      // Phase 1 — all writes (collapse text to measure intrinsic width).
-      const items: { text: HTMLElement; cell: HTMLElement }[] = [];
-      cells.forEach((cell) => {
-        const text = cell.querySelector<HTMLElement>('.logo-text');
-        if (!text) return;
-        text.style.fontSize = '10px';
-        text.style.width = 'fit-content';
-        items.push({ text, cell });
-      });
-      // Phase 2 — all reads in a row (browser does one layout, not N).
-      const measurements = items.map(({ text, cell }) => ({
-        text, textW: text.offsetWidth, cellW: cell.offsetWidth,
-      }));
-      // Phase 3 — all writes back.
-      measurements.forEach(({ text, textW, cellW }) => {
-        text.style.width = '100%';
-        text.style.fontSize = `${10 * (cellW * 0.72 / textW)}px`;
-      });
-    };
-
-    refit();
-    const ro = new ResizeObserver(() => {
-      if (raf) return;
-      raf = requestAnimationFrame(refit);
-    });
-    ro.observe(grid);
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      ro.disconnect();
-    };
-  }, []);
 
   // GSAP scroll reveals
   useEffect(() => {
@@ -85,7 +44,7 @@ const TrustSection: React.FC = () => {
           gsap.fromTo(
             cells,
             { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 0.9, stagger: 0.07, ease: 'power3.out',
+            { opacity: 1, y: 0, duration: 0.9, stagger: 0.05, ease: 'power3.out',
               scrollTrigger: { trigger: gridRef.current, start: 'top 78%', ...st } }
           );
         }
@@ -143,10 +102,10 @@ const TrustSection: React.FC = () => {
           paddingBottom: '14vh',
         }}
       >
-        {LOGOS.map((name) => (
+        {LOGOS.map((src, i) => (
           <div
-            key={name}
-            className="logo-cell group cursor-pointer"
+            key={i}
+            className="logo-cell group"
             style={{
               aspectRatio: '1 / 1',
               borderRight: '1px solid rgba(255,255,255,0.08)',
@@ -154,33 +113,35 @@ const TrustSection: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '8%',
+              padding: '16%',
               transition: 'background 0.35s ease',
               overflow: 'hidden',
             }}
           >
-            <span
-              className="logo-text font-black tracking-[-0.03em] leading-none text-center whitespace-nowrap"
+            <img
+              src={src}
+              alt=""
+              loading="lazy"
+              className="logo-img"
               style={{
-                transition: 'color 0.35s ease',
-                width: '100%',
-                textAlign: 'center',
-                display: 'block',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain',
+                transition: 'opacity 0.35s ease',
               }}
-            >
-              {name}
-            </span>
+            />
           </div>
         ))}
       </div>
 
-      {/* Hover styles — moved off JS onMouseEnter/Leave (10 elements × 2 handlers
-          mutating styles + querySelector) to pure CSS, which the compositor
-          handles without main-thread work. */}
+      {/* White logos at reduced opacity, full white on hover — matches the
+          original text treatment. Logos are already pure-white silhouettes. */}
       <style>{`
-        .logo-cell .logo-text { color: rgba(255,255,255,0.3); }
+        .logo-cell .logo-img { opacity: 0.45; }
         .logo-cell:hover { background: rgba(155,225,44,0.05); }
-        .logo-cell:hover .logo-text { color: ${ACCENT}; }
+        .logo-cell:hover .logo-img { opacity: 1; }
       `}</style>
 
     </section>
