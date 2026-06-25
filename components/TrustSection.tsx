@@ -6,14 +6,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ACCENT = '#9BE12C';
 
-// White silhouette logos generated into /public/assets/logos-trust.
-// 30 logos -> 5 columns = 6 clean rows on desktop.
-const LOGOS = Array.from({ length: 30 }, (_, i) => {
-  const n = String(i + 1).padStart(2, '0');
-  const row = Math.floor(i / 6) + 1;
-  const col = (i % 6) + 1;
-  return `/assets/logos-trust/logo_${n}_r${row}c${col}.png`;
-});
+// Greyscale logos in /public/assets/logos-trust. The source files use an
+// irregular grid (row 4 has 7 cols, row 5 has 5), so the names can't be
+// generated arithmetically — list them explicitly to avoid 404s.
+const LOGO_FILES = [
+  'logo_01_r1c1.png', 'logo_02_r1c2.png', 'logo_03_r1c3.png', 'logo_04_r1c4.png',
+  'logo_05_r1c5.png', 'logo_06_r1c6.png', 'logo_07_r2c1.png', 'logo_08_r2c2.png',
+  'logo_09_r2c3.png', 'logo_10_r2c4.png', 'logo_11_r2c5.png', 'logo_12_r2c6.png',
+  'logo_13_r3c1.png', 'logo_14_r3c2.png', 'logo_15_r3c3.png', 'logo_16_r3c4.png',
+  'logo_17_r3c5.png', 'logo_18_r3c6.png', 'logo_19_r4c1.png', 'logo_20_r4c2.png',
+  'logo_21_r4c3.png', 'logo_22_r4c4.png', 'logo_23_r4c5.png', 'logo_24_r4c6.png',
+  'logo_25_r4c7.png', 'logo_26_r5c1.png', 'logo_27_r5c2.png', 'logo_28_r5c3.png',
+  'logo_29_r5c4.png', 'logo_30_r5c5.png',
+];
+const LOGOS = LOGO_FILES.map((f) => `/assets/logos-trust/${f}`);
 
 const COLS = 5; // per row on desktop
 
