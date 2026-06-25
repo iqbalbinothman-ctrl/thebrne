@@ -48,6 +48,25 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
         />
       </Link>
 
+      {/* Universal "HIT US" CTA — top-right, mirrors the logo on every page */}
+      <a
+        href="https://wa.me/60176412060"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Hit us up on WhatsApp"
+        className={`fixed top-4 right-4 md:top-6 md:right-6 z-[60] transition-opacity duration-300 pointer-events-auto ${hideLogo ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        style={{ animation: 'logoSlideDown 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both' }}
+      >
+        <span
+          className="inline-flex items-center justify-center font-black uppercase tracking-[0.12em] rounded-full select-none transition-colors duration-300 text-[12px] md:text-[13px] px-5 py-2.5 md:px-6 md:py-3"
+          style={{ background: '#9BE12C', color: '#000' }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = '#fff'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = '#9BE12C'; }}
+        >
+          Hit Us
+        </span>
+      </a>
+
       {/* Apply blur only on homepage when maintenance mode is active */}
       <div className={isMaintenanceMode && isHomepage ? 'blur-sm pointer-events-none' : ''}>
         <PageTransition>
