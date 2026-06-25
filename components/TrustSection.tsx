@@ -136,10 +136,10 @@ const TrustSection: React.FC = () => {
         ))}
       </div>
 
-      {/* White logos at reduced opacity, full white on hover — matches the
-          original text treatment. Logos are already pure-white silhouettes. */}
+      {/* Greyscale logos at reduced opacity, full brightness on hover —
+          preserves each logo's actual design while staying tonally consistent. */}
       <style>{`
-        .logo-cell .logo-img { opacity: 0.45; }
+        .logo-cell .logo-img { opacity: 0.7; }
         .logo-cell:hover { background: rgba(155,225,44,0.05); }
         .logo-cell:hover .logo-img { opacity: 1; }
       `}</style>
