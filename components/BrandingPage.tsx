@@ -54,25 +54,24 @@ const BrandingPage: React.FC = () => {
 
                         {/* LEFT TOP — Lottie Animation or Skeleton */}
                         <div ref={lottieRef} className="w-full aspect-[4/3] md:aspect-[16/10] bg-gray-800 rounded-lg overflow-hidden relative group">
-                            {isLoading ? (
-                                // Skeleton Loader
+                            {isInView && animationData ? (
+                                <Lottie
+                                    animationData={animationData}
+                                    loop={true}
+                                    className="w-full h-full"
+                                    rendererSettings={{
+                                        preserveAspectRatio: 'xMidYMid slice'
+                                    }}
+                                />
+                            ) : (
+                                // Skeleton — shown until the (large) animation is both
+                                // loaded and in view, so the box is never empty.
                                 <div className="w-full h-full animate-pulse bg-gray-800 flex items-center justify-center">
                                     <div className="text-gray-600 font-heading text-xl tracking-widest uppercase">Loading Visuals...</div>
                                 </div>
-                            ) : (
-                                isInView && animationData && (
-                                    <Lottie
-                                        animationData={animationData}
-                                        loop={true}
-                                        className="w-full h-full"
-                                        rendererSettings={{
-                                            preserveAspectRatio: 'xMidYMid slice'
-                                        }}
-                                    />
-                                )
                             )}
 
-                            {!isLoading && <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />}
+                            {isInView && animationData && <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />}
 
                             {/* Overlay Text */}
                             <div className="absolute bottom-6 left-6 right-6">
