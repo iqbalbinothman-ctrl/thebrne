@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import Header from './Header';
 import Footer from './Footer';
 
 interface ProjectDetail {
@@ -111,8 +110,7 @@ const ProjectDetailPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white text-black">
-            {/* Header */}
-            <Header />
+
 
             {/* Main Content - Split Layout */}
             <div className="pt-20 md:pt-24 px-6 md:px-12">

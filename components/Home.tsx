@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import CinematicHero from './CinematicHero';
 import PersonalIntro from './PersonalIntro';
 import ProductShowcase from './ProductShowcase';
@@ -17,8 +16,7 @@ const Home: React.FC = () => {
                     showing video-frame.mp4 → SEEN / WANTED / REMEMBERED scroll up over the same video */}
                 <CinematicHero />
 
-                {/* Sticky Header Bridge */}
-                <Header />
+
 
                 {/* Section 2: Personal Intro (Brand Color) */}
                 <PersonalIntro />

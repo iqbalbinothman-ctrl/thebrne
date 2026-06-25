@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
 import Footer from './Footer';
 
 const PROJECTS = [
@@ -26,8 +25,7 @@ const PROJECTS = [
 const PortfolioPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-white text-black">
-            {/* Header */}
-            <Header />
+
 
             {/* Hero Section */}
             <section className="pt-32 pb-16 page-padding">
