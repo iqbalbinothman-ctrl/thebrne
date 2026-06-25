@@ -42,10 +42,8 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
         style={{ animation: 'logoSlideDown 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both' }}
       >
         <img
-          src="/logo-light.svg"
+          src="/logo.gif"
           alt="THE BRNE"
-          width="180"
-          height="64"
           className="h-[52px] md:h-[62px] w-auto select-none"
         />
       </Link>
@@ -55,8 +53,9 @@ const AppContent: React.FC<{ isMaintenanceMode: boolean }> = ({ isMaintenanceMod
         <PageTransition>
           <Suspense fallback={<div className="min-h-screen bg-[#1A1A1A]" />}>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<NewHome />} />
               <Route path="/new" element={<NewHome />} />
+              <Route path="/old" element={<Home />} />
               <Route path="/branding" element={<BrandingPage />} />
               <Route path="/website-development" element={<WebsiteDevelopmentPage />} />
               <Route path="/social-media-management" element={<SocialMediaManagementPage />} />

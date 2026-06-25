@@ -44,18 +44,12 @@ const Header: React.FC = () => {
     <>
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 transition-all duration-500 px-6 md:px-12 py-4 flex items-center justify-between w-full ${isSticky
+        className={`sticky top-0 z-50 transition-all duration-500 px-6 md:px-12 py-4 flex items-center justify-end w-full ${isSticky
           ? 'bg-black/90 backdrop-blur-xl text-white'
           : 'bg-[#9BE12C] text-black'
           }`}
       >
-        <Link to="/" className="flex items-center z-50" aria-label="THE BRNE — Home">
-          <img
-            src="/logo.gif"
-            alt="THE BRNE"
-            className="h-[52px] md:h-[62px] w-auto object-contain block"
-          />
-        </Link>
+        {/* Header logo removed — the fixed top-left logo (App.tsx) is the single brand mark */}
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-10">
