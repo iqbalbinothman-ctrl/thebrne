@@ -35,7 +35,7 @@ const AgenciesMenu: React.FC = () => {
         aria-haspopup="true"
         aria-expanded={open}
       >
-        Agencies
+        Services
         <ChevronDown
           size={15}
           className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
