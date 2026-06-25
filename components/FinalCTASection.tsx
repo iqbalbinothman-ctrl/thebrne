@@ -104,7 +104,7 @@ const FinalCTASection: React.FC = () => {
           </Link>
 
           <a
-            href="https://wa.me/60000000000"
+            href="https://wa.me/60176412060"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 font-medium text-white/70 hover:text-white transition-colors whitespace-nowrap"
