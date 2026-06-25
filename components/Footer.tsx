@@ -15,12 +15,17 @@ const Footer: React.FC = () => {
             <p className="text-gray-400 text-lg mb-10 leading-relaxed font-body">
               Have a question for THE BRNE? Want to suggest a collaboration? Interested in partnering with us? Just want to say hi? We've got a form for that.
             </p>
-            <button className="group flex items-center gap-3 bg-white text-black pl-8 pr-2 py-3 rounded-full font-heading text-2xl uppercase tracking-wider transition-all btn-bubble-effect btn-bubble-green">
+            <a
+              href="https://wa.me/60176412060"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 bg-white text-black pl-8 pr-2 py-3 rounded-full font-heading text-2xl uppercase tracking-wider transition-all btn-bubble-effect btn-bubble-green"
+            >
               <span>Get in touch</span>
               <div className="bg-black text-white p-3 rounded-full group-hover:bg-[#9BE12C] group-hover:text-black transition-colors">
                 <ArrowRight size={24} />
               </div>
-            </button>
+            </a>
           </div>
 
         </div>
