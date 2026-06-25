@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from './Header';
 import Footer from './Footer';
 
 const ContactPage: React.FC = () => {
@@ -64,8 +63,6 @@ const ContactPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#1A1A1A] text-white selection:bg-[#9BE12C] selection:text-black font-sans flex flex-col">
-            <Header />
-
             <main className="flex-grow pt-32 pb-20 page-padding">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
