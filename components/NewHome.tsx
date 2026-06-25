@@ -6,7 +6,7 @@ import IdolBeliefSection from './IdolBeliefSection';
 import GothamSection from './GothamSection';
 import PlatformsSection from './PlatformsSection';
 import TrustSection from './TrustSection';
-import PortfolioGridSection from './PortfolioGridSection';
+// import PortfolioGridSection from './PortfolioGridSection'; // Selected work — temporarily hidden
 import ManifestoSection from './ManifestoSection';
 import CertificationsSection from './CertificationsSection';
 import BAKESection from './BAKESection';
@@ -24,7 +24,8 @@ const NewHome: React.FC = () => {
       <GothamSection />
       <PlatformsSection />
       <TrustSection />
-      <PortfolioGridSection />
+      {/* Selected work — temporarily hidden. Uncomment to restore. */}
+      {/* <PortfolioGridSection /> */}
       <ManifestoSection />
       <CertificationsSection />
       <BAKESection />
